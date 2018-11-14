@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>cinemasubito</id>
+    <name>Cinema Subito</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <fanart></fanart>
+    <thumbnail>https://www.cinemasubito.biz/uploads/custom-logo.png</thumbnail>
+    <bannermenu>https://www.cinemasubito.biz/uploads/custom-logo.png</bannermenu>
+
+    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>9</version>
+    <date>11/04/2018</date>
+    <changes>Update</changes>
+
+    <categories>
+        <category>serie</category>
+        <category>movie</category>
+    </categories>
+
+    <settings>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+        <default>true</default>
+        <enabled>true</enabled>
+        <visible>true</visible>
+    </settings>
+</channel>

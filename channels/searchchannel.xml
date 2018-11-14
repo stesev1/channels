@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>searchchannel</id>
+	<name>Cerca canale</name>
+
+	<active>false</active>
+	<adult>false</adult>
+	<language>it</language>
+	<include_in_global_search>disabled</include_in_global_search>
+	
+	<fanart></fanart>
+	<thumbnail>https://d30y9cdsu7xlg0.cloudfront.net/png/1265459-200.png</thumbnail>
+	<bannermenu>https://d30y9cdsu7xlg0.cloudfront.net/png/1265459-200.png</bannermenu>
+
+	<update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+	<version>3</version>
+	<date>20/04/2017</date>
+	<changes>Fix</changes>
+
+	<categories>
+		<category>all</category>
+	</categories>
+</channel>

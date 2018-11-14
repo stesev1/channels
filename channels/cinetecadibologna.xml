@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>cinetecadibologna</id>
+    <name>Cineteca di Bologna</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <fanart></fanart>
+    <thumbnail>http://cinestore.cinetecadibologna.it/pics/logo.gif</thumbnail>
+    <bannermenu>http://cinestore.cinetecadibologna.it/pics/logo.gif</bannermenu>
+
+    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>2</version>
+    <date>22/06/2016</date>
+    <changes>update</changes>
+
+    <categories>
+        <category>documentary</category>
+        <category>cult</category>
+    </categories>
+
+    <settings>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+		<default>false</default>
+		<enabled>false</enabled>
+		<visible>false</visible>
+    </settings>
+</channel>

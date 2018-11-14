@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>dragonballforever</id>
+    <name>DragonBallForever</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <thumbnail>https://www.dragonballforever.it/wp-content/uploads/2017/02/header_dbf-1.jpg</thumbnail>
+    <bannermenu>https://www.dragonballforever.it/wp-content/uploads/2017/02/header_dbf-1.jpg</bannermenu>
+    <fanart>https://www.dragonballforever.it/wp-content/uploads/2017/07/dbf_sfondo.jpg</fanart>
+
+    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>1</version>
+    <date>23/10/2017</date>
+    <changes>New CHannel</changes>
+
+    <categories>
+        <category>anime</category>
+    </categories>
+
+    <settings>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+		<default>false</default>
+		<enabled>false</enabled>
+		<visible>true</visible>
+    </settings>
+</channel>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>istitutoluce</id>
+    <name>Istituto Luce</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <fanart></fanart>
+    <thumbnail>http://www.archivioluce.com/wp-content/themes/wpbootstrap/bootstrap/img/luce-logo.png</thumbnail>
+    <bannermenu>http://www.archivioluce.com/wp-content/themes/wpbootstrap/bootstrap/img/luce-logo.png</bannermenu>
+
+    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>1</version>
+    <date>19/04/2018</date>
+    <changes>update</changes>
+
+    <categories>
+        <category>documentary</category>
+        <category>cult</category>
+    </categories>
+
+    <settings>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+		<default>false</default>
+		<enabled>false</enabled>
+		<visible>false</visible>
+    </settings>
+</channel>

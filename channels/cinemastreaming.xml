@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>cinemastreaming</id>
+	<name>Cinema Streaming</name>
+  
+	<active>true</active>
+	<adult>false</adult>
+	<language>it</language>
+	<fanart></fanart>
+	<thumbnail>https://www.telegramitalia.it/wp-content/uploads/2018/02/IMG_20180222_214809_805.jpg</thumbnail>
+	<bannermenu>https://www.telegramitalia.it/wp-content/uploads/2018/02/IMG_20180222_214809_805.jpg</bannermenu>
+
+	<update_url>https://stefanoaddon.info/sod/channels/</update_url>
+	<version>1</version>
+	<date>03/02/2018</date>
+	<changes>update</changes>
+
+	<categories>
+		<category>movie</category>
+		<category>serie</category>
+	</categories>
+
+	<settings>
+		<id>include_in_global_search</id>
+		<type>bool</type>
+		<label>Includi ricerca globale</label>
+		<default>false</default>
+		<enabled>false</enabled>
+		<visible>false</visible>
+	</settings>
+</channel>

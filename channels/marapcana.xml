@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>marapcana</id>
+	<name>Marapcana</name>
+  
+	<active>true</active>
+	<adult>false</adult>
+	<language>it</language>
+	<fanart></fanart>
+	<thumbnail>http://marapcana.site/maraplogo7.png</thumbnail>
+	<bannermenu></bannermenu>
+
+	<update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+	<version>1</version>
+	<date>13/04/2018</date>
+	<changes>update</changes>
+
+	<categories>
+		<category>movie</category>
+		<category>vos</category>
+	</categories>
+
+	<settings>
+		<id>include_in_global_search</id>
+		<type>bool</type>
+		<label>Includi ricerca globale</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+</channel>

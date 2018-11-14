@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>libreria</id>
+	<name>Biblioteca</name>
+
+	<active>false</active>
+	<adult>false</adult>
+	<language>it</language>
+
+	<fanart></fanart>
+	<thumbnail></thumbnail>
+	<bannermenu></bannermenu>
+
+	<update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>18</version>
+
+	<changes>
+		<change>
+			<date>13/04/2018</date>
+			<autor>axlt2002</autor>
+			<description>added filter for "SUB ITA"</description>
+		</change>
+	</changes>
+
+	<include_in_global_search>disabled</include_in_global_search>
+
+	<settings>
+		<id>updatelibrary</id>
+		<type>list</type>
+		<label>Aggiornamento libreria:</label>
+		<default>1</default>
+		<visible>true</visible>
+		<lvalues>Mai</lvalues>
+		<lvalues>Quando si avvia Kodi</lvalues>
+		<lvalues>Quotidiano</lvalues>
+		<lvalues>Quando si avvia Kodi e quotidiano</lvalues>
+	</settings>
+	<settings>
+		<id>updatelibrary_wait</id>
+		<type>list</type>
+		<label>   - Attendere prima di aggiornare</label>
+		<default>0</default>
+		<visible>true</visible>
+		<enabled>eq(-1,Quando si avvia Kodi)|eq(-1,Quando si avvia Kodi e quotidiano)</enabled>
+		<lvalues>No</lvalues>
+		<lvalues>10 sec</lvalues>
+		<lvalues>20 sec</lvalues>
+		<lvalues>30 sec</lvalues>
+		<lvalues>60 sec</lvalues>
+	</settings>
+	<settings>
+		<id>everyday_delay</id>
+		<type>list</type>
+		<label>   - Aggiorna a partire dalle</label>
+		<default>1</default>
+		<visible>true</visible>
+		<enabled>eq(-2,Una sola volta al giorno)|eq(-2,Quando si avvia Kodi e quotidiano)</enabled>
+		<lvalues>00:00</lvalues>
+		<lvalues>04:00</lvalues>
+		<lvalues>08:00</lvalues>
+		<lvalues>12:00</lvalues>
+	</settings>
+	<settings>
+		<id>updatetvshows_interval</id>
+		<type>list</type>
+		<label>   - Cercare nuovi episodi nella serie attiva</label>
+		<default>0</default>
+		<visible>true</visible>
+		<enabled>!eq(-3,Mai)</enabled>
+		<lvalues>Sempre</lvalues>
+		<lvalues>Secondo emissione</lvalues>
+	</settings>
+	<settings>
+		<id>search_new_content</id>
+		<type>list</type>
+		<label>   - Esegui la ricerca di contenuti</label>
+		<default>0</default>
+		<enabled>!eq(-4,Nunca)</enabled>
+		<lvalues>Nella cartella di ogni serie</lvalues>
+		<lvalues>Tutta la biblioteca</lvalues>
+	</settings>
+	<settings>
+		<id>clean_after_update</id>
+		<type>bool</type>
+		<label>   - Pulire la libreria dopo l'aggiornamento</label>
+		<enabled>!eq(-5,Nunca)</enabled>
+		<default>false</default>
+	</settings>
+	<settings>
+		<id>addlibrary</id>
+		<type>label</type>
+		<label>Aggiunta alla libreria:</label>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<id>filtersub</id>
+		<type>bool</type>
+		<label>   - Escludi stream di tipo "SUB ITA"</label>
+		<default>false</default>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<id>window_type</id>
+		<type>list</type>
+		<label>Mostra collegamenti in</label>
+		<default>1</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<lvalues>Finestra convenzionale</lvalues>
+		<lvalues>Finestra pop-up</lvalues>
+	</settings>
+	<settings>
+		<id>max_links</id>
+		<type>list</type>
+		<label>   - Numero massimo di collegamenti da mostrare (Raccomandato per i dispositivi lenti)</label>
+		<default>0</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<lvalues>Tutti</lvalues>
+		<lvalues>30</lvalues>
+		<lvalues>60</lvalues>
+		<lvalues>90</lvalues>
+		<lvalues>120</lvalues>
+		<lvalues>150</lvalues>
+		<lvalues>180</lvalues>
+		<lvalues>210</lvalues>
+	</settings>
+	<settings>
+		<id>white_list_order</id>
+		<type>bool</type>
+		<label>   - Ordina per whitelist</label>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<default>false</default>
+	</settings>
+	<settings>
+		<id>quit_channel_name</id>
+		<type>bool</type>
+		<label>   - Rimuovi il nome del canale dalla lista episodi</label>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<default>false</default>
+	</settings>
+	<settings>
+		<id>replace_VD</id>
+		<type>bool</type>
+		<label>   - Pop: Sostituire "View" con "[V]" e "Scarica" con "[D]"</label>
+		<enabled>false</enabled>
+		<visible>false</visible>
+		<default>false</default>
+	</settings>
+
+
+	<settings>
+		<id>library_mode</id>
+		<type>list</type>
+		<label>Locazione Database</label>
+		<default>0</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<lvalues>Locale</lvalues>
+		<lvalues>Remota</lvalues>
+	</settings>
+	<settings>
+		<id>xbmc_host</id>
+		<type>text</type>
+		<label>    Nome server</label>
+		<visible>true</visible>
+		<enabled>eq(-1,Remota)</enabled>
+		<default></default>
+	</settings>
+	<settings>
+		<id>xbmc_puerto</id>
+		<type>text</type>
+		<label>    Porta server</label>
+		<enabled>!eq(-1,'')</enabled>
+		<visible>true</visible>
+		<default></default>
+	</settings>
+	<settings>
+		<id>mark_as_watched</id>
+		<type>bool</type>
+		<label>Contrassegnato automaticamente quando visto</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<id>watched_setting</id>
+		<type>list</type>
+		<label>   - Tempo di visione del video</label>
+		<default>3</default>
+		<visible>true</visible>
+		<enabled>eq(-1,true)</enabled>
+		<lvalues>5 min</lvalues>
+		<lvalues>30%</lvalues>
+		<lvalues>50%</lvalues>
+		<lvalues>80%</lvalues>
+		<lvalues>0 sec</lvalues>
+	</settings>
+	<settings>
+		<id>sync_trakt</id>
+		<type>label</type>
+		<label>Sincronizzazione con Trakt</label>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<id>sync_trakt_watched</id>
+		<type>bool</type>
+		<label>   - Dopo aver segnato l'episodio come visto</label>
+		<default>false</default>
+		<visible>true</visible>
+		<enabled>eq(-3,true)</enabled>
+	</settings>
+	<settings>
+		<id>sync_trakt_notification</id>
+		<type>bool</type>
+		<label>        Mostra notifica</label>
+		<default>true</default>
+		<visible>true</visible>
+		<enabled>eq(-1,true)</enabled>
+	</settings>
+	<settings>
+		<id>sync_trakt_new_tvshow</id>
+		<type>bool</type>
+		<label>   - All'aggiunta di una nuova serie alla libreria</label>
+		<default>false</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<id>sync_trakt_new_tvshow_wait</id>
+		<type>bool</type>
+		<label>        Attendere che la serie sia aggiunta alla libreria</label>
+		<default>true</default>
+		<visible>true</visible>
+		<enabled>eq(-1,true)</enabled>
+	</settings>
+
+	<settings>
+		<id>show_all_seasons</id>
+		<type>bool</type>
+		<label>Mostra l'opzione "Tutte le stagioni"</label>
+		<default>true</default>
+	</settings>
+	<settings>
+		<id>no_pile_on_seasons</id>
+		<type>list</type>
+		<label>Non unire le stagioni delle serie</label>
+		<default>1</default>
+		<lvalues>Mai</lvalues>
+		<lvalues>Solo se c'è una stagione</lvalues>
+		<lvalues>Sempre</lvalues>
+	</settings>
+	<settings>
+		<id>ask_channel</id>
+		<type>bool</type>
+		<label>Mostra dialogo di selezione dei canali</label>
+		<default>false</default>
+	</settings>
+	<settings>
+		<id>original_title_folder</id>
+		<type>list</type>
+		<label>Creare directory sul sistema utilizzando</label>
+		<default>0</default>
+		<lvalues>Titolo in italiano</lvalues>
+		<lvalues>Titolo originale</lvalues>
+	</settings>
+	<settings>
+		<id>lab_1</id>
+		<type>label</type>
+		<label>Con l'aggiunta di contenuti, ottieni informazioni di:</label>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+    <settings>
+		<id>scraper_movies</id>
+		<type>list</type>
+		<label>    Film</label>
+        <enabled>false</enabled>
+		<default>0</default>
+		<lvalues>TheMovieDB.org</lvalues>
+        <lvalues>None</lvalues>
+	</settings>
+    <settings>
+		<id>scraper_tvshows</id>
+		<type>list</type>
+		<label>    Serie TV</label>
+		<default>0</default>
+		<lvalues>TheMovieDB.org</lvalues>
+        <lvalues>TheTvDB.com</lvalues>
+	</settings>
+	<settings>
+		<id>tvdb_retry_eng</id>
+		<type>bool</type>
+		<label>        Ricerca in inglese se non ci sono risultati in italiano</label>
+		<default>true</default>
+		<enabled>eq(-1,TheTvDB.com)</enabled>
+		<visible>true</visible>
+	</settings>
+</channel>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>seriehd</id>
+    <name>Serie HD</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <fanart></fanart>
+    <thumbnail>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/seriehd.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/seriehd.png</bannermenu>
+
+    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>14</version>
+    <date>15/09/2017</date>
+    <changes>small fix</changes>
+
+    <categories>
+        <category>serie</category>
+    </categories>
+
+    <settings>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+        <default>true</default>
+        <enabled>true</enabled>
+        <visible>true</visible>
+    </settings>
+</channel>

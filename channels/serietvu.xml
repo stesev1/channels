@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>serietvu</id>
+    <name>SerieTVU</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <thumbnail>http://www.serietvu.com/wp-content/themes/gurarjbar/images/logo.png</thumbnail>
+    <bannermenu>http://www.serietvu.com/wp-content/themes/gurarjbar/images/logo.png</bannermenu>
+
+    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <version>10</version>
+    <date>07/09/2017</date>
+    <changes>Small Fix</changes>
+
+    <categories>
+        <category>serie</category>
+    </categories>
+
+ 	<settings>
+		<id>include_in_global_search</id>
+		<type>bool</type>
+		<label>Includi ricerca globale</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+
+	<settings>
+		<id>include_in_newest_series</id>
+		<type>bool</type>
+		<label>Includi in novità - Serie TV</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+</channel>

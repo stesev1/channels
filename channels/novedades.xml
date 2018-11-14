@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>novedades</id>
+	<name>Novedades</name>
+	
+	<active>false</active>
+	<adult>false</adult>
+	<language>it</language>
+	<include_in_global_search>disabled</include_in_global_search>
+	
+	<fanart></fanart>
+	<thumbnail></thumbnail>
+	
+	<update_url></update_url>
+	<version>5</version>
+	
+	<changes>
+		<change> 
+			<date>26/05/17</date>
+			<autor>MrTruth</autor>
+			<description>Merge from pelisalacarta</description>
+		</change>
+		<change>
+			<date>11/10/2016</date>
+			<autor>Costaplus</autor>
+			<description>Fix ita</description>
+		</change>
+		<change> 
+			<date>29/04/16</date>
+			<autor>super_berny</autor>
+			<description>Posibilidad de incluir otros canales, mediante configuracion</description>
+		</change>
+	</changes>
+	
+	<categories>
+		<category>movie</category>
+	</categories>
+	
+	<settings>
+		<id>multithread</id>
+		<type>bool</type>
+		<label>MultiThread</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<id>result_mode</id>
+		<type>list</type>
+		<label>Vedi risultato:</label>
+    	<default>1</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<lvalues>Raggruppa per contenuto</lvalues>
+		<lvalues>Raggruppa per canale</lvalues>
+		<lvalues>Non raggruppare</lvalues>
+	</settings>
+    <settings>
+		<id>perfil</id>
+		<type>list</type>
+		<label>Profilo colore</label>
+		<default>0</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+		<lvalues>Frio</lvalues>
+		<lvalues>Calido</lvalues>
+		<lvalues>Lila</lvalues>
+        <lvalues>Pastel</lvalues>
+        <lvalues>Vivos</lvalues>
+	</settings>
+</channel>
