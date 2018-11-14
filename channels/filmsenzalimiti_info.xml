@@ -10,7 +10,7 @@
     <thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/filmsenzalimiti_info.png</thumbnail>
     <bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/filmsenzalimiti_info.png</bannermenu>
 
-    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
     <version>11</version>
     <date>28/09/2018</date>
     <changes>Update - Temporary Fix</changes>

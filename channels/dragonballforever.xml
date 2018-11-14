@@ -11,7 +11,7 @@
     <bannermenu>https://www.dragonballforever.it/wp-content/uploads/2017/02/header_dbf-1.jpg</bannermenu>
     <fanart>https://www.dragonballforever.it/wp-content/uploads/2017/07/dbf_sfondo.jpg</fanart>
 
-    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
     <version>1</version>
     <date>23/10/2017</date>
     <changes>New CHannel</changes>

@@ -11,7 +11,7 @@
     <thumbnail>http://www.archivioluce.com/wp-content/themes/wpbootstrap/bootstrap/img/luce-logo.png</thumbnail>
     <bannermenu>http://www.archivioluce.com/wp-content/themes/wpbootstrap/bootstrap/img/luce-logo.png</bannermenu>
 
-    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
     <version>1</version>
     <date>19/04/2018</date>
     <changes>update</changes>

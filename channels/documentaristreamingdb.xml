@@ -11,7 +11,7 @@
 	<thumbnail>http://www.documentari-streaming-db.com/cms/wp-content/uploads/2016/10/dsdb_logo-1.png</thumbnail>
 	<bannermenu>http://www.documentari-streaming-db.com/cms/wp-content/uploads/2016/10/dsdb_logo-1.png</bannermenu>
 
-	<update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 	<version>8</version>
 	<date>27/05/2017</date>
 	<changes>Fix import</changes>

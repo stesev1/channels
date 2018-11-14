@@ -10,7 +10,7 @@
     <thumbnail>http://www.animesubita.org/wp-content/uploads/2016/06/500v2-1.png</thumbnail>
     <bannermenu>http://www.animesubita.org/wp-content/uploads/2016/06/500v2-1.png</bannermenu>
 
-    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
     <version>1</version>
     <date>05/05/2018</date>
     <changes>New Channel</changes>

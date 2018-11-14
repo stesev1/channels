@@ -11,7 +11,7 @@
 	<thumbnail>https://filmperevolvere.it/wp-content/uploads/2017/06/cropped-coversito.jpg</thumbnail>
 	<bannermenu>https://filmperevolvere.it/wp-content/uploads/2017/06/cropped-coversito.jpg</bannermenu>
 
-	<update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 	<version>12</version>
 	<date>14/06/2017</date>
 	<changes>Fix Domain</changes>
