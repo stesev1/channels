@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<server>
+	<active>true</active>
+	<changes>
+		<change>
+			<autor></autor>
+			<date>25/03/2016</date>
+			<description>Versión incial</description>
+		</change>
+	</changes>
+	<find_videos>
+		<ignore_urls>
+		</ignore_urls>
+		<patterns>
+			<pattern>(https?://(?:redirector\.)?googlevideo.com/[^"']+)(?:",\s*"label":\s*([0-9]+),)?</pattern>
+			<url>\1</url>
+		</patterns>
+		<patterns>
+			<pattern>(https?://(?:lh.\.)?googleusercontent.com/[^=]+=m(\d+))</pattern>
+			<url>\1</url>
+		</patterns>
+		<patterns>
+			<pattern>(?s)https://(?:docs|drive).google.com/file/d/([^/]+)/preview</pattern>
+			<url>http://docs.google.com/get_video_info?docid=\1</url>
+		</patterns>
+		<patterns>
+			<pattern>.google.com/open\?\id=([a-zA-Z0-9_-]+)</pattern>
+			<url>https://drive.google.com/file/d/\1/view</url>
+		</patterns>
+	</find_videos>
+	<free>true</free>
+	<id>googlevideo</id>
+	<name>googlevideo</name>
+	<premium>
+	</premium>
+	<settings>
+		<default>false</default>
+		<enabled>true</enabled>
+		<id>black_list</id>
+		<label>Incluir en lista negra</label>
+		<type>bool</type>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<default>100</default>
+		<enabled>true</enabled>
+		<id>favorites_servers_list</id>
+		<label>Incluir en lista de favoritos</label>
+		<lvalues>No</lvalues>
+		<lvalues>1</lvalues>
+		<lvalues>2</lvalues>
+		<lvalues>3</lvalues>
+		<lvalues>4</lvalues>
+		<lvalues>5</lvalues>
+		<type>list</type>
+		<visible>false</visible>
+	</settings>
+	<thumbnail>http://media.tvalacarta.info/servers/server_googlevideo.png</thumbnail>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
+	<version>5</version>
+</server>

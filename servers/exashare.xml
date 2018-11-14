@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<server>
+	<active>true</active>
+	<changes>
+		<change>
+			<autor></autor>
+			<date>25/03/2016</date>
+			<description>Versión inicial</description>
+		</change>
+	</changes>
+	<find_videos>
+		<ignore_urls>
+		</ignore_urls>
+		<patterns>
+			<pattern>//(?:www\.)?exashare\.com/(?:embed-)?(?!make)(?!image)(?!login)(?!contact)(?!player)([0-9A-Za-z]+)(?:\-[0-9]+x[0-9]+\.html)?</pattern>
+			<url>http://exashare.com/embed-\1.html</url>
+		</patterns>
+	</find_videos>
+	<free>true</free>
+	<id>exashare</id>
+	<name>exashare</name>
+	<premium>
+		<value>realdebrid</value>
+	</premium>
+	<settings>
+		<default>false</default>
+		<enabled>true</enabled>
+		<id>black_list</id>
+		<label>Incluir en lista negra</label>
+		<type>bool</type>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<default>100</default>
+		<enabled>true</enabled>
+		<id>favorites_servers_list</id>
+		<label>Incluir en lista de favoritos</label>
+		<lvalues>No</lvalues>
+		<lvalues>1</lvalues>
+		<lvalues>2</lvalues>
+		<lvalues>3</lvalues>
+		<lvalues>4</lvalues>
+		<lvalues>5</lvalues>
+		<type>list</type>
+		<visible>false</visible>
+	</settings>
+	<thumbnail>http://media.tvalacarta.info/servers/server_exashare.png</thumbnail>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
+	<version>4</version>
+</server>
