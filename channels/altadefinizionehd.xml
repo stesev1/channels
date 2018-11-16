@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
-    <id>altadefinizionehd</id>
-    <name>AltadefinizioneHD</name>
+	<id>altadefinizionehd</id>
+	<name>AltaDefinizione HD</name>
 
-    <active>true</active>
-    <adult>false</adult>
-    <language>it</language>
+	<active>true</active>
+	<adult>false</adult>
+	<language>it</language>
 
-    <fanart></fanart>
-    <thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizionehd.png</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizionehd.png</bannermenu>
+	<fanart></fanart>
+	<thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizione_hd.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizione_hd.png</bannermenu>
 
-    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>4</version>
-    <date>30/01/2018</date>
-    <changes>Disabled</changes>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
+	<version>5</version>
+	<date>16/11/2018</date>
+	<changes>Update website</changes>
 
-    <categories>
-        <category>movie</category>
-    </categories>
+	<categories>
+		<category>movie</category>
+		<category>vos</category>
+	</categories>
 
- 	<settings>
-        <include_in_global_search>false</include_in_global_search>
+	<settings>
+		<include_in_global_search>true</include_in_global_search>
 		<id>include_in_global_search</id>
 		<type>bool</type>
 		<label>Includi ricerca globale</label>
-		<default>false</default>
-		<enabled>false</enabled>
-		<visible>false</visible>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
 	</settings>
 </channel>
