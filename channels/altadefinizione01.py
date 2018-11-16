@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
 # StreamOnDemand-PureITA / XBMC Plugin
-# Canale  altadefinizione01_biz
+# Canale  altadefinizione01
 # http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
 import re
@@ -15,13 +15,13 @@ from core import servertools
 from core.item import Item
 from core.tmdb import infoSod
 
-__channel__ = "altadefinizione01_biz"
+__channel__ = "altadefinizione01"
 host = "http://altadefinizione01.link"
 headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("streamondemand-pureita.altadefinizione01_biz mainlist")
+    logger.info("[altadefinizione01] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Al Cinema[/COLOR]",
                      action="peliculas",
@@ -92,7 +92,7 @@ def categorias(item):
 # ==================================================================================================================================================
 	
 def search(item, texto):
-    logger.info("streamondemand-pureita altadefinizione01_biz " + item.url + " search " + texto)
+    logger.info("streamondemand-pureita altadefinizione01 " + item.url + " search " + texto)
     item.url = host + "/?do=search&subaction=search&story=" + texto
     try:
         if item.extra == "movie":
@@ -109,7 +109,7 @@ def search(item, texto):
 # ==================================================================================================================================================		
 		
 def peliculas(item):
-    logger.info("streamondemand-pureita altadefinizione01_biz peliculas")
+    logger.info("streamondemand-pureita altadefinizione01 peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -161,7 +161,7 @@ def peliculas(item):
 # ==================================================================================================================================================	
 	
 def peliculas_tv(item):
-    logger.info("streamondemand-pureita altadefinizione01_biz peliculas")
+    logger.info("streamondemand-pureita altadefinizione01 peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -213,7 +213,7 @@ def peliculas_tv(item):
 # ==================================================================================================================================================	
 	
 def episodios(item):
-    logger.info("streamondemand-pureita altadefinizione01_biz episodios")
+    logger.info("streamondemand-pureita altadefinizione01 episodios")
 
     itemlist = []
 

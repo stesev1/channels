@@ -3,7 +3,7 @@
     <id>altadefinizione01</id>
     <name>AltaDefinizione01</name>
 
-    <active>false</active>
+    <active>true</active>
     <adult>false</adult>
     <language>it</language>
 
@@ -12,8 +12,8 @@
     <bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizione01_biz.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>30</version>
-    <date>14/11/2018</date>
+    <version>31</version>
+    <date>16/11/2018</date>
     <changes>Update and Fix</changes>
 
     <categories>
