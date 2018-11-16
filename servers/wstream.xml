@@ -1,47 +1,13 @@
 <?xml version="1.0" ?>
 <server>
 	<active>true</active>
-	<changes>
-		<change>
-			<autor></autor>
-			<date>25/03/2016</date>
-			<description>Versión inicial</description>
-		</change>
-	</changes>
-	<find_videos>
-		<patterns>
-			<pattern>wstream.video/(?:embed-)?([a-z0-9A-Z]+)</pattern>
-			<url>http://wstream.video/\1</url>
-		</patterns>
-	</find_videos>
+	<changes>Temporary Fix</changes>
+	<date>20/10/2018</date>
 	<free>true</free>
 	<id>wstream</id>
 	<name>wstream</name>
-	<premium>
-	</premium>
-	<settings>
-		<default>false</default>
-		<enabled>true</enabled>
-		<id>black_list</id>
-		<label>Incluir en lista negra</label>
-		<type>bool</type>
-		<visible>true</visible>
-	</settings>
-	<settings>
-		<default>100</default>
-		<enabled>true</enabled>
-		<id>favorites_servers_list</id>
-		<label>Incluir en lista de favoritos</label>
-		<lvalues>No</lvalues>
-		<lvalues>1</lvalues>
-		<lvalues>2</lvalues>
-		<lvalues>3</lvalues>
-		<lvalues>4</lvalues>
-		<lvalues>5</lvalues>
-		<type>list</type>
-		<visible>false</visible>
-	</settings>
-	<thumbnail>http://media.tvalacarta.info/servers/server_wstream.png</thumbnail>
-	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>5</version>
+	<premium></premium>
+	<thumbnail></thumbnail>
+	<update_url>https://github.com/stesev1/channels/tree/master/servers</update_url>
+	<version>11</version>
 </server>
