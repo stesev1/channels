@@ -54,12 +54,7 @@ def mainlist(item):
                      title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
-				Item(channel=__channel__,
-					title="[COLOR orange]Cerca Serie...[/COLOR]",
-					action="search",
-					extra="serie",
-					thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
 
     return itemlist
 
@@ -374,4 +369,4 @@ def findvideos(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")

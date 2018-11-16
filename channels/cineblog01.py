@@ -29,31 +29,37 @@ def mainlist(item):
     # Main options
     itemlist = [Item(channel=__channel__,
                      action="peliculas",
-                     title="[COLOR azure]Novita'[/COLOR]",
+                     title="[COLOR azure]Film[COLOR orange] - Novita'[/COLOR]",
                      url=host,
                      extra="movie",
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
+                     title="[COLOR azure]Film[COLOR orange] - Aggiornamenti[/COLOR]",
+                     action="peliculas_lastupdate",
+                     url="%s/lista-film-ultimi-100-film-aggiornati/" % host,
+                     extra="movie",
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_new_P.png"),
+				Item(channel=__channel__,
                      action="peliculas",
-                     title="[COLOR azure]Alta Definizione [HD][/COLOR]",
+                     title="[COLOR azure]Film[COLOR orange] - Alta Definizione [HD][/COLOR]",
                      url="%s/tag/film-hd-altadefinizione/" % host,
                      extra="movie",
                      thumbnail="http://jcrent.com/apple%20tv%20final/HD.png"),
                 Item(channel=__channel__,
                      action="menuhd",
-                     title="[COLOR azure]Menù HD[/COLOR]",
+                     title="[COLOR azure]Film[COLOR orange] - Menù HD[/COLOR]",
                      url=host,
                      extra="movie",
                      thumbnail="http://files.softicons.com/download/computer-icons/disks-icons-by-wil-nichols/png/256x256/Blu-Ray.png"),
                 Item(channel=__channel__,
                      action="menugeneros",
-                     title="[COLOR azure]Per Genere[/COLOR]",
+                     title="[COLOR azure]Film[COLOR orange] - Per Genere[/COLOR]",
                      url=host,
                      extra="movie",
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
                      action="menuanyos",
-                     title="[COLOR azure]Per Anno[/COLOR]",
+                     title="[COLOR azure]Film[COLOR orange] - Per Anno[/COLOR]",
                      url=host,
                      extra="movie",
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
@@ -64,7 +70,7 @@ def mainlist(item):
                      thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
                 Item(channel=__channel__,
                      action="listserie",
-                     title="[COLOR azure]Serie Tv - Novita'[/COLOR]",
+                     title="[COLOR azure]Serie Tv[COLOR orange] - Novita'[/COLOR]",
                      url="%s/serietv/" % host,
                      extra="serie",
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
@@ -144,6 +150,10 @@ def next_page(itemlist,np_url,np_action,np_extra):
              folder=True))
 
 
+def updates(item):
+    logger.info("[cineblog01.py] updates")
+    return menulist(item,'<select name="select1"(.*?)</select>')
+			 
 def menugeneros(item):
     logger.info("[cineblog01.py] menugeneros")
     return menulist(item,'<select name="select2"(.*?)</select>')
@@ -551,4 +561,65 @@ def play(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
+
+# ==================================================================================================================================================
+
+def peliculas_lastupdate(item):
+    logger.info("[streamondemand-pureita cineblog01] peliculas_update")
+
+    itemlist = []
+    numpage = 14
+
+    p = 1
+    if '{}' in item.url:
+        item.url, p = item.url.split('{}')
+        p = int(p)
+
+    # Descarga la pagina
+
+    data = httptools.downloadpage(item.url, headers=headers).data
+
+    # Estrae i contenuti 
+    patron = '<a href="([^"]+)">([^<]+)</a><br>-'
+    matches = re.compile(patron, re.DOTALL).findall(data)
+
+
+    for i, (scrapedurl, scrapedtitle) in enumerate(matches):
+        if (p - 1) * numpage > i: continue
+        if i >= p * numpage: break
+        scrapedthumbnail = ""
+        scrapedplot = ""
+
+        scrapedtitle=scrapedtitle.replace("&#8211;", "-").replace("&#215;", "").replace("[Sub-ITA]", "(Sub Ita)")
+        scrapedtitle=scrapedtitle.replace("/", " - ").replace("&#8217;", "'").replace("&#8230;", "...").replace("#", "# ")
+        scrapedtitle=scrapedtitle.strip()
+        title = scrapertools.decodeHtmlentities(scrapedtitle)
+        itemlist.append(infoSod(
+            Item(channel=__channel__,
+                 extra=item.extra,
+                 action="findvideos",
+                 contentType="movie",
+                 title=title,
+                 url=scrapedurl,
+                 thumbnail=scrapedthumbnail,
+                 fulltitle=title,
+                 show=title,
+                 plot=scrapedplot,
+                 folder=True), tipo='movie'))
+				 
+    # Extrae el paginador
+    if len(matches) >= p * numpage:
+        scrapedurl = item.url + '{}' + str(p + 1)
+        itemlist.append(
+            Item(channel=__channel__,
+                 extra=item.extra,
+                 action="peliculas_lastupdate",
+                 title="[COLOR orange]Successivi >>[/COLOR]",
+                 url=scrapedurl,
+                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 folder=True))
+
+    return itemlist
+
+# ==================================================================================================================================================	

@@ -11,7 +11,7 @@
     <thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/streaminghd.png</thumbnail>
     <bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/streaminghd.png</bannermenu>
 
-    <update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
     <version>07</version>
     <date>10/11/2018</date>
     <changes>Temporary Fix</changes>

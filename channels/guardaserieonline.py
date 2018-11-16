@@ -23,7 +23,7 @@ headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("[GuardaSerieOnline] mainlist")
+    logger.info("streamondemand-pureita [GuardaSerieOnline mainlist]")
     itemlist = [Item(channel=__channel__,
                      action="peliculas_new",
                      title="[COLOR azure]Serie TV - [COLOR orange]Nuove[/COLOR]",
@@ -52,19 +52,14 @@ def mainlist(item):
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca ...[/COLOR]",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
-				Item(channel=__channel__,
-					title="[COLOR orange]Cerca Serie...[/COLOR]",
-					action="search",
-					extra="serie",
-					thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
 
     return itemlist
 
 # ==============================================================================================================================================================================
 
 def newest(categoria):
-    logger.info("[GuardaSerieOnline] newest" + categoria)
+    logger.info("streamondemand-pureita [GuardaSerieOnline newest]" + categoria)
     itemlist = []
     item = Item()
     try:
@@ -88,7 +83,7 @@ def newest(categoria):
 # ==============================================================================================================================================================================
 	
 def search(item, texto):
-    logger.info("[GuardaSerieOnline] search")
+    logger.info("streamondemand-pureita [GuardaSerieOnline search]")
     item.url = host + "/?s=" + texto
     try:
         return lista_serie(item)
@@ -102,7 +97,7 @@ def search(item, texto):
 # ==============================================================================================================================================================================
 
 def peliculas_new(item):
-    logger.info("[GuardaSerieOnline] peliculas_new")
+    logger.info("streamondemand-pureita [GuardaSerieOnline peliculas_new]")
     itemlist = []
     PERPAGE = 14
 
@@ -154,7 +149,7 @@ def peliculas_new(item):
 # ==============================================================================================================================================================================
 
 def peliculas_sub(item):
-    logger.info("[GuardaSerieOnline] peliculas_sub")
+    logger.info("streamondemand-pureita [GuardaSerieOnline peliculas_sub]")
     itemlist = []
     PERPAGE = 14
 
@@ -207,7 +202,7 @@ def peliculas_sub(item):
 # ==============================================================================================================================================================================
 
 def serietvaggiornate(item):
-    logger.info("[GuardaSerieOnline]  serietvaggiornate")
+    logger.info("streamondemand-pureita [GuardaSerieOnline  serietvaggiornate]")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -239,7 +234,7 @@ def serietvaggiornate(item):
 # ==============================================================================================================================================================================
 	
 def categorie(item):
-    logger.info("[GuardaSerieOnline] categorie")
+    logger.info("streamondemand-pureita [GuardaSerieOnline  categorie]")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -263,7 +258,7 @@ def categorie(item):
 # ==============================================================================================================================================================================
 
 def lista_serie(item):
-    logger.info("[GuardaSerieOnline] lista_serie")
+    logger.info("streamondemand-pureita [GuardaSerieOnline lista_serie]")
     itemlist = []
     
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -302,7 +297,7 @@ def lista_serie(item):
 # ==============================================================================================================================================================================
 
 def episodi(item):
-    logger.info("[GuardaSerieOnline] episodi")
+    logger.info("streamondemand-pureita [GuardaSerieOnline  episodi]")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -332,7 +327,7 @@ def episodi(item):
 # ==============================================================================================================================================================================
 
 def findvideos(item):
-    logger.info("[GuardaSerieOnline] findvideos")
+    logger.info("streamondemand-pureita [GuardaSerieOnline findvideos]")
 
     if item.url:
         data = httptools.downloadpage(item.url, headers=headers).data

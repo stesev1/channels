@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
 	<id>cinemalibero</id>
-	<name>Cinemalibero</name>
+	<name>Cinema Libero</name>
 
 	<active>true</active>
 	<adult>false</adult>
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/cinemalibero.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/cinemalibero.png</bannermenu>
+	<thumbnail>http://i.imgur.com/xuz7YWR.png</thumbnail>
+	<bannermenu>http://i.imgur.com/xuz7YWR.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>22</version>
-	<date>07/11/2018</date>
-	<changes>Enabled - Partial Fix</changes>
+	<version>23</version>
+	<date>13/11/2018</date>
+	<changes>Fix Domain</changes>
 
 	<categories>
-        <category>movie</category>
+		<category>movie</category>
         <category>serie</category>
-        <category>anime</category>
+		<category>anime</category>
 	</categories>
 
 	<settings>
-		<include_in_global_search>true</include_in_global_search>
 		<id>include_in_global_search</id>
 		<type>bool</type>
 		<label>Includi ricerca globale</label>
@@ -31,4 +30,5 @@
 		<enabled>true</enabled>
 		<visible>true</visible>
 	</settings>
+
 </channel>

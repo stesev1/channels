@@ -18,7 +18,7 @@ from core.tmdb import infoSod
 
 
 __channel__ = "tantifilm"
-host = "https://www.tantifilm.gratis"
+host = "https://www.tantifilm.cc"
 
 headers = [['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
            ['Accept-Encoding', 'gzip, deflate'],
@@ -751,29 +751,26 @@ def findvideos(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Extrae las entradas (carpetas)
-    patron = '<div\s*id="wpwm-tabs-(\d+)">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="(.*?)"[^>]+>'
+    patron = '<div  id="wpwm-tabs-(\d+)">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="(.*?)"[^>]+>'
 
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for option, scrapedurl in matches:
-
-        if "protectlink" in scrapedurl:
-          scrapedurl=scrapertools.find_single_match(data, '<div\s*id="wpwm-tabs-%s">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="[^\/]+\/\/[^=]+=([^"]+)"[^>]+>' % option)
+        scrapedtitle=scrapertools.find_single_match(data, '<li id="wpwm-tabmob[^>]+><a href="#wpwm-tabs-%s">([^<]+)</a></li>' % option)
+        if "protectlink" in data:
+          scrapedurl=scrapertools.find_single_match(data, '<div  id="wpwm-tabs-%s">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="[^\/]+\/\/[^=]+=([^"]+)"[^>]+>' % option)
           scrapedurl=''.join(scrapedurl.split())
           scrapedurl=scrapedurl.decode("base64")
-
-        scrapedtitle=scrapertools.find_single_match(data, '<li\s*id="wpwm-tabmob[^>]+><a href="#wpwm-tabs-%s">([^<]+)</a></li>' % option)
         if scrapedtitle=="-":
            continue
         if "Player" in scrapedtitle:
            return episodios(item)
-
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
                  fulltitle=item.fulltitle,
                  show=item.show,
-                 title="[COLOR azure][[COLOR orange]" + scrapedtitle + "[/COLOR]] - " + item.title,
+                 title="[COLOR azure][[COLOR orange]" + scrapedtitle.strip() + "[/COLOR]] - " + item.title,
                  url=scrapedurl.strip(),
                  thumbnail=item.thumbnail,
                  plot=item.plot,

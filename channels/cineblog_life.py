@@ -58,15 +58,11 @@ def mainlist(item):
                      url="%s/serie-tv/" % host,
                      thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/a-z_P.png"),
                 Item(channel=__channel__,
-                     title="[COLOR orange]Cerca Film...[/COLOR]",
+                     title="[COLOR orange]Cerca...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
-                Item(channel=__channel__,
-                     title="[COLOR orange]Cerca Serie...[/COLOR]",
-                     action="search",
-                     extra="serie",
                      thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+
     return itemlist
 
 # ===================================================================================================================================================	

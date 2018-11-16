@@ -25,7 +25,7 @@ headers = [['User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:52.0) Ge
 
 
 def mainlist(item):
-    logger.info("streamondemand-pureita guardogratis.py mainlist")
+    logger.info("[guardogratis.py] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="Film[COLOR orange]   - Novita'[/COLOR]",
                      action="film",
@@ -59,14 +59,18 @@ def mainlist(item):
                      title="[COLOR orange]Cerca.....[/COLOR]",
                      action="search",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
-
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
+				Item(channel=__channel__,
+					title="[COLOR orange]Cerca Serie...[/COLOR]",
+					action="search",
+					extra="serie",
+					thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
     return itemlist
 
 # ==================================================================================================================================================
 
 def search(item, texto):
-    logger.info("streamondemand-pureita guardogratis.py search")
+    logger.info("[guardogratis.py] search")
     item.url = host + "/?s=" + texto
     try:
         return film(item)
@@ -80,7 +84,7 @@ def search(item, texto):
 # ==================================================================================================================================================
 
 def genere(item):
-    logger.info("streamondemand-pureita guardogratis.py pergenere")
+    logger.info("[guardogratis.py] pergenere")
     itemlist = []
     
     data = scrapertools.anti_cloudflare(item.url, headers=headers)
@@ -106,7 +110,7 @@ def genere(item):
 # ==================================================================================================================================================
 
 def film(item):
-    logger.info("streamondemand-pureita guardogratis.py film")
+    logger.info("[guardogratis.py] film")
     itemlist = []
 
 
@@ -155,7 +159,7 @@ def film(item):
 # ==================================================================================================================================================
 """
 def film_top(item):
-    logger.info("streamondemand-pureita guardogratis.py film")
+    logger.info("[guardogratis.py] film")
     itemlist = []
 
     data = scrapertools.anti_cloudflare(item.url, headers=headers)
@@ -199,7 +203,7 @@ def film_top(item):
 # ==================================================================================================================================================
 	
 def film_new(item):
-    logger.info("streamondemand-pureita guardogratis.py film")
+    logger.info("[guardogratis.py] film")
     itemlist = []
 
     data = scrapertools.anti_cloudflare(item.url, headers=headers)

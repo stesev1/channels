@@ -20,7 +20,7 @@ host = "https://streaminghd.online"
 headers = [['Referer', host]]
 
 def mainlist(item):
-    logger.info("streamondemand-pureita streaminghd mainlist")
+    logger.info("[streaminghd] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Novita'[/COLOR]",
                      action="peliculas",
@@ -104,7 +104,7 @@ def categorias(item):
 # ==================================================================================================================================================
 	
 def search(item, texto):
-    logger.info("streamondemand-pureita streaminghd " + item.url + " search " + texto)
+    logger.info("[streaminghd] " + item.url + " search " + texto)
     
     try:
         if item.extra == "movie":
@@ -124,7 +124,7 @@ def search(item, texto):
 # ==================================================================================================================================================		
 		
 def peliculas(item):
-    logger.info("streamondemand-pureita streaminghd peliculas")
+    logger.info("[streaminghd] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -185,7 +185,7 @@ def peliculas(item):
 # ==================================================================================================================================================
 
 def peliculas_tmdb(item):
-    logger.info("streamondemand-pureita streaminghd peliculas")
+    logger.info("[streaminghd] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -247,7 +247,7 @@ def peliculas_tmdb(item):
 # ==================================================================================================================================================
 		
 def peliculas_new(item):
-    logger.info("streamondemand-pureita streaminghd peliculas_new")
+    logger.info("[streaminghd] peliculas_new")
     itemlist = []
 
     # Descarga la pagina
@@ -299,7 +299,7 @@ def peliculas_new(item):
 # ==================================================================================================================================================
 
 def peliculas_update(item):
-    logger.info("streamondemand-pureita streaminghd peliculas_update")
+    logger.info("[streaminghd] peliculas_update")
 
     itemlist = []
 
@@ -343,7 +343,7 @@ def peliculas_update(item):
 # ==================================================================================================================================================	
 
 def peliculas_tv(item):
-    logger.info("streamondemand-pureita streaminghd peliculas")
+    logger.info("[streaminghd] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -403,7 +403,7 @@ def peliculas_tv(item):
 # ==================================================================================================================================================
 
 def peliculas_new_tv(item):
-    logger.info("streamondemand-pureita streaminghd peliculas")
+    logger.info("[streaminghd] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -461,7 +461,7 @@ def peliculas_new_tv(item):
 # ==================================================================================================================================================
 
 def peliculas_search(item):
-    logger.info("streamondemand-pureita streaminghd peliculas_update")
+    logger.info("[streaminghd] peliculas_update")
 
     itemlist = []
 
@@ -494,7 +494,7 @@ def peliculas_search(item):
 # ==================================================================================================================================================
 	
 def episodios(item):
-    logger.info("streamondemand-pureita streaminghd episodios")
+    logger.info("[streaminghd] episodios")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
