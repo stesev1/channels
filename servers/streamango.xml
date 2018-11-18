@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<server>
+	<active>true</active>
+	<changes>
+		<change>
+			<autor>Cmos</autor>
+			<date>22/04/2017</date>
+			<description>Nuevo conector</description>
+		</change>
+	</changes>
+	<find_videos>
+		<ignore_urls>
+            <value>http://streamango.com/embed/assets</value>
+            <value>http://streamango.com/embed/contact</value>
+            <value>http://streamango.com/embed/money</value>
+            <value>http://streamango.com/embed/register</value>
+			<value>http://streamango.com/embed/log</value>
+            <value>http://streamango.com/embed/login</value>
+            <value>http://streamango.com/embed/about</value>
+            <value>http://streamango.com/embed/news</value>
+            <value>http://streamango.com/embed/faq</value>
+            <value>http://streamango.com/embed/tos</value>
+            <value>http://streamango.com/embed/copyright</value>
+            <value>http://streamango.com/embed/dmca</value>
+            <value>http://streamango.com/embed/api</value>
+            <value>http://streamango.com/embed/speedtest</value>
+		</ignore_urls>
+		<patterns>
+			<pattern>(?://|\.)streamango\.com/(?:f/|embed/)?([0-9a-zA-Z]+)</pattern>
+			<url>http://streamango.com/embed/\1</url>
+		</patterns>
+	</find_videos>
+	<free>true</free>
+	<id>streamango</id>
+	<name>streamango</name>
+	<premium>
+	</premium>
+	<settings>
+		<default>false</default>
+		<enabled>true</enabled>
+		<id>black_list</id>
+		<label>Incluir en lista negra</label>
+		<type>bool</type>
+		<visible>true</visible>
+	</settings>
+	<settings>
+		<default>100</default>
+		<enabled>true</enabled>
+		<id>favorites_servers_list</id>
+		<label>Incluir en lista de favoritos</label>
+		<lvalues>No</lvalues>
+		<lvalues>1</lvalues>
+		<lvalues>2</lvalues>
+		<lvalues>3</lvalues>
+		<lvalues>4</lvalues>
+		<lvalues>5</lvalues>
+		<type>list</type>
+		<visible>false</visible>
+	</settings>
+	<thumbnail>http://i.imgur.com/o8XR8fL.png</thumbnail>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
+	<version>5</version>
+</server>
