@@ -4,7 +4,7 @@
 	<changes>
 		<change>
 			<autor>Cmos</autor>
-			<date>21/03/2017</date>
+			<date>18/11/2018</date>
 			<description>Primera version</description>
 		</change>
 	</changes>
@@ -45,5 +45,5 @@
 	</settings>
 	<thumbnail>http://i.imgur.com/c7LwCTc.png?1</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>2</version>
+	<version>3</version>
 </server>

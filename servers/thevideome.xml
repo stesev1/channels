@@ -1,10 +1,10 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 <server>
 	<active>true</active>
 	<changes>
 		<change>
 			<autor>Cmos</autor>
-			<date>27/02/2017</date>
+			<date>18/11/2018</date>
 			<description>Reparado conector</description>
 		</change>
 		<change>
@@ -50,5 +50,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_thevideome.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>6</version>
+	<version>7</version>
 </server>

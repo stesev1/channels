@@ -1,10 +1,10 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 <server>
 	<active>true</active>
 	<changes>
 		<change>
 			<autor></autor>
-			<date>25/03/2016</date>
+			<date>18/11/2018</date>
 			<description>Versión incial</description>
 		</change>
 	</changes>
@@ -49,5 +49,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_nosvideo.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>2</version>
+	<version>3</version>
 </server>

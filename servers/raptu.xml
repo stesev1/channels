@@ -1,10 +1,10 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 <server>
 	<active>true</active>
 	<changes>
 		<change>
 			<autor>Intel1</autor>
-			<date>09/05/2017</date>
+			<date>18/11/2018</date>
 			<description>Agregado otro tipo de url de los videos y detección de subtítulos</description>
 		</change>
 		<change>
@@ -50,5 +50,5 @@
 	</settings>
 	<thumbnail>http://i.imgur.com/quVK1j0.png?1</thumbnail>
 	<update_url>https://raw.githubusercontent.com/tvalacarta/pelisalacarta/master/python/main-classic/servers/</update_url>
-	<version>3</version>
+	<version>4</version>
 </server>

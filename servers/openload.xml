@@ -4,7 +4,7 @@
 	<changes>
 		<change>
 			<autor>Cmos</autor>
-			<date>12/05/2017</date>
+			<date>18/11/2018</date>
 			<description>Corregido por cambios en el servidor</description>
 		</change>
 		<change>
@@ -56,5 +56,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_openload.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>36</version>
+	<version>37</version>
 </server>

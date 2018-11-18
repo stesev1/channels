@@ -1,10 +1,10 @@
-<?xml version="1.0" ?>
+﻿<?xml version="1.0" ?>
 <server>
 	<active>true</active>
 	<changes>
 		<change>
 			<autor></autor>
-			<date>09/01/2017</date>
+			<date>18/11/2018</date>
 			<description>Versión inicial</description>
 		</change>
 	</changes>
@@ -45,5 +45,5 @@
 	</settings>
 	<thumbnail>http://i.imgur.com/WApzSMn.png?1</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>2</version>
+	<version>3</version>
 </server>

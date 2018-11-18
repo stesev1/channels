@@ -4,7 +4,7 @@
 	<changes>
 		<change>
 			<autor>Cmos</autor>
-			<date>21/03/2017</date>
+			<date>18/11/2018</date>
 			<description>Mejorado el test de video y uso de httptools</description>
 		</change>
 		<change>
@@ -50,6 +50,6 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_flashx.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>7</version>
+	<version>8</version>
 </server>
 
