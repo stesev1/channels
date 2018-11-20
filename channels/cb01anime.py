@@ -13,7 +13,7 @@ from platformcode import logger
 
 __channel__ = "cb01anime"
 
-host = "https://www.cb01.news/"
+host = "http://www.cineblog01.pink/"
 
 
 # -----------------------------------------------------------------
