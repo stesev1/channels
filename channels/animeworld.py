@@ -17,7 +17,7 @@ __channel__ = "animeworld"
 
 host = "https://www.animeworld.it"
 
-PERPAGE = 20
+PERPAGE = 30
 
 
 # -----------------------------------------------------------------
@@ -29,14 +29,14 @@ def mainlist(item):
             action="lista_anime",
             title=
             "[COLOR azure]Anime [/COLOR]- [COLOR lightsalmon]Lista Completa[/COLOR]",
-            url=host + "/animelist?load_all=1",
+            url=host + "/az-list",
             thumbnail=CategoriaThumbnail,
             fanart=CategoriaFanart),
         Item(
             channel=__channel__,
             action="ultimiep",
             title="[COLOR azure]Ultimi Episodi[/COLOR]",
-            url=host + "/fetch_pages?request=episodes",
+            url=host + "/updated",
             thumbnail=CategoriaThumbnail,
             fanart=CategoriaFanart),
         Item(
@@ -99,18 +99,18 @@ def search_anime(item):
     log("search_anime", "search_anime")
     itemlist = []
 
-    data = httptools.downloadpage(host + "/animelist?load_all=1").data
-    data = scrapertools.decodeHtmlentities(data)
+    data = httptools.downloadpage(host + "/search?keyword=" + item.url.replace(" ", "+")).data
+    data = re.sub(">\s*<", "><", data).replace("\r\n", "").replace("</div></div><div", "</div></div>\n<div")
 
-    texto = item.url.lower().split('+')
+    regex = r'<div class=\"item\">.*<img src=\"([^\"]+)\".*</div>.*<a href=\"([^\"]+)\".*>(.*)</a>.*</div></div>\n'
+    matches = re.compile(regex, re.IGNORECASE).findall(data)
 
-    patron = r'<a href="([^"]+)"[^>]*?>[^>]*?>(.+?)<'
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    # texto = item.url.lower().split('+')
 
-    for scrapedurl, scrapedtitle in [(scrapedurl, scrapedtitle)
-                                     for scrapedurl, scrapedtitle in matches
-                                     if all(t in scrapedtitle.lower()
-                                            for t in texto)]:
+    # patron = r'<a href="([^"]+)"[^>]*?>[^>]*?>(.+?)<'
+    #matches = re.compile(patron, re.DOTALL).findall(data)
+
+    for scrapedthumbnail, scrapedurl, scrapedtitle in matches:
         itemlist.append(
             Item(
                 channel=__channel__,
@@ -142,14 +142,18 @@ def lista_anime(item):
     data = httptools.downloadpage(item.url).data
 
     # Estrae i contenuti
-    patron = r'<a href="([^"]+)"[^>]*?>[^>]*?>(.+?)<'
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    patron = r"<a\sclass=\"name\" .* href=\"([^\"]+)\">(.+?)<"
+
+    matches = re.compile(patron, re.IGNORECASE).findall(data)
 
     scrapedplot = ""
     scrapedthumbnail = ""
     for i, (scrapedurl, scrapedtitle) in enumerate(matches):
-        if (p - 1) * PERPAGE > i: continue
-        if i >= p * PERPAGE: break
+        if (p - 1) * PERPAGE > i:
+            continue
+        if i >= p * PERPAGE:
+            break
+
         title = scrapertools.decodeHtmlentities(scrapedtitle).strip()
         itemlist.append(
             infoSod(
@@ -174,15 +178,18 @@ def lista_anime(item):
                 title="[COLOR yellow]Torna Home[/COLOR]",
                 folder=True)),
 
-    if len(matches) >= p * PERPAGE:
-        scrapedurl = item.url + '{}' + str(p + 1)
+    patronvideos = r'<a class=\"page-link\" href=\"([^\"]+)\" rel=\"next\".*</'
+    next_page = scrapertools.find_single_match(data, patronvideos)
+
+    if next_page:
+        # scrapedurl = item.url + '{}' + str(p + 1)
         itemlist.append(
             Item(
                 channel=__channel__,
                 extra=item.extra,
                 action="lista_anime",
                 title="[COLOR orange]Successivo >>[/COLOR]",
-                url=scrapedurl,
+                url=next_page,
                 thumbnail=
                 "http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                 folder=True))
@@ -198,19 +205,27 @@ def ultimiep(item):
     log("ultimiep", "ultimiep")
     itemlist = []
 
-    post = "page=%s" % item.extra if item.extra else None
+    # post = "page=%s" % item.extra if item.extra else None
+    #
+    # data = httptools.downloadpage(
+    #     item.url, post=post, headers={
+    #         'X-Requested-With': 'XMLHttpRequest'
+    #     }).data
 
-    data = httptools.downloadpage(
-        item.url, post=post, headers={
-            'X-Requested-With': 'XMLHttpRequest'
-        }).data
+    # patron = r"""<a href='[^']+'><div class="locandina"><img alt="[^"]+" src="([^"]+)" title="[^"]+" class="grandezza"></div></a>\s*"""
+    # patron += r"""<a href='([^']+)'><div class="testo">(.+?)</div></a>\s*"""
+    # patron += r"""<a href='[^']+'><div class="testo2">(.+?)</div></a>"""
+    # matches = re.compile(patron, re.DOTALL).findall(data)
 
-    patron = r"""<a href='[^']+'><div class="locandina"><img alt="[^"]+" src="([^"]+)" title="[^"]+" class="grandezza"></div></a>\s*"""
-    patron += r"""<a href='([^']+)'><div class="testo">(.+?)</div></a>\s*"""
-    patron += r"""<a href='[^']+'><div class="testo2">(.+?)</div></a>"""
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    data = httptools.downloadpage(item.url).data
 
-    for scrapedthumbnail, scrapedurl, scrapedtitle1, scrapedtitle2 in matches:
+    data = re.sub(">\s*<", "><", data).replace("\r\n", "").replace("</div></div><div", "</div></div>\n<div")
+
+    regex = r'<div class=\"item\">.*<img src=\"([^\"]+)\".*<div class=\"ep\">(.*)</div></div>.*<a href=\"([^\"]+)\".*>(.*)</a>.*</div></div>\n'
+    matches = re.compile(regex, re.IGNORECASE).findall(data)
+
+    for scrapedthumbnail, scrapedtitle2, scrapedurl, scrapedtitle1 in matches:
+
         scrapedtitle1 = scrapertools.decodeHtmlentities(scrapedtitle1)
         scrapedtitle2 = scrapertools.decodeHtmlentities(scrapedtitle2)
         scrapedtitle = scrapedtitle1 + ' - [COLOR azure]' + scrapedtitle2 + '[/COLOR]'
@@ -227,7 +242,7 @@ def ultimiep(item):
                 tipo="tv"))
 
     # Pagine
-    patronvideos = r'data-page="(\d+)" title="Next">Pagina Successiva'
+    patronvideos = r'<a class=\"page-link\" href=\"([^\"]+)\" rel=\"next\".*</'
     next_page = scrapertools.find_single_match(data, patronvideos)
 
     if next_page:
@@ -242,7 +257,7 @@ def ultimiep(item):
                 channel=__channel__,
                 action="ultimiep",
                 title="[COLOR orange]Successivo >>[/COLOR]",
-                url=host + "/fetch_pages?request=episodes",
+                url=next_page,
                 thumbnail=
                 "http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
                 extra=next_page,
@@ -260,23 +275,16 @@ def episodios(item):
 
     data = httptools.downloadpage(item.url).data
 
-    anime_id = scrapertools.find_single_match(data, r'\?anime_id=(\d+)')
+    regex = r"<li><a data-id=\".* href=\"([^\"]+)\" .*>(.*)</a>"
+    matches = re.compile(regex, re.IGNORECASE).findall(data)
 
-    data = httptools.downloadpage(
-        host + "/loading_anime?anime_id=" + anime_id,
-        headers={
-            'X-Requested-With': 'XMLHttpRequest'
-        }).data
-
-    patron = r'<td style="[^"]+"><b><strong" style="[^"]+">(.+?)</b></strong></td>\s*'
-    patron += r'<td style="[^"]+"><a href="([^"]+)"'
-    matches = re.compile(patron, re.DOTALL).findall(data)
-
-    for scrapedtitle, scrapedurl in matches:
+    for scrapedurl, scrapedtitle in matches:
+        # scrapedurl = match.group(1)
+        # scrapedtitle = "Episodio " + match.group(2)
 
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         scrapedtitle = re.sub(r'<[^>]*?>', '', scrapedtitle)
-        scrapedtitle = '[COLOR azure][B]' + scrapedtitle + '[/B][/COLOR]'
+        scrapedtitle = "Episodio " + '[COLOR azure][B]' + scrapedtitle + '[/B][/COLOR]'
         itemlist.append(
             Item(
                 channel=__channel__,
@@ -314,19 +322,17 @@ def findvideos(item):
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
-    patron = r'<a href="([^"]+)"><div class="downloadestreaming">'
-    url = scrapertools.find_single_match(data, patron)
 
-    data = httptools.downloadpage(url).data
-    patron = r"""<source\s*src=(?:"|')([^"']+?)(?:"|')\s*type=(?:"|')video/mp4(?:"|')>"""
-    matches = re.compile(patron, re.DOTALL).findall(data)
-    for video in matches:
+    regex = r"<a href=\"([^\"]+)\" id=\"downloadLink\".*download>(.*)</a>"
+    matches = re.finditer(regex, data)
+
+    for match in matches:
         itemlist.append(
             Item(
                 channel=__channel__,
                 action="play",
                 title=item.title + " [[COLOR orange]Diretto[/COLOR]]",
-                url=video,
+                url=match.group(1),
                 folder=False))
 
     return itemlist
