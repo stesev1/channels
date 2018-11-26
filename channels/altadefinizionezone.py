@@ -16,7 +16,7 @@ from core.tmdb import infoSod
 
 __channel__ = "altadefinizionezone"
 
-host = "https://www.altadefinizione01.film/"
+host = "https://www.altadefinizione01.casa/"
 
 headers = [['Referer', host]]
 
