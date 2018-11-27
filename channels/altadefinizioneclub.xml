@@ -12,9 +12,9 @@
 	<bannermenu>http://altadefinizione.bid/wp-content/themes/altedefinizioni/images/logo-alte.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>8</version>
-	<date>18/07/2017</date>
-	<changes>Disabled Channel</changes>
+	<version>9</version>
+	<date>27/11/2018</date>
+	<changes>Update Channel</changes>
 
 	<categories>
 		<category>movie</category>

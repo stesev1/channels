@@ -17,7 +17,7 @@ from core.tmdb import infoSod
 
 __channel__ = "altadefinizioneclub"
 
-host = "https://altadefinizione.green/"
+host = "https://altadefinizione.review/"
 
 
 def mainlist(item):
