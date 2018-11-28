@@ -3,7 +3,7 @@
 	<id>eurostreaming</id>
 	<name>Eurostreaming</name>
 
-	<active>false</active>
+	<active>true</active>
 	<adult>false</adult>
 	<language>it</language>
 
@@ -12,16 +12,21 @@
 	<bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/eurostreaming.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>12</version>
-	<date>16/11/2017</date>
-	<changes>Enabled</changes>
+	<version>13</version>
+	<date>28/11/2018</date>
+	<changes>Update</changes>
 
 	<categories>
-                <category>serie</category>
-                <category>anime</category>
+            <category>serie</category>
+            <category>anime</category>
 	</categories>
 
 	<settings>
-		<include_in_global_search>false</include_in_global_search>
+		<id>include_in_global_search</id>
+		<type>bool</type>
+		<label>Includi ricerca globale</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
 	</settings>
 </channel>
