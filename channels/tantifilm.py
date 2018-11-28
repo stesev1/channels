@@ -18,7 +18,7 @@ from core.tmdb import infoSod
 
 
 __channel__ = "tantifilm"
-host = "https://www.tantifilm.cc"
+host = "https://www.tantifilm.video"
 
 headers = [['User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:38.0) Gecko/20100101 Firefox/38.0'],
            ['Accept-Encoding', 'gzip, deflate'],
@@ -55,14 +55,19 @@ def mainlist(item):
                      title="[COLOR azure]Serie TV - [COLOR orange]Ultimi Episodi[/COLOR]",
                      extra="series",
                      action="peliculas_series",
-                     url="%s/aggiornamenti-giornalieri-serie-tv-2/" % host,
+                     url="%s/aggiornamenti-giornalieri-serie-tv/" % host,
                      thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow][I]Cerca ...[/I][/COLOR]",
+                     title="[COLOR yellow][I]Cerca Film ...[/I][/COLOR]",
                      action="search",
                      extra="series",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
-
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
+				Item(channel=__channel__,
+					title="[COLOR yellow][I]Cerca Serie...[/I][/COLOR]",
+					action="search",
+					extra="serie",
+					thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+					 
     return itemlist
 
 # ==================================================================================================================================================
@@ -121,13 +126,13 @@ def menu_tvshow(item):
                      title="[COLOR azure]Serie TV - [COLOR orange]Aggiornamenti per data[/COLOR]",
                      extra="series",
                      action="cat_date",
-                     url="%s/aggiornamenti-giornalieri-serie-tv-2/" % host,
+                     url="%s/aggiornamenti-giornalieri-serie-tv/" % host,
                      thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV - [COLOR orange]Ultime Episodi[/COLOR]",
                      extra="anime",
                      action="peliculas_series",
-                     url="%s/aggiornamenti-giornalieri-serie-tv-2/" % host,
+                     url="%s/aggiornamenti-giornalieri-serie-tv/" % host,
                      thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV - [COLOR orange]Novita'[/COLOR]",
@@ -354,6 +359,8 @@ def peliculas_series(item):
         ep=" ([COLOR orange]" + ep + "[/COLOR])"
         scrapedplot = ""
         scrapedthumbnail = ""
+        #if "streaming-5/" in scrapedurl:
+           #continue
         itemlist.append(infoSod(
             Item(channel=__channel__,
                  action="episodios",
@@ -579,7 +586,7 @@ def episodios_all(item):
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
-    patron = r'<iframe src="([^"]+)" scrolling="no" frameborder="0" width="626" height="550" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>'
+    patron = r'<iframe src="([^"]+)" scrolling="no" frameborder="\d+" width="\d+" height="\d+" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"><\/iframe>'
     url = scrapertools.find_single_match(data, patron)
 
     data = httptools.downloadpage(url).data.replace('\n', '')
@@ -751,26 +758,29 @@ def findvideos(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Extrae las entradas (carpetas)
-    patron = '<div  id="wpwm-tabs-(\d+)">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="(.*?)"[^>]+>'
+    patron = '<div\s*id="wpwm-tabs-(\d+)">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="(.*?)"[^>]+>'
 
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for option, scrapedurl in matches:
-        scrapedtitle=scrapertools.find_single_match(data, '<li id="wpwm-tabmob[^>]+><a href="#wpwm-tabs-%s">([^<]+)</a></li>' % option)
-        if "protectlink" in data:
-          scrapedurl=scrapertools.find_single_match(data, '<div  id="wpwm-tabs-%s">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="[^\/]+\/\/[^=]+=([^"]+)"[^>]+>' % option)
+
+        if "protectlink" in scrapedurl:
+          scrapedurl=scrapertools.find_single_match(data, '<div\s*id="wpwm-tabs-%s">\s*<ul class="wpwm-movie-links">\s*[^>]+>\s*[^>]+>\s*<iframe src="[^\/]+\/\/[^=]+=([^"]+)"[^>]+>' % option)
           scrapedurl=''.join(scrapedurl.split())
           scrapedurl=scrapedurl.decode("base64")
+
+        scrapedtitle=scrapertools.find_single_match(data, '<li\s*id="wpwm-tabmob[^>]+><a href="#wpwm-tabs-%s">([^<]+)</a></li>' % option)
         if scrapedtitle=="-":
            continue
         if "Player" in scrapedtitle:
            return episodios(item)
+
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
                  fulltitle=item.fulltitle,
                  show=item.show,
-                 title="[COLOR azure][[COLOR orange]" + scrapedtitle.strip() + "[/COLOR]] - " + item.title,
+                 title="[COLOR azure][[COLOR orange]" + scrapedtitle + "[/COLOR]] - " + item.title,
                  url=scrapedurl.strip(),
                  thumbnail=item.thumbnail,
                  plot=item.plot,

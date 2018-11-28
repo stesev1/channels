@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
 	<id>tantifilm</id>
@@ -12,10 +11,10 @@
 	<thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/tantifilm.png</thumbnail>
 	<bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/tantifilm.png</bannermenu>
 
-	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>21</version>
-	<date>29/10/2018</date>
-	<changes>Temporary Fix</changes>
+	<update_url>https://raw.githubusercontent.com/orione7/plugin.video.streamondemand-pureita/master/channels/</update_url>
+	<version>23</version>
+	<date>28/11/2018</date>
+	<changes>Update</changes>
 
 	<categories>
 		<category>movie</category>
