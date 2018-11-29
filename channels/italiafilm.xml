@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
 	<id>italiafilm</id>
-	<name>Italia-Film.co</name>
+	<name>ItaliaFilm</name>
 
 	<active>true</active>
 	<adult>false</adult>
@@ -12,9 +12,9 @@
 	<bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/italiafilm.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>19</version>
-	<date>02/10/2018</date>
-	<changes>Update and Partial Fix</changes>
+	<version>20</version>
+	<date>29/11/2018</date>
+	<changes>Update</changes>
 
 	<categories>
           <category>movie</category>
