@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
 	<id>guardogratis</id>
-	<name>guardogratis</name>
+	<name>GuardoGratis</name>
 
 	<active>true</active>
 	<adult>false</adult>
@@ -12,7 +12,7 @@
 	<bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/guardogratis.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>06</version>
+	<version>07</version>
 	<date>29/11/2018</date>
 	<changes>Update</changes>
 
