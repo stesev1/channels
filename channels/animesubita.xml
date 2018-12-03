@@ -3,7 +3,7 @@
     <id>animesubita</id>
     <name>AnimeSubIta</name>
 
-    <active>false</active>
+    <active>true</active>
     <adult>false</adult>
     <language>it</language>
 
@@ -11,9 +11,9 @@
     <bannermenu>http://www.animesubita.org/wp-content/uploads/2016/06/500v2-1.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>1</version>
-    <date>05/05/2018</date>
-    <changes>New Channel</changes>
+    <version>2</version>
+    <date>03/12/2018</date>
+    <changes>Update</changes>
 
     <categories>
         <category>anime</category>

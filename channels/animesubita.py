@@ -136,7 +136,7 @@ def ultimiep(item):
         if 'episodio' in eptype.lower():
             epnumber = scrapertools.find_single_match(title.lower(), r'episodio?\s*(\d+)')
             eptype += ":? " + epnumber
-                
+
         extra = "<tr>\s*<td[^>]+><strong>(?:[^>]+>|)%s(?:[^>]+>[^>]+>|[^<]*|[^>]+>)</strong>" % eptype
         itm.title = color(title, 'azure')
         itm.action = "findvideos"
@@ -180,7 +180,7 @@ def lista_anime(item, nextpage=True, show_lang=True):
     if nextpage:
         patronvideos = r'<link rel="next" href="([^"]+)"\s*/>'
         matches = re.compile(patronvideos, re.DOTALL).findall(data)
-        
+
         if len(matches) > 0:
             scrapedurl = matches[0]
             itemlist.append(
@@ -231,7 +231,7 @@ def lista_anime_completa(item):
 def episodi(item):
     logger.info()
     itemlist = []
-    
+
     data = httptools.downloadpage(item.url).data
 
     patron = '<td style="[^"]*?">\s*.*?<strong>(.*?)</strong>.*?\s*</td>\s*<td style="[^"]*?">\s*<a href="([^"]+?)"[^>]+>\s*<img.*?src="([^"]+?)".*?/>\s*</a>\s*</td>'
