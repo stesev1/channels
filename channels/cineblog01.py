@@ -18,7 +18,7 @@ from core.tmdb import infoSod
 
 __channel__ = "cineblog01"
 
-host = "https://www.cineblog.news/"
+host = "https://www.cb01.rocks/"
 
 headers = [['Referer', host]]
 
