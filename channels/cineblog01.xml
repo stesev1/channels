@@ -8,11 +8,11 @@
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>https://github.com/stesev1/channels/blob/master/images/cineblog01.png</thumbnail>
-	<bannermenu>https://github.com/stesev1/channels/blob/master/images/cineblog01.png</bannermenu>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/cineblog01.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/cineblog01.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>42</version>
+	<version>43</version>
 	<date>05/12/2018</date>
 	<changes>Change Domain</changes>
 
