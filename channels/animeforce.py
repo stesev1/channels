@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale  per http://animeinstreaming.net/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
+
 import re
 import urllib
 import urlparse
@@ -51,7 +50,7 @@ def mainlist(item):
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca ...[/COLOR]",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
