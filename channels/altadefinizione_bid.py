@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# streamondemand-PureITA - XBMC Plugin
-# Canale  altadefinizione_bid
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
+# thegroove360 - XBMC Plugin
+# Canale altadefinizione_bid
 # ------------------------------------------------------------
 import re
 import urlparse
@@ -21,63 +20,63 @@ headers     = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] mainlist")
+    logger.info("[thegroove360.altadefinizione_bid] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Prima visione[/COLOR]",
                      action="peliculas",
                      url="%s/prime-visioni/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/popcorn_cinema_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_serie_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Ultimi Inseriti[/COLOR]",
                      action="peliculas",
                      url="%s/genere/film/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movies_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - HD[/COLOR]",
                      action="peliculas",
                      url=host + "/?s=[HD]",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/hd_movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/hd_movies_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Categoria[/COLOR]",
                      action="categorias",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Film...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Serie TV - [COLOR orange]Nuove[/COLOR]",
                      action="peliculas_tv",
                      url=host+"/genere/serie-tv/",
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_series_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_series_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Serie TV - [COLOR orange]Aggiornate[/COLOR]",
                      action="peliculas_tv_new",
                      url=host+"/aggiornamenti-serie-tv/",
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/new_tvshows_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Serie TV - [COLOR orange]Ultimi Episodi[/COLOR]",
                      action="peliculas_ep",
                      url=host+"/aggiornamenti-serie-tv/",
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/new_tvshows_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Serie TV...[/COLOR]",
                      action="search",
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 # ==================================================================================================================================================
 
 def categorias(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] categorias")
+    logger.info("[thegroove360.altadefinizione_bid] categorias")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -101,7 +100,7 @@ def categorias(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  extra=item.extra,
                  plot=scrapedplot))
 
@@ -110,7 +109,7 @@ def categorias(item):
 # ==================================================================================================================================================
 
 def search(item, texto):
-    logger.info("[streamondemand-pureita altadefinizione_bid] " + item.url + " search " + texto)
+    logger.info("[thegroove360.altadefinizione_bid] " + item.url + " search " + texto)
     item.url = host + "/?s=" + texto
     try:
         if item.extra == "movie":
@@ -127,7 +126,7 @@ def search(item, texto):
 # ==================================================================================================================================================
 	
 def peliculas(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] peliculas")
+    logger.info("[thegroove360.altadefinizione_bid] peliculas")
     itemlist = []
 
     # Descarga la pagina 
@@ -177,7 +176,7 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  extra=item.extra,
                  folder=True))
 
@@ -186,7 +185,7 @@ def peliculas(item):
 # ==================================================================================================================================================
 
 def peliculas_tv(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] peliculas_tv")
+    logger.info("[thegroove360.altadefinizione_bid] peliculas_tv")
     itemlist = []
 
     # Descarga la pagina 
@@ -221,7 +220,7 @@ def peliculas_tv(item):
                  action="peliculas_tv",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  extra=item.extra,
                  folder=True))
 
@@ -230,7 +229,7 @@ def peliculas_tv(item):
 # ==================================================================================================================================================
 	
 def peliculas_tv_new(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] peliculas_tv_new")
+    logger.info("[thegroove360.altadefinizione_bid] peliculas_tv_new")
     itemlist = []
     PERPAGE = 14
 
@@ -270,7 +269,7 @@ def peliculas_tv_new(item):
                  action="peliculas_tv_new",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -278,7 +277,7 @@ def peliculas_tv_new(item):
 # ==================================================================================================================================================
 
 def peliculas_ep(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] peliculas_ep")
+    logger.info("[thegroove360.altadefinizione_bid] peliculas_ep")
     itemlist = []
     minpage = 14
 	
@@ -323,7 +322,7 @@ def peliculas_ep(item):
                  action="peliculas_ep",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -353,7 +352,7 @@ def episodios(item):
                          fulltitle=item.fulltitle + " (" + lang_title + ")" + ' - ' + scrapedtitle,
                          show=item.show + " (" + lang_title + ")" + ' - ' + scrapedtitle))
 
-    logger.info("[streamondemand-pureita altadefinizione_bid] episodios")
+    logger.info("[thegroove360.altadefinizione_bid] episodios")
     itemlist = []
 
     # Descarga la pagina 
@@ -390,7 +389,7 @@ def episodios(item):
 # ==================================================================================================================================================
 	
 def findvideos_tv(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] findvideos_tv")
+    logger.info("[thegroove360.altadefinizione_bid] findvideos_tv")
     itemlist = []
 
     patron = '<a\s*href="([^"]+)"[^>]+>([^<]+)</a>'
@@ -415,7 +414,7 @@ def findvideos_tv(item):
 # ==================================================================================================================================================
 
 def findvideos_movies(item):
-    logger.info("[streamondemand-pureita altadefinizione_bid] findvideos_movies")
+    logger.info("[thegroove360.altadefinizione_bid] findvideos_movies")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -489,7 +488,7 @@ def play(item):
 # ==================================================================================================================================================
 """
 def findvideos(item):
-    logger.info("streamondemand-pureita altadefinizione_bid findvideos")
+    logger.info("streamondemand- altadefinizione_bid findvideos")
 	
     # Descarga la pagina 
     data = item.url if item.extra == 'serie' else httptools.downloadpage(item.url).data
