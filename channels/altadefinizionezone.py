@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
-# Canale  altadefinizionezone
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
+# Thegroove360 - XBMC Plugin
+# Canale  altadefinizione01casa
 # ------------------------------------------------------------
+
 import re
 import urlparse
 
@@ -19,53 +19,51 @@ __channel__ = "altadefinizionezone"
 host = "https://www.altadefinizione01.casa"
 headers = [['Referer', host]]
 
-
-
 def mainlist(item):
-    logger.info("[altadefinizionezone] mainlist")
+    logger.info("[tregroove360.altadefinizione01casa] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Cinema[/COLOR]",
                      action="peliculas",
                      url="%s/cinema/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/popcorn_cinema_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_serie_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Novita'[/COLOR]",
                      action="peliculas_update",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_new_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Categorie[/COLOR]",
                      action="categorias",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Attori consigliati[/COLOR]",
                      action="actors_list",
                      url="%s/attori/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_actors_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_actors_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Archivio[/COLOR]",
                      action="peliculas_list",
                      url="%s/catalog/a/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/all_movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/all_movies_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film [COLOR orange]- Lista A-Z[/COLOR]",
                      action="list_az",
                      url="%s/catalog/a/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/a-z_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/a-z_P.png"),
                Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Film...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 # ==================================================================================================================================================
 
 def categorias(item):
-    logger.info("[altadefinizionezone] categorias")
+    logger.info("[tregroove360.altadefinizione01casa] categorias")
     itemlist = []
 
     # Descarga la pagina
@@ -85,7 +83,7 @@ def categorias(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  folder=True))
 
     return itemlist
@@ -93,7 +91,7 @@ def categorias(item):
 # ==================================================================================================================================================
 
 def categorias_year(item):
-    logger.info("[altadefinizionezone] categorias")
+    logger.info("[tregroove360.altadefinizione01casa] categorias")
     itemlist = []
 
     # Descarga la pagina
@@ -113,7 +111,7 @@ def categorias_year(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  folder=True))
 
     return itemlist
@@ -121,7 +119,7 @@ def categorias_year(item):
 # ==================================================================================================================================================
 
 def list_az(item):
-    logger.info("[altadefinizionezone] list_az")
+    logger.info("[tregroove360.altadefinizione01casa] list_az")
     itemlist = []
 
     # Descarga la pagina
@@ -139,7 +137,7 @@ def list_az(item):
                  action="peliculas_list",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/a-z_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/a-z_P.png",
                  folder=True))
 
     return itemlist
@@ -147,7 +145,7 @@ def list_az(item):
 # ==================================================================================================================================================
 
 def actors_list(item):
-    logger.info("[altadefinizionezone] actors_list")
+    logger.info("[tregroove360.altadefinizione01casa] actors_list")
     itemlist = []
     numpage = 999
 	
@@ -173,7 +171,7 @@ def actors_list(item):
                  action="peliculas",
                  title=scrapedtitle,
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_actors_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_actors_P.png",
                  folder=True))
 
     # Extrae el paginador
@@ -185,7 +183,7 @@ def actors_list(item):
                  action="actors_list",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -193,7 +191,7 @@ def actors_list(item):
 # ==================================================================================================================================================
 
 def peliculas_list(item):
-    logger.info("[altadefinizionezone] peliculas_list")
+    logger.info("[tregroove360.altadefinizione01casa] peliculas_list")
     itemlist = []
 
     # Descarga la pagina
@@ -247,7 +245,7 @@ def peliculas_list(item):
                  action="peliculas_list",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -255,7 +253,7 @@ def peliculas_list(item):
 # ==================================================================================================================================================	
 
 def peliculas_update(item):
-    logger.info("[altadefinizionezone] peliculas_update")
+    logger.info("[tregroove360.altadefinizione01casa] peliculas_update")
     itemlist = []
 
     # Descarga la pagina
@@ -320,7 +318,7 @@ def peliculas_update(item):
                  action="peliculas_update",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -328,7 +326,7 @@ def peliculas_update(item):
 # ==================================================================================================================================================	
 		
 def peliculas(item):
-    logger.info("[altadefinizionezone] peliculas")
+    logger.info("[tregroove360.altadefinizione01casa] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -388,7 +386,7 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -396,7 +394,7 @@ def peliculas(item):
 # ==================================================================================================================================================
 	
 def findvideos(item):
-    logger.info("[altadefinizionezone] findvideos")
+    logger.info("[tregroove360.altadefinizione01casa] findvideos")
     itemlist = []
 
     # Descarga la pagina 
@@ -424,7 +422,7 @@ def findvideos(item):
 # ==================================================================================================================================================
 
 def search(item, texto):
-    logger.info("[altadefinizionezone] " + item.url + " search " + texto)
+    logger.info("[tregroove360.altadefinizione01casa] " + item.url + " search " + texto)
     item.url = host + "/?do=search&subaction=search&story=" + texto
     try:
         return peliculas(item)
