@@ -8,12 +8,12 @@
     <language>it</language>
 
     <fanart></fanart>
-    <thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizione01_biz.png</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/altadefinizione01_biz.png</bannermenu>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/altadefinizione01.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/altadefinizione01.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>31</version>
-    <date>16/11/2018</date>
+    <version>32</version>
+    <date>06/12/2018</date>
     <changes>Update and Fix</changes>
 
     <categories>
