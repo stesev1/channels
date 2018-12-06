@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale altadefinizionehd
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
 
 import re
@@ -23,49 +22,49 @@ headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] mainlist")
+    logger.info("[thegroove360.altadefinizionehd] mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Al Cinema[/COLOR]",
                      action="peliculas",
                      url="%s/genere/cinema/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/popcorn_cinema_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_serie_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Novita'[/COLOR]",
                      action="peliculas",
                      url="%s/film/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_new_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
 	            Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Top Imdb[/COLOR]",
                      action="peliculas_imdb",
                      url="%s/top-imdb/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movies_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Categorie[/COLOR]",
                      action="genere",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
 	            Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Popolari[/COLOR]",
                      action="peliculas",
                      url="%s/trending/?get=movies" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/hd_movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/hd_movies_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR orange]Cerca...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 # ========================================================================================================================================================
 
 def search(item, texto):
-    logger.info("[streamondemand-pureita altadefinizionehd]] " + item.url + " search " + texto)
+    logger.info("[thegroove360.altadefinizionehd] " + item.url + " search " + texto)
 
     item.url = host + "/?s=" + texto
 
@@ -82,7 +81,7 @@ def search(item, texto):
 # ========================================================================================================================================================
 
 def peliculas_search(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] peliculas_search")
+    logger.info("[thegroove360.altadefinizionehd] peliculas_search")
     itemlist = []
 
     # Descarga la pagina 
@@ -117,14 +116,14 @@ def peliculas_search(item):
                  action="peliculas_search",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=paginador,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 				 
     return itemlist		
 
 # ========================================================================================================================================================		
 
 def genere(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] genere")
+    logger.info("[thegroove360.altadefinizionehd] genere")
     itemlist = []
 
     # Descarga la pagina
@@ -142,7 +141,7 @@ def genere(item):
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR] ",
                  url=scrapedurl,
                  plot="[COLOR orange]Numero di Film presenti in %s[/COLOR][B] (%s)[/B]" % (scrapedtitle, quantity),
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  folder=True))
 
     return itemlist
@@ -150,7 +149,7 @@ def genere(item):
 # ========================================================================================================================================================
 
 def year(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] year")
+    logger.info("[thegroove360.altadefinizionehd] year")
     itemlist = []
 
     # Descarga la pagina
@@ -168,7 +167,7 @@ def year(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_year_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_year_P.png",
                  folder=True))
 
     return itemlist
@@ -176,7 +175,7 @@ def year(item):
 # ========================================================================================================================================================
 
 def peliculas(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] peliculas")
+    logger.info("[thegroove360.altadefinizionehd] peliculas")
     itemlist = []
 
     # Descarga la pagina 
@@ -216,14 +215,14 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=paginador,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
 
 # ========================================================================================================================================================
 
 def peliculas_imdb(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] peliculas_imdb")
+    logger.info("[thegroove360.altadefinizionehd] peliculas_imdb")
     itemlist = []
     minpage = 10
 
@@ -269,7 +268,7 @@ def peliculas_imdb(item):
                  action="peliculas_imdb",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -277,7 +276,7 @@ def peliculas_imdb(item):
 # ========================================================================================================================================================
 
 def findvideos(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] findvideos")
+    logger.info("[thegroove360.altadefinizionehd] findvideos")
     itemlist = []
 
     # Descarga la pagina
@@ -306,7 +305,7 @@ def findvideos(item):
 # ========================================================================================================================================================
 
 def play(item):
-    logger.info("[streamondemand-pureita altadefinizionehd] play")
+    logger.info("[thegroove360.altadefinizionehd] play")
     itemlist = []
 
     data = scrapertools.anti_cloudflare(item.url, headers)
