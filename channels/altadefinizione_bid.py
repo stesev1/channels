@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# thegroove360 - XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale altadefinizione_bid
 # ------------------------------------------------------------
 import re
