@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale  per http://manganimenod.it
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# By MrTruth
 # ------------------------------------------------------------
-
-# Da rendere più dinamico
 
 import re
 
@@ -23,11 +18,11 @@ host = "http://animenod.one/"
 
 # ----------------------------------------------------------------------------------------------------------------
 def mainlist(item):
-    logger.info("[AnimeNOD.py]==> mainlist")
+    logger.info("[thegroove360.animenod] mainlist")
     itemlist = [Item(channel=__channel__,
                      action="dragonball_list",
                      title=color("Dragon Ball (1, Z, GT, Kai, Super)", "azure"),
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="episodi",
                      title=color("One Piece", "azure"),
@@ -84,7 +79,7 @@ def mainlist(item):
 
 # ----------------------------------------------------------------------------------------------------------------
 def dragonball_list(item):
-    logger.info("[AnimeNOD.py]==> dragonball_list")
+    logger.info("[thegroove360.animenod] dragonball_list")
     itemlist = [Item(channel=__channel__,
                      action="episodi",
                      title=color("Dragon Ball", "azure"),
@@ -121,7 +116,7 @@ def dragonball_list(item):
 
 # ----------------------------------------------------------------------------------------------------------------
 def episodi(item):
-    logger.info("[AnimeNOD.py]==> episodi")
+    logger.info("[thegroove360.animenod] episodi")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -146,7 +141,7 @@ def episodi(item):
 
 # ----------------------------------------------------------------------------------------------------------------
 def findvideos(item):
-    logger.info("[AnimeNOD.py]==> findvideos")
+    logger.info("[thegroove360.animenod] findvideos")
 
     data = httptools.downloadpage(item.url).data
     itemlist = servertools.find_video_items(data=data)
