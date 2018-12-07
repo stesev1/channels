@@ -3,6 +3,7 @@
 # Thegroove360 - XBMC Plugin
 # Canale altadefinizione01
 # ------------------------------------------------------------
+
 import re
 import urlparse
 
@@ -17,7 +18,6 @@ from core.tmdb import infoSod
 __channel__ = "altadefinizione01"
 host = "http://altadefinizione01.link"
 headers = [['Referer', host]]
-
 
 def mainlist(item):
     logger.info("[thegroove360.altadefinizione01] mainlist")
