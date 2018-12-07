@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale animestream.it
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-#  By Costaplus
 # ------------------------------------------------------------
+
 import re
 import urlparse
-
 import xbmc
 
 from core import config, httptools
@@ -17,14 +14,12 @@ from core import scrapertools
 from core.item import Item
 
 __channel__ = "animestream"
-
 host = "https://www.animeworld.it/"
-
 hostcategoria = host + "/Ricerca-Tutti-pag1"
 
 # -----------------------------------------------------------------
 def mainlist(item):
-    logger.info("streamondemand.animestram mainlist")
+    logger.info("[thegroove360.animestream] mainlist")
 
     itemlist = [Item(channel=__channel__,
                      action="lista_anime",
@@ -50,13 +45,13 @@ def mainlist(item):
 
 # -----------------------------------------------------------------
 def lista_anime(item):
-    logger.info("streamondemand.animestram lista_anime")
+    logger.info("[thegroove360.animestream] lista_anime")
     itemlist = []
 
     patron = 'class="anime"[^<]+<.*?window.location=\'(.*?)\'.*?url\((.*?)\);">[^=]+[^<]+[^>]+[^<]+<h4>(.*?)</h4>'
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in scrapedAll(item.url, patron):
-        logger.debug("streamondemand.animestram lista_anime scrapedurl: " + scrapedurl + " scrapedthumbnail:" + scrapedthumbnail + "scrapedtitle:" + scrapedtitle)
+        logger.debug("[thegroove360.animestream] lista_anime scrapedurl: " + scrapedurl + " scrapedthumbnail:" + scrapedthumbnail + "scrapedtitle:" + scrapedtitle)
         scrapedthumbnail = scrapedthumbnail.replace("(", "")
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         itemlist.append(
@@ -74,7 +69,7 @@ def lista_anime(item):
     pagina = scrapedSingle(item.url, '<div class="navc">.*?</div>', '<b.*?id="nav".*>.*?</b>[^<]+<.*?>(.*?)</a>')
     if len(pagina) > 0:
         paginaurl = Crea_Url(pagina[0], "ricerca")
-        logger.debug("streamondemand.animestram lista_anime Paginaurl: " + paginaurl)
+        logger.debug("[thegroove360.animestream] lista_anime Paginaurl: " + paginaurl)
         itemlist.append(
             Item(channel=__channel__,
                  action="lista_anime",
@@ -90,13 +85,13 @@ def lista_anime(item):
 
 # -----------------------------------------------------------------
 def lista_anime_categoria(item):
-    logger.info("streamondemand.animestram lista_anime_categoria")
+    logger.info("[thegroove360.animestream] lista_anime_categoria")
     itemlist = []
 
     patron = 'class="anime"[^<]+<.*?window.location=\'(.*?)\'.*?url\((.*?)\);">[^=]+[^<]+[^>]+[^<]+<h4>(.*?)</h4>'
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in scrapedAll(item.url, patron):
-        logger.debug("streamondemand.animestram lista_anime_categoria scrapedurl: " + scrapedurl + " scrapedthumbnail:" + scrapedthumbnail + "scrapedtitle:" + scrapedtitle)
+        logger.debug("[thegroove360.animestream] lista_anime_categoria scrapedurl: " + scrapedurl + " scrapedthumbnail:" + scrapedthumbnail + "scrapedtitle:" + scrapedtitle)
         scrapedthumbnail = scrapedthumbnail.replace("(", "")
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         itemlist.append(
@@ -114,7 +109,7 @@ def lista_anime_categoria(item):
     pagina = scrapedSingle(item.url, '<div class="navc">.*?</div>', '<b.*?id="nav".*>.*?</b>[^<]+<.*?>(.*?)</a>')
     if len(pagina) > 0:
         paginaurl = Crea_Url(pagina[0], "ricerca", item.title)
-        logger.debug("streamondemand.animestram Paginaurl: " + paginaurl)
+        logger.debug("[thegroove360.animestream] Paginaurl: " + paginaurl)
         itemlist.append(
             Item(channel=__channel__,
                  action="lista_anime_categoria",
@@ -130,7 +125,7 @@ def lista_anime_categoria(item):
 
 # -----------------------------------------------------------------
 def search(item, texto):
-    logger.info("streamondemand.animestram search "+ texto)
+    logger.info("[thegroove360.animestream] search "+ texto)
     itemlist = []
 
     url = Crea_Url("1", "ricerca", "", texto)
@@ -155,7 +150,7 @@ def search(item, texto):
 
 # -----------------------------------------------------------------
 def categoria(item):
-    logger.info("streamondemand.animestram categoria")
+    logger.info("[thegroove360.animestream] categoria")
     itemlist = []
     patron = '<option value="(.*?)">.*?</option>'
 
@@ -178,7 +173,7 @@ def categoria(item):
 
 # -----------------------------------------------------------------
 def episodios(item):
-    logger.info("streamondemand.animestram episodios")
+    logger.info("[thegroove360.animestream] episodios")
     itemlist = []
 
     patron = 'class="episodio">\s*<.*?href=([^>]+)><img.*?src=(.*?)width[^<]+<[^<]+<[^<]+<[^<]+<.*?>(.*?)</a>'
@@ -221,13 +216,13 @@ def episodios(item):
 
 # -----------------------------------------------------------------
 def findvideos(item):
-    logger.info("streamondemand.animestram findvideos")
+    logger.info("[thegroove360.animestream] findvideos")
     itemlist = []
 
     patron = '<source.*?src="(.*?)".*?>'
     for scrapedurl in scrapedAll(urlparse.urljoin(host, item.url), patron):
         url = urlparse.urljoin(host, scrapedurl)
-        logger.debug("streamondemand.animestram player url Video:" + url)
+        logger.debug("[thegroove360.animestream] player url Video:" + url)
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
@@ -269,7 +264,7 @@ def Crea_Url(pagina="1", azione="ricerca", categoria="", nome=""):
     # esempio
     # chiamate.php?azione=ricerca&cat=&nome=&pag=
     Stringa = host + "chiamate.php?azione=" + azione + "&cat=" + categoria + "&nome=" + nome + "&pag=" + pagina
-    logger.debug("streamondemand.animestram CreaUrl " + Stringa)
+    logger.debug("[thegroove360.animestream] CreaUrl " + Stringa)
 
     return Stringa
 # =================================================================
@@ -286,8 +281,8 @@ AnimeThumbnail = "http://img15.deviantart.net/f81c/i/2011/173/7/6/cursed_candies
 AnimeFanart = "https://i.ytimg.com/vi/IAlbvyBdYdY/maxresdefault.jpg"
 CategoriaThumbnail = "http://static.europosters.cz/image/750/poster/street-fighter-anime-i4817.jpg"
 CategoriaFanart = "https://i.ytimg.com/vi/IAlbvyBdYdY/maxresdefault.jpg"
-CercaThumbnail = "http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"
+CercaThumbnail = "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"
 CercaFanart = "https://i.ytimg.com/vi/IAlbvyBdYdY/maxresdefault.jpg"
 HomeTxt = "[COLOR yellow]Torna Home[/COLOR]"
 AvantiTxt = "[COLOR orange]Successivo>>[/COLOR]"
-AvantiImg = "http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png"
+AvantiImg = "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"
