@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# streamondemand-pureita.- XBMC Plugin
+# streamondemand-.- XBMC Plugin
 # Canale casacinema
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
+
 # ------------------------------------------------------------
 
 import re
@@ -27,55 +27,55 @@ def isGeneric():
     return True
 	
 def mainlist(item):
-    logger.info("streamondemand-pureita.casacinema mainlist")
+    logger.info("streamondemand-.casacinema mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Novita'[/COLOR]",
                      action="peliculas",
                      extra="movie",
                      url="%s/genere/film" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_new_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Categorie[/COLOR]",
                      action="categorias",
                      extra="movie",
                      url="%s/genere/film" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Sub Ita[/COLOR]",
                      action="peliculas",
                      extra="movie",
                      url="%s/genere/sub-ita" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_sub_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_sub_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Film ...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV[COLOR orange] - Aggiornamenti[/COLOR]",
                      extra="serie",
                      action="peliculas_update",
                      url="%s/aggiornamenti-serie-tv" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/new_tvshows_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV[/COLOR]",
                      extra="serie",
                      action="peliculas_tv",
                      url="%s/genere/serie-tv" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_serie_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_/tv_serie_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Serie TV ...[/COLOR]",
                      action="search",
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 # ==============================================================================================================================================================================
 	
 def newest(categoria):
-    logger.info("[streamondemand-pureita.casacinema] newest" + categoria)
+    logger.info("[streamondemand-.casacinema] newest" + categoria)
     itemlist = []
     item = Item()
     try:
@@ -119,7 +119,7 @@ def search(item, texto):
 # ==============================================================================================================================================================================
 
 def peliculas(item):
-    logger.info("streamondemand-pureita.casacinema peliculas")
+    logger.info("streamondemand-.casacinema peliculas")
 
     itemlist = []
 
@@ -157,14 +157,14 @@ def peliculas(item):
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=next_page,
                  extra=item.extra,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
 
 # ==============================================================================================================================================================================
 
 def peliculas_update(item):
-    logger.info("streamondemand-pureita.casacinema peliculas")
+    logger.info("streamondemand-.casacinema peliculas")
     itemlist = []
     numpage = 10
 
@@ -204,7 +204,7 @@ def peliculas_update(item):
                  action="peliculas_update",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -212,7 +212,7 @@ def peliculas_update(item):
 # ==============================================================================================================================================================================
 
 def peliculas_tv(item):
-    logger.info("streamondemand-pureita.casacinema peliculas_tv")
+    logger.info("streamondemand-.casacinema peliculas_tv")
 
     itemlist = []
 
@@ -249,14 +249,14 @@ def peliculas_tv(item):
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=next_page,
                  extra=item.extra,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
 
 # ==============================================================================================================================================================================	
 
 def categorias(item):
-    logger.info("streamondemand-pureita.casacinema categorias")
+    logger.info("streamondemand-.casacinema categorias")
 
     itemlist = []
 
@@ -275,7 +275,7 @@ def categorias(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  extra=item.extra,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png",
                  url=urlparse.urljoin(host, scrapedurl)))
 
     return itemlist
@@ -306,7 +306,7 @@ def episodios(item):
                          fulltitle=scrapedtitle + " (" + lang_title + ")" + ' - ' + item.show,
                          show=item.show))
 
-    logger.info("[streamondemand-pureita.casacinema] episodios")
+    logger.info("[streamondemand-.casacinema] episodios")
     itemlist = []
 
     # Descarga la página
@@ -344,7 +344,7 @@ def episodios(item):
 # ==============================================================================================================================================================================
 	
 def findvideos(item):
-    logger.info("streamondemand-pureita.casacinema findvideos")
+    logger.info("streamondemand-.casacinema findvideos")
 
     itemlist = []
 
