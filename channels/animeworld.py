@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale  per http://animeinstreaming.net/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# Thegroove360 - XBMC Plugin
+# Canale  per https://www.animeworld.it/
 # ------------------------------------------------------------
+
 import re
 import urlparse
 

@@ -8,12 +8,12 @@
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>https://scontent-mxp1-1.xx.fbcdn.net/v/t1.0-9/28378280_818778854975699_2916961111500495865_n.png?_nc_cat=0&oh=a4fbbc46eaa7f16d1ce84b573aa5bb6a&oe=5B3324B4</thumbnail>
-	<bannermenu>https://scontent-mxp1-1.xx.fbcdn.net/v/t1.0-9/28378280_818778854975699_2916961111500495865_n.png?_nc_cat=0&oh=a4fbbc46eaa7f16d1ce84b573aa5bb6a&oe=5B3324B4</bannermenu>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/animeworld.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/animeworld.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>2</version>
-	<date>20/11/2018</date>
+	<version>3</version>
+	<date>10/12/2018</date>
 	<changes>Update</changes>
 
 	<categories>
