@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale animetubeita.com
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-#  By Costaplus
 # ------------------------------------------------------------
+
 import re
 import urllib
 
@@ -20,7 +18,6 @@ host = "http://www.animetubeita.com"
 hostlista = host + "/lista-anime/"
 hostgeneri = host + "/generi/"
 hostcorso = host + "/category/serie-in-corso/"
-
 
 # -----------------------------------------------------------------
 def mainlist(item):
@@ -56,7 +53,6 @@ def mainlist(item):
                      thumbnail=CercaThumbnail,
                      fanart=CercaFanart)]
     return itemlist
-
 
 # =================================================================
 
@@ -100,7 +96,6 @@ def lista_home(item):
     # ===========================================================
     return itemlist
 
-
 # =================================================================
 
 # -----------------------------------------------------------------
@@ -122,7 +117,6 @@ def lista_anime(item):
                              fanart=""))
 
     return itemlist
-
 
 # =================================================================
 
@@ -151,7 +145,6 @@ def lista_genere(item):
                  thumbnail=item.thumbnail))
 
     return itemlist
-
 
 # =================================================================
 
@@ -196,7 +189,6 @@ def lista_generi(item):
 
     return itemlist
 
-
 # =================================================================
 
 # -----------------------------------------------------------------
@@ -238,7 +230,6 @@ def lista_in_corso(item):
     # ===========================================================
     return itemlist
 
-
 # =================================================================
 
 # -----------------------------------------------------------------
@@ -279,7 +270,6 @@ def dl_s(item):
 
     return itemlist
 
-
 # =================================================================
 
 # -----------------------------------------------------------------
@@ -291,11 +281,11 @@ def dettaglio(item):
                'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; rv:52.0) Gecko/20100101 Firefox/52.0'}
 
     episodio = 1
-    patron = '<a href="http:\/\/link[^a]+animetubeita[^c]+com\/[^\/]+\/[^s]+stream[^p]+php(\?.*?)"'
+    patron = '<a href="http:\/\/link[^a]+animetubeita[^c]+com\/[^\/]+\/[^s]+stream[^p]+php\?file=(.*?)"'
     for scrapedurl in scrapedAll(item.url, patron):
         title = "Episodio " + str(episodio)
         episodio += 1
-        url = host + "/stream.php" + scrapedurl
+        url = host + "/stream2.php" + scrapedurl
         headers['Referer'] =  url
         data = httptools.downloadpage(url, headers=headers).data
         # ------------------------------------------------
@@ -307,18 +297,17 @@ def dettaglio(item):
             cookies += name + "=" + value + ";"
         headers['Cookie'] = cookies[:-1]
         # ------------------------------------------------
-        url = scrapertools.find_single_match(data, """<source src="([^"]+)" type='video/mp4'>""")
-        url += '|' + urllib.urlencode(headers)
+        #url = scrapertools.find_single_match(data, """<source src="([^"]+)" type='video/mp4'>""")
+        #url += '|' + urllib.urlencode(headers)
         itemlist.append(Item(channel=__channel__,
                              action="play",
                              title="[COLOR azure]" + title + "[/COLOR]",
-                             url=url,
+                             url="http://s3.animetubeita.com/anime3/" + scrapedurl,
                              thumbnail=item.thumbnail,
                              fanart=item.thumbnail,
                              plot=item.plot))
 
     return itemlist
-
 
 # =================================================================
 
@@ -370,14 +359,12 @@ def scrapedSingle(url="", single="", patron=""):
 def log(funzione="", stringa="", canale=__channel__):
     logger.debug("[" + canale + "].[" + funzione + "] " + stringa)
 
-
 # =================================================================
 
 # -----------------------------------------------------------------
 def HomePage(item):
     import xbmc
     xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
-
 
 # =================================================================
 
