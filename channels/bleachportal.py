@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
+
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale per http://bleachportal.it
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+
 # By MrTruth
 # ------------------------------------------------------------
 
