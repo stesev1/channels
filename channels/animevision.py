@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale  per http://animevision.altervista.org/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# By costaplus
 # ------------------------------------------------------------
+
 import re
 
 from core import httptools
@@ -17,10 +15,9 @@ __channel__ = "animevision"
 
 host = "https://www.animevision.it"
 
-
 # -----------------------------------------------------------------
 def mainlist(item):
-    logger.info("streamondemand.animevision mainlist")
+    logger.info("[thegroove360.animevision] mainlist")
 
     itemlist = [Item(channel=__channel__,
                      action="lista_anime",
@@ -42,7 +39,7 @@ def mainlist(item):
 
 # -----------------------------------------------------------------
 def search(item, texto):
-    logger.info("streamondemand.animevision search")
+    logger.info("[thegroove360.animevision] search")
     item.url = host + "/?search=" + texto
     try:
         return lista_anime_src(item)
@@ -53,13 +50,11 @@ def search(item, texto):
             logger.error("%s" % line)
         return []
 
-
-
 # =================================================================
 
 # -----------------------------------------------------------------
 def lista_anime_src(item):
-    logger.info("streamondemand.animevision lista_anime_src")
+    logger.info("[thegroove360.animevision] lista_anime_src")
 
     itemlist = []
 
@@ -91,7 +86,7 @@ def lista_anime_src(item):
 
 # -----------------------------------------------------------------
 def lista_anime(item):
-    logger.info("streamondemand.animevision lista_anime")
+    logger.info("[thegroove360.animevision] lista_anime")
 
     itemlist = []
 
@@ -123,7 +118,7 @@ def lista_anime(item):
 
 # -----------------------------------------------------------------
 def episodi(item):
-    logger.info("streamondemand.animevision episodi")
+    logger.info("[thegroove360.animevision] episodi")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
