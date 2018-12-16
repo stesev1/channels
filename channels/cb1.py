@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
+
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale cineblog01
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+
 # Version: 201706200900
 # ------------------------------------------------------------
 import re
@@ -32,13 +32,13 @@ def mainlist(item):
                      title="[COLOR azure]Film[COLOR orange] - Novita'[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Aggiornamenti[/COLOR]",
                      action="peliculas_lastupdate",
                      url="%s/lista-film-ultimi-100-film-aggiornati/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_new_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
 				Item(channel=__channel__,
                      action="peliculas",
                      title="[COLOR azure]Film[COLOR orange] - Alta Definizione [HD][/COLOR]",
@@ -56,29 +56,29 @@ def mainlist(item):
                      title="[COLOR azure]Film[COLOR orange] - Per Genere[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="menuanyos",
                      title="[COLOR azure]Film[COLOR orange] - Per Anno[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Film[/COLOR]",
                      extra="movie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                 Item(channel=__channel__,
                      action="listserie",
                      title="[COLOR azure]Serie Tv[COLOR orange] - Novita'[/COLOR]",
                      url="%s/serietv/" % host,
                      extra="serie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Serie Tv[/COLOR]",
                      extra="serie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
@@ -140,7 +140,7 @@ def next_page(itemlist,np_url,np_action,np_extra):
              action=np_action,
              title=scrapedtitle,
              url=np_url,
-             thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
              extra=np_extra,
              plot=""))
     itemlist.append(
@@ -566,7 +566,7 @@ def HomePage(item):
 # ==================================================================================================================================================
 
 def peliculas_lastupdate(item):
-    logger.info("[streamondemand-pureita cineblog01] peliculas_update")
+    logger.info("[streamondemand- cineblog01] peliculas_update")
 
     itemlist = []
     numpage = 14
@@ -617,7 +617,7 @@ def peliculas_lastupdate(item):
                  action="peliculas_lastupdate",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
