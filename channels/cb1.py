@@ -22,7 +22,7 @@ headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("[cineblog01.py] mainlist")
+    logger.info("[thegroove360.cb1] mainlist")
 
     # Main options
     itemlist = [Item(channel=__channel__,
@@ -82,7 +82,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("[cineblog01.py] peliculas")
+    logger.info("[thegroove360.cb1] peliculas")
     itemlist = []
 
     if item.url == "":
@@ -149,19 +149,19 @@ def next_page(itemlist,np_url,np_action,np_extra):
 
 
 def updates(item):
-    logger.info("[cineblog01.py] updates")
+    logger.info("[thegroove360.cb1] updates")
     return menulist(item,'<select name="select1"(.*?)</select>')
 			 
 def menugeneros(item):
-    logger.info("[cineblog01.py] menugeneros")
+    logger.info("[thegroove360.cb1] menugeneros")
     return menulist(item,'<select name="select2"(.*?)</select>')
 
 def menuhd(item):
-    logger.info("[cineblog01.py] menuhd")
+    logger.info("[thegroove360.cb1] menuhd")
     return menulist(item,'<select name="select1"(.*?)</select>')
 
 def menuanyos(item):
-    logger.info("[cineblog01.py] menuvk")
+    logger.info("[thegroove360.cb1] menuvk")
     return menulist(item,'<select name="select3"(.*?)</select>')
 
 def menulist(item,re_txt):
@@ -195,7 +195,7 @@ def menulist(item,re_txt):
 
 # Al llamarse "search" la función, el launcher pide un texto a buscar y lo añade como parámetro
 def search(item, texto):
-    logger.info("[cineblog01.py] " + item.url + " search " + texto)
+    logger.info("[thegroove360.cb1] " + item.url + " search " + texto)
 
     try:
 
@@ -215,7 +215,7 @@ def search(item, texto):
 
 
 def listserie(item):
-    logger.info("[cineblog01.py] listaserie")
+    logger.info("[thegroove360.cb1] listaserie")
     itemlist = []
 
     # Carica la pagina
@@ -343,7 +343,7 @@ def episodios_serie_new(item):
                          fulltitle=scrapedtitle + " (" + lang_title + ")" + ' - ' + item.show,
                          show=item.show))
 
-    logger.info("[cineblog01.py] episodios")
+    logger.info("[thegroove360.cb1] episodios")
 
     itemlist = []
 
@@ -386,7 +386,7 @@ def findvid_film(item):
                      show=item.show,
                      folder=False))
 
-    logger.info("[cineblog01.py] findvid_film")
+    logger.info("[thegroove360.cb1] findvid_film")
 
     itemlist = []
 
@@ -449,7 +449,7 @@ def findvid_serie(item):
                      show=item.show,
                      folder=False))
 
-    logger.info("[cineblog01.py] findvid_serie")
+    logger.info("[thegroove360.cb1] findvid_serie")
 
     itemlist = []
     lnkblk = []
@@ -489,7 +489,7 @@ def findvid_serie(item):
 
 
 def play(item):
-    logger.info("[cineblog01.py] play")
+    logger.info("[thegroove360.cb1] play")
     itemlist = []
 
     ### Handling new cb01 wrapper
