@@ -26,32 +26,32 @@ def mainlist(item):
                      action="peliculas_new",
                      title="[COLOR azure]Anime[COLOR orange] - Novita'[/COLOR]",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_new_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_new_P.png"),
                 Item(channel=__channel__,
                      action="genere",
                      title="[COLOR azure]Anime[COLOR orange] - Categorie[/COLOR]",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_genre_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_genre_P.png"),
                 Item(channel=__channel__,
                      action="year",
                      title="[COLOR azure]Anime[COLOR orange] - Anno[/COLOR]",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_year_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_year_P.png"),
                 Item(channel=__channel__,
                      action="alfabetico",
                      title="[COLOR azure]Anime[COLOR orange] - Lista A-Z[/COLOR]",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_az_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_az_P.png"),
                 Item(channel=__channel__,
                      action="listacompleta",
                      title="[COLOR azure]Anime[COLOR orange] - Lista[/COLOR]",
                      url="%s/lista-completa-anime-cartoon/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_lista_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_lista_P.png"),
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca ...[/COLOR]",
                      extra="anime",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
@@ -104,7 +104,7 @@ def peliculas_new(item):
                  action="peliculas_new",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  extra=item.extra,
                  folder=True))
 
@@ -136,7 +136,7 @@ def genere(item):
                  show=scrapedtitle,
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_genre_P.png",
                  folder=True))
 
     return itemlist
@@ -169,7 +169,7 @@ def year(item):
                  show=scrapedtitle,
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_year_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_year_P.png",
                  folder=True))
 
     return itemlist
@@ -197,7 +197,7 @@ def alfabetico(item):
                  action="peliculas_new",
                  title=scrapedtitle,
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/a-z_cartoons_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/a-z_cartoons_P.png",
                  plot="Indice [[COLOR orange]" + scrapedtitle + "[/COLOR]]",
                  folder=True))
 
@@ -228,7 +228,7 @@ def listacompleta(item):
                  show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/anime_lista_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/anime_lista_P.png",
                  folder=True))
 
     return itemlist
