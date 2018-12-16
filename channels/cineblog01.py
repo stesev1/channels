@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale cineblog01
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# Version: 201706200900
 # ------------------------------------------------------------
+
 import re
 import urlparse
 
@@ -24,7 +22,7 @@ headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("[cineblog01.py] mainlist")
+    logger.info("[thegroove360.cineblog01] mainlist")
 
     # Main options
     itemlist = [Item(channel=__channel__,
@@ -32,13 +30,13 @@ def mainlist(item):
                      title="[COLOR azure]Film[COLOR orange] - Novita'[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Aggiornamenti[/COLOR]",
                      action="peliculas_lastupdate",
                      url="%s/lista-film-ultimi-100-film-aggiornati/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_new_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
 				Item(channel=__channel__,
                      action="peliculas",
                      title="[COLOR azure]Film[COLOR orange] - Alta Definizione [HD][/COLOR]",
@@ -50,41 +48,41 @@ def mainlist(item):
                      title="[COLOR azure]Film[COLOR orange] - Menù HD[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://files.softicons.com/download/computer-icons/disks-icons-by-wil-nichols/png/256x256/Blu-Ray.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/Blu-Ray.png"),
                 Item(channel=__channel__,
                      action="menugeneros",
                      title="[COLOR azure]Film[COLOR orange] - Per Genere[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="menuanyos",
                      title="[COLOR azure]Film[COLOR orange] - Per Anno[/COLOR]",
                      url=host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Film[/COLOR]",
                      extra="movie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                 Item(channel=__channel__,
                      action="listserie",
                      title="[COLOR azure]Serie Tv[COLOR orange] - Novita'[/COLOR]",
                      url="%s/serietv/" % host,
                      extra="serie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="search",
                      title="[COLOR yellow]Cerca Serie Tv[/COLOR]",
                      extra="serie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 
 def peliculas(item):
-    logger.info("[cineblog01.py] peliculas")
+    logger.info("[thegroove360.cineblog01] peliculas")
     itemlist = []
 
     if item.url == "":
@@ -140,7 +138,7 @@ def next_page(itemlist,np_url,np_action,np_extra):
              action=np_action,
              title=scrapedtitle,
              url=np_url,
-             thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
              extra=np_extra,
              plot=""))
     itemlist.append(
@@ -151,19 +149,19 @@ def next_page(itemlist,np_url,np_action,np_extra):
 
 
 def updates(item):
-    logger.info("[cineblog01.py] updates")
+    logger.info("[thegroove360.cineblog01] updates")
     return menulist(item,'<select name="select1"(.*?)</select>')
 			 
 def menugeneros(item):
-    logger.info("[cineblog01.py] menugeneros")
+    logger.info("[thegroove360.cineblog01] menugeneros")
     return menulist(item,'<select name="select2"(.*?)</select>')
 
 def menuhd(item):
-    logger.info("[cineblog01.py] menuhd")
+    logger.info("[thegroove360.cineblog01] menuhd")
     return menulist(item,'<select name="select1"(.*?)</select>')
 
 def menuanyos(item):
-    logger.info("[cineblog01.py] menuvk")
+    logger.info("[thegroove360.cineblog01] menuvk")
     return menulist(item,'<select name="select3"(.*?)</select>')
 
 def menulist(item,re_txt):
@@ -197,7 +195,7 @@ def menulist(item,re_txt):
 
 # Al llamarse "search" la función, el launcher pide un texto a buscar y lo añade como parámetro
 def search(item, texto):
-    logger.info("[cineblog01.py] " + item.url + " search " + texto)
+    logger.info("[thegroove360.cineblog01] " + item.url + " search " + texto)
 
     try:
 
@@ -217,7 +215,7 @@ def search(item, texto):
 
 
 def listserie(item):
-    logger.info("[cineblog01.py] listaserie")
+    logger.info("[thegroove360.cineblog01] listaserie")
     itemlist = []
 
     # Carica la pagina
@@ -345,7 +343,7 @@ def episodios_serie_new(item):
                          fulltitle=scrapedtitle + " (" + lang_title + ")" + ' - ' + item.show,
                          show=item.show))
 
-    logger.info("[cineblog01.py] episodios")
+    logger.info("[thegroove360.cineblog01] episodios")
 
     itemlist = []
 
@@ -388,7 +386,7 @@ def findvid_film(item):
                      show=item.show,
                      folder=False))
 
-    logger.info("[cineblog01.py] findvid_film")
+    logger.info("[thegroove360.cineblog01] findvid_film")
 
     itemlist = []
 
@@ -451,7 +449,7 @@ def findvid_serie(item):
                      show=item.show,
                      folder=False))
 
-    logger.info("[cineblog01.py] findvid_serie")
+    logger.info("[thegroove360.cineblog01] findvid_serie")
 
     itemlist = []
     lnkblk = []
@@ -491,7 +489,7 @@ def findvid_serie(item):
 
 
 def play(item):
-    logger.info("[cineblog01.py] play")
+    logger.info("[thegroove360.cineblog01] play")
     itemlist = []
 
     ### Handling new cb01 wrapper
@@ -561,12 +559,12 @@ def play(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
 
 # ==================================================================================================================================================
 
 def peliculas_lastupdate(item):
-    logger.info("[streamondemand-pureita cineblog01] peliculas_update")
+    logger.info("[thegroove360.cineblog01] peliculas_update")
 
     itemlist = []
     numpage = 14
@@ -617,7 +615,7 @@ def peliculas_lastupdate(item):
                  action="peliculas_lastupdate",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
