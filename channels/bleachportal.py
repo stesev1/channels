@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-
 # ------------------------------------------------------------
 # Thegroove360 - XBMC Plugin
 # Canale per http://bleachportal.it
-
-# By MrTruth
 # ------------------------------------------------------------
 
 import re
