@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# streamondemand-PureITA / XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale  cineblog_life
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
 import re
 import urlparse
@@ -19,56 +18,55 @@ __channel__ = "cineblog_life"
 host = "https://www.cineblog.life"
 headers = [['Referer', host]]
 
-
 def mainlist(item):
-    logger.info("[cineblog_life] mainlist")
+    logger.info("[thegroove360.cineblog_life] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Novita'[/COLOR]",
                      action="peliculas",
                      url="%s/filmlist/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/popcorn_cinema_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_serie_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]HD[/COLOR]",
                      action="peliculas",
                      extra="movie",
                      url=host+"/categorie/film-in-altadefinizione",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/hd_movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/hd_movies_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Sub Ita[/COLOR]",
                      action="peliculas",
                      extra="movie",
                      url="%s/categorie/film-sub-ita/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/movie_sub_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_sub_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Categoria[/COLOR]",
                      action="categorias",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Lista A-Z[/COLOR]",
                      action="categorias_list",
                      extra="movie",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/a-z_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/a-z_P.png"),
                Item(channel=__channel__,
                      title="[COLOR azure]Serie TV - [COLOR orange]Lista[/COLOR]",
                      action="peliculas_tv",
                      extra="serie",
                      url="%s/serie-tv/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/a-z_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/a-z_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR orange]Cerca...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 # ===================================================================================================================================================	
 
 def categorias(item):
-    logger.info("streamondemand.cineblog_life categorias")
+    logger.info("[thegroove360.cineblog_life] categorias")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -86,7 +84,7 @@ def categorias(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  extra=item.extra,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  url=scrapedurl))
 
     return itemlist
@@ -94,7 +92,7 @@ def categorias(item):
 # ===================================================================================================================================================
 	
 def categorias_list(item):
-    logger.info("streamondemand.cineblog_life categorias")
+    logger.info("[thegroove360.cineblog_life] categorias")
     itemlist = []
 
     # Descarga la pagina
@@ -111,7 +109,7 @@ def categorias_list(item):
                  action="peliculas_list",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  extra=item.extra,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  url=scrapedurl))
 
     return itemlist	
@@ -133,7 +131,7 @@ def search(item, texto):
 # ===================================================================================================================================================
 		
 def peliculas_search(item):
-    logger.info("[cineblog_life] peliculas")
+    logger.info("[thegroove360.cineblog_life] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -177,7 +175,7 @@ def peliculas_search(item):
 # ===================================================================================================================================================
 		
 def peliculas(item):
-    logger.info("[cineblog_life] peliculas")
+    logger.info("[thegroove360.cineblog_life] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -232,7 +230,7 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -240,7 +238,7 @@ def peliculas(item):
 # ===================================================================================================================================================	
 
 def peliculas_list(item):
-    logger.info("[cineblog_life] peliculas")
+    logger.info("[thegroove360.cineblog_life] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -289,7 +287,7 @@ def peliculas_list(item):
                  action="peliculas_list",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -297,7 +295,7 @@ def peliculas_list(item):
 # ===================================================================================================================================================
 
 def peliculas_tv(item):
-    logger.info("[cineblog_life] peliculas")
+    logger.info("[thegroove360.cineblog_life] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -344,7 +342,7 @@ def peliculas_tv(item):
                  action="peliculas_tv",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -352,7 +350,7 @@ def peliculas_tv(item):
 # ===================================================================================================================================================	
 
 def episodios(item):
-    logger.info("streamondemand.cineblog_life categorias")
+    logger.info("[thegroove360.cineblog_life] categorias")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -384,7 +382,7 @@ def episodios(item):
 # ===================================================================================================================================================
 	
 def findvideos(item):
-    logger.info("[streamondemand-pureita animesenzalimiti] categorie")
+    logger.info("[streamondemand- animesenzalimiti] categorie")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
