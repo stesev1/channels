@@ -2,8 +2,8 @@
 # ------------------------------------------------------------
 # StefanoAddon / XBMC Plugin
 # Canale cb01anime
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
+
 import re
 import urlparse
 
@@ -21,7 +21,7 @@ headers     = [['Referer', host]]
 
 # ========================================================================================================================================================
 def mainlist(item):
-    logger.info("[cb01anime] mainlist")
+    logger.info("[thegroove360.cb01anime] mainlist")
     itemlist = [Item(channel=__channel__,
                      action="peliculas_new",
                      title="[COLOR azure]Anime[COLOR orange] - Novita'[/COLOR]",
@@ -58,7 +58,7 @@ def mainlist(item):
 # ========================================================================================================================================================
 
 def peliculas_new(item):
-    logger.info("[StefanoAddon cb01anime] peliculas_new")
+    logger.info("[thegroove360.cb01anime] peliculas_new")
     itemlist = []
 
     # Descarga la pagina 
@@ -113,7 +113,7 @@ def peliculas_new(item):
 # ========================================================================================================================================================
 
 def genere(item):
-    logger.info("[cb01anime] genere")
+    logger.info("[thegroove360.cb01anime] genere")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -144,7 +144,7 @@ def genere(item):
 # ========================================================================================================================================================
 
 def year(item):
-    logger.info("[cb01anime] genere")
+    logger.info("[thegroove360.cb01anime] genere")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -177,7 +177,7 @@ def year(item):
 # ========================================================================================================================================================
 
 def alfabetico(item):
-    logger.info("[cb01anime] listacompleta")
+    logger.info("[thegroove360.cb01anime] listacompleta")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -206,7 +206,7 @@ def alfabetico(item):
 # ========================================================================================================================================================
 
 def listacompleta(item):
-    logger.info("[cb01anime] listacompleta")
+    logger.info("[thegroove360.cb01anime] listacompleta")
     itemlist = []
 
     data = scrapertools.anti_cloudflare(item.url, headers)
@@ -236,7 +236,7 @@ def listacompleta(item):
 # ========================================================================================================================================================
 
 def search(item, texto):
-    logger.info("[cb01anime] " + item.url + " search " + texto)
+    logger.info("[thegroove360.cb01anime] " + item.url + " search " + texto)
 
     item.url = host + "/anime/?s=" + texto
 
@@ -245,7 +245,7 @@ def search(item, texto):
 # ========================================================================================================================================================
 
 def episodios(item):
-    logger.info("[cb01anime] episodios")
+    logger.info("[thegroove360.cb01anime] episodios")
 
     itemlist = []
 
@@ -307,7 +307,7 @@ def episodios(item):
 # ========================================================================================================================================================
 
 def findvideos(item):
-    logger.info("[cb01anime] findvideos")
+    logger.info("[thegroove360.cb01anime] findvideos")
 
     itemlist = []
 
@@ -333,7 +333,7 @@ def findvideos(item):
 # ========================================================================================================================================================
 
 def play(item):
-    logger.info("[cb01anime] play")
+    logger.info("[thegroove360.cb01anime] play")
 
     if '/goto/' in item.url:
         item.url = item.url.split('/goto/')[-1].decode('base64')

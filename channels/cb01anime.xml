@@ -8,12 +8,12 @@
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>http://i.imgur.com/bHoUMo2.png</thumbnail>
-	<bannermenu>http://i.imgur.com/bHoUMo2.png</bannermenu>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/cineblog01anime.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/cineblog01anime.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>13</version>
-	<date>20/11/2018</date>
+	<version>14</version>
+	<date>10/12/2018</date>
 	<changes>Update</changes>
 
 	<categories>
