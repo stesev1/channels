@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# streamondemand-.- XBMC Plugin
+# TheGroove360 - XBMC Plugin
 # Canale casacinema
-
 # ------------------------------------------------------------
 
 import re
@@ -27,7 +26,7 @@ def isGeneric():
     return True
 	
 def mainlist(item):
-    logger.info("streamondemand-.casacinema mainlist")
+    logger.info("[thegroove360.casacinema] mainlist")
 
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Novita'[/COLOR]",
@@ -75,7 +74,7 @@ def mainlist(item):
 # ==============================================================================================================================================================================
 	
 def newest(categoria):
-    logger.info("[streamondemand-.casacinema] newest" + categoria)
+    logger.info("[[thegroove360.casacinema]] newest" + categoria)
     itemlist = []
     item = Item()
     try:
@@ -119,7 +118,7 @@ def search(item, texto):
 # ==============================================================================================================================================================================
 
 def peliculas(item):
-    logger.info("streamondemand-.casacinema peliculas")
+    logger.info("[thegroove360.casacinema] peliculas")
 
     itemlist = []
 
@@ -164,7 +163,7 @@ def peliculas(item):
 # ==============================================================================================================================================================================
 
 def peliculas_update(item):
-    logger.info("streamondemand-.casacinema peliculas")
+    logger.info("[thegroove360.casacinema] peliculas")
     itemlist = []
     numpage = 10
 
@@ -212,7 +211,7 @@ def peliculas_update(item):
 # ==============================================================================================================================================================================
 
 def peliculas_tv(item):
-    logger.info("streamondemand-.casacinema peliculas_tv")
+    logger.info("[thegroove360.casacinema] peliculas_tv")
 
     itemlist = []
 
@@ -256,7 +255,7 @@ def peliculas_tv(item):
 # ==============================================================================================================================================================================	
 
 def categorias(item):
-    logger.info("streamondemand-.casacinema categorias")
+    logger.info("[thegroove360.casacinema] categorias")
 
     itemlist = []
 
@@ -306,7 +305,7 @@ def episodios(item):
                          fulltitle=scrapedtitle + " (" + lang_title + ")" + ' - ' + item.show,
                          show=item.show))
 
-    logger.info("[streamondemand-.casacinema] episodios")
+    logger.info("[[thegroove360.casacinema]] episodios")
     itemlist = []
 
     # Descarga la página
@@ -344,7 +343,7 @@ def episodios(item):
 # ==============================================================================================================================================================================
 	
 def findvideos(item):
-    logger.info("streamondemand-.casacinema findvideos")
+    logger.info("[thegroove360.casacinema] findvideos")
 
     itemlist = []
 
