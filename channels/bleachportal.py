@@ -17,7 +17,7 @@ host = "http://www.bleachportal.it"
 
 
 def mainlist(item):
-    logger.info("[BleachPortal.py]==> mainlist")
+    logger.info("[thegroove360.BleachPortal] mainlist")
     itemlist = [Item(channel=__channel__,
                      action="episodi",
                      title="[COLOR azure] Bleach [/COLOR] - [COLOR deepskyblue]Lista Episodi[/COLOR]",
@@ -37,7 +37,7 @@ def mainlist(item):
 
 
 def episodi(item):
-    logger.info("[BleachPortal.py]==> episodi")
+    logger.info("[thegroove360.BleachPortal] episodi")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -72,7 +72,7 @@ def episodi(item):
 
 
 def oav(item):
-    logger.info("[BleachPortal.py]==> oav")
+    logger.info("[thegroove360.BleachPortal] oav")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -94,7 +94,7 @@ def oav(item):
 
 
 def findvideos(item):
-    logger.info("[BleachPortal.py]==> findvideos")
+    logger.info("[thegroove360.BleachPortal] findvideos")
     itemlist = []
 
     if "bleach//" in item.url:
