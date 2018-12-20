@@ -91,7 +91,7 @@ def categorias(item):
 # ==================================================================================================================================================
 	
 def search(item, texto):
-    logger.info("streamondemand- altadefinizione01 " + item.url + " search " + texto)
+    logger.info("[thegroove360.altadefinizione01] " + item.url + " search " + texto)
     item.url = host + "/?do=search&subaction=search&story=" + texto
     try:
         if item.extra == "movie":
@@ -108,34 +108,34 @@ def search(item, texto):
 # ==================================================================================================================================================		
 		
 def peliculas(item):
-    logger.info("streamondemand- altadefinizione01 peliculas")
+    logger.info("[thegroove360.altadefinizione01] peliculas")
     itemlist = []
 
     # Descarga la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Extrae las entradas (carpetas)
-    patron = '<span class[^>]+>([^<]+)<\/span> <span class="ssound">([^<]+)</span>'
-    patron += '<a href="([^"]+)"><img src="([^"]+)" class="[^>]+" alt="([^<]+)"\s*height[^>]+>'
+    #patron = '<span class[^>]+>([^<]+)<\/span> <span class="ssound">([^<]+)</span>'
+    patron = '<a href="([^"]+)"><img src="([^"]+)" class="[^>]+" alt="([^<]+)"\s*height[^>]+>'
     matches = re.compile(patron, re.DOTALL).finditer(data)
 
     for match in matches:
         scrapedplot = ""
-        scrapedtitle = scrapertools.unescape(match.group(5))
-        scrapedthumbnail = urlparse.urljoin(item.url, match.group(4))
-        scrapedurl = urlparse.urljoin(item.url, match.group(3))
-        lang = scrapertools.unescape(match.group(2))
-        lang =lang.replace("Italiano", "ITA")
-        quality = scrapertools.unescape(match.group(1))
-        quality =" ([COLOR yellow]" + quality +"[/COLOR])"
-        lang =" ([COLOR yellow]" + lang +"[/COLOR])"
+        scrapedtitle = scrapertools.unescape(match.group(3))
+        scrapedthumbnail = urlparse.urljoin(item.url, match.group(2))
+        scrapedurl = urlparse.urljoin(item.url, match.group(1))
+        #lang = scrapertools.unescape(match.group(2))
+        #lang =lang.replace("Italiano", "ITA")
+        #quality = scrapertools.unescape(match.group(1))
+        #quality =" ([COLOR yellow]" + quality +"[/COLOR])"
+        #lang =" ([COLOR yellow]" + lang +"[/COLOR])"
         itemlist.append(infoSod(
             Item(channel=__channel__,
                  action="findvideos",
                  contentType="movie",
                  fulltitle=scrapedtitle,
                  show=scrapedtitle,
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]" + quality + lang,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
@@ -160,7 +160,7 @@ def peliculas(item):
 # ==================================================================================================================================================	
 	
 def peliculas_tv(item):
-    logger.info("streamondemand- altadefinizione01 peliculas")
+    logger.info("[thegroove360.altadefinizione01] peliculas")
     itemlist = []
 
     # Descarga la pagina
@@ -212,7 +212,7 @@ def peliculas_tv(item):
 # ==================================================================================================================================================	
 	
 def episodios(item):
-    logger.info("streamondemand- altadefinizione01 episodios")
+    logger.info("[thegroove360.altadefinizione01] episodios")
 
     itemlist = []
 
