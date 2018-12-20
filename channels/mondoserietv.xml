@@ -8,8 +8,8 @@
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>https://mondoserietv.com//wp-content//uploads//2018//04//logo.png</thumbnail>
-	<bannermenu>https://mondoserietv.com//wp-content//uploads//2018//04//logo.png</bannermenu>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/mondoserietv.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/mondoserietv.png</bannermenu>
 	
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 	<version>39</version>

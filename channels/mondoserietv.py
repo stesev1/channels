@@ -2,7 +2,7 @@
 # ------------------------------------------------------------
 # TheGroove360 - XBMC Plugin
 # Canale per mondoserietv
-# ----------------------------------------------------------
+# ------------------------------------------------------------
 
 import re
 import urllib
@@ -314,35 +314,21 @@ def findvideos(item):
 
     b = re.compile(regex, re.MULTILINE).findall(data)
 
+    print  b[0]
+
     if b:
         blocco = b[0]
     else:
         return []
 
-    patron = '<a[^>]+href=\'(.*?)\'[^>].*?<b>(.*?)<\/b>*>'
-    matches = re.compile(patron, re.IGNORECASE).findall(blocco)
-
-    itemlist = []
-
-    for url, name in matches:
-        import requests
-        r = requests.get(url)
-
-        server = servertools.get_server_from_url(r.url)
-        itemlist.append(
-            Item(
-                channel=__channel__,
-                action="play",
-                title=name,
-                url=url,
-                server=server,
-                folder=False))
-
-    if item.contentType != 'episode':
-        if len(itemlist) > 0 and item.extra != 'findvideos':
-            itemlist.append(
-                Item(channel=item.channel, title='[COLOR yellow][B]Aggiungi alla videoteca[/B][/COLOR]', url=item.url,
-                     action="add_pelicula_to_library", extra="findvideos", contentTitle=item.contentTitle))
+    itemlist = servertools.find_video_items(data=blocco)
+    for videoitem in itemlist:
+        videoitem.title = item.title + videoitem.title
+        videoitem.fulltitle = item.fulltitle
+        videoitem.thumbnail = item.thumbnail
+        videoitem.show = item.show
+        videoitem.plot = item.plot
+        videoitem.channel = __channel__
 
     return itemlist
 
