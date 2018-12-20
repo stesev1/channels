@@ -238,7 +238,7 @@ def listacompleta(item):
 def search(item, texto):
     logger.info("[thegroove360.cb01anime] " + item.url + " search " + texto)
 
-    item.url = host + "/anime/?s=" + texto
+    item.url = host + "?s=" + texto
 
     return peliculas_new(item)
 
