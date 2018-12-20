@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# Icarus - XBMC Plugin
+# TheGroove360 - XBMC Plugin
 # Canale per mondoserietv
-# https://alfa-addon.com/categories/icarus-addon.50/
 # ----------------------------------------------------------
+
 import re
 import urllib
 
@@ -36,7 +36,7 @@ PERPAGE = 14
 
 
 def mainlist(item):
-    logger.info("icarus.mondoserietvmainlist")
+    logger.info("[thegroove360.mondoserietv] mainlist")
 
     # autoplay.init(item.channel, list_servers, list_quality)
 
@@ -44,39 +44,39 @@ def mainlist(item):
                      action="lista_serie",
                      title="[COLOR azure]Lista Serie Tv Anni 50 60 70 80[/COLOR]",
                      url=("%s/lista-serie-tv-anni-60-70-80/" % host),
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=item.channel,
                      action="lista_serie",
                      title="[COLOR azure]Lista Serie Tv Italiane[/COLOR]",
                      url=("%s/lista-serie-tv-italiane/" % host),
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=item.channel,
                      action="lista_serie",
                      title="[COLOR azure]Lista Cartoni Animati & Anime[/COLOR]",
                      url=("%s/lista-cartoni-animati-e-anime/" % host),
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=item.channel,
                      action="peliculas",
                      title="[COLOR azure]Lista Film[/COLOR]",
                      url=("%s/lista-film/" % host),
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=item.channel,
                      title="[COLOR yellow]Cerca Film...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                 Item(channel=item.channel,
                      title="[COLOR yellow]Cerca SerieTV...[/COLOR]",
                      action="search",
                      extra="tvshow",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
     # autoplay.show_option(item.channel, itemlist)
 
     return itemlist
 
 
 def search(item, texto):
-    logger.info("icarus.mondoserietv search " + texto)
+    logger.info("[thegroove360.mondoserietv] search " + texto)
     item.url = "%s/?s=%s" % (host, texto)
 
     try:
@@ -94,7 +94,7 @@ def search(item, texto):
 
 
 def search_peliculas(item):
-    logger.info("icarus.mondoserietv search_peliculas")
+    logger.info("[thegroove360.mondoserietv] search_peliculas")
     itemlist = []
 
     # Carica la pagina
@@ -125,7 +125,7 @@ def search_peliculas(item):
 
 
 def search_peliculas_tv(item):
-    logger.info("icarus.mondoserietv search_peliculas_tv")
+    logger.info("[thegroove360.mondoserietv] search_peliculas_tv")
     itemlist = []
 
     # Carica la pagina
@@ -156,7 +156,7 @@ def search_peliculas_tv(item):
 
 
 def peliculas(item):
-    logger.info("icarus.mondoserietv film")
+    logger.info("[thegroove360.mondoserietv] film")
     itemlist = []
 
     p = 1
@@ -192,14 +192,14 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR lightgreen]" + config.get_localized_string(30992) + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 
 def lista_serie(item):
-    logger.info("icarus.mondoserietv novità")
+    logger.info("[thegroove360.mondoserietv] novità")
     itemlist = []
 
     p = 1
@@ -235,14 +235,14 @@ def lista_serie(item):
                  action="lista_serie",
                  title="[COLOR lightgreen]" + config.get_localized_string(30992) + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 
 def episodios(item):
-    logger.info("icarus.mondoserietv episodios")
+    logger.info("[thegroove360.mondoserietv] episodios")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data

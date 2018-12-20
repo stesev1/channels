@@ -11,9 +11,9 @@
 	<thumbnail>https://mondoserietv.com//wp-content//uploads//2018//04//logo.png</thumbnail>
 	<bannermenu>https://mondoserietv.com//wp-content//uploads//2018//04//logo.png</bannermenu>
 	
-	<update_url>http://arthasdesign.it/repo/channels/</update_url>
-	<version>38</version>
-	<date>12/11/2018</date>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
+	<version>39</version>
+	<date>20/12/2018</date>
 	<changes>update</changes>
 
 	<categories>
