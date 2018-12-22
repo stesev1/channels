@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# ------------------------------------------------------------
+# Thegroove360 - XBMC Plugin
+# Canale vedohd
+# ------------------------------------------------------------
+
 import re
 import urllib
 
@@ -5,7 +11,7 @@ from core import httptools
 from platformcode import logger
 from core import scrapertools
 from core import servertools
-from core.item_ext import ItemExt as Item
+from core.item import Item
 
 __channel__ = "vedohd"
 __category__ = "F,S,A"
@@ -18,7 +24,7 @@ headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("streamondemand.filmpertutti mainlist")
+    logger.info("[thegroove360.vedohd] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Ultimi film inseriti[/COLOR]",
                      action="peliculas",
@@ -54,7 +60,7 @@ def mainlist(item):
 
 
 def search(item, texto):
-    logger.info("streamondemand.vedohd " + item.url + " search " + texto)
+    logger.info("[thegroove360.vedohd] " + item.url + " search " + texto)
     item.url = host + "/?s=" + texto
 
     try:
@@ -68,7 +74,7 @@ def search(item, texto):
 
 
 def newest():
-    logger.info("streamondemand.vedohd newest")
+    logger.info("[thegroove360.vedohd] newest")
     item = Item()
     try:
         item.url = host
@@ -87,7 +93,7 @@ def newest():
 
 
 def categorias(item):
-    logger.info("streamondemand.vedohd categorias")
+    logger.info("[thegroove360.vedohd] categorias")
     data = httptools.downloadpage(item.url).data
     patron = r'<ul class=\"genres.*></ul></nav>.*?<nav'
     blocco = scrapertools.get_match(data, patron)
@@ -118,7 +124,7 @@ def categorias(item):
 
 
 def anno(item):
-    logger.info("streamondemand.vedohd categorias")
+    logger.info("[thegroove360.vedohd] categorias")
     data = httptools.downloadpage(item.url).data
     patron = r'<ul class=\"releases.*></ul></nav>.*?'
     blocco = scrapertools.get_match(data, patron)
@@ -149,7 +155,7 @@ def anno(item):
 
 
 def peliculas(item):
-    logger.info("streamondemand.vedohd peliculas")
+    logger.info("[thegroove360.vedohd] peliculas")
     itemlist = []
 
     # Carica la pagina
@@ -199,7 +205,7 @@ def peliculas(item):
 
 
 def peliculas_search(item):
-    logger.info("streamondemand.vedohd peliculas_search")
+    logger.info("[thegroove360.vedohd] peliculas_search")
     itemlist = []
 
     # Carica la pagina
