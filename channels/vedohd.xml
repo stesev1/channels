@@ -12,12 +12,13 @@
 	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/vedohd.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>1</version>
+	<version>107</version>
 	<date>22/12/2018</date>
-	<changes>New Channel</changes>
+	<changes>Update</changes>
 
 	<categories>
-		<category>anime</category>
+		<category>Movie</category>
+		<category>Serie</category>
 	</categories>
 
 	<settings>
