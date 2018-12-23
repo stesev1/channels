@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>	<id>altadefinizione_2</id>	<name>AltaDefinizione Center</name>
+	<active>true</active>	<adult>false</adult>	<language>it</language>
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/altadefinizione_2.png</thumbnail>	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/altadefinizione_2.png</bannermenu>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>	<version>1</version>	<date>23/12/2018</date>	<changes>New Channel</changes>
+	<categories>        <category>movie</category>        <category>serie</category>	</categories>
+	<settings>		<include_in_global_search>true</include_in_global_search>		<id>include_in_global_search</id>		<type>bool</type>		<label>Includi ricerca globale</label>		<default>true</default>		<enabled>true</enabled>		<visible>true</visible>		</settings>
+</channel>
