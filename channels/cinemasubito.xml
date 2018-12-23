@@ -7,13 +7,13 @@
     <adult>false</adult>
     <language>it</language>
 
-    <fanart></fanart>
-    <thumbnail>https://www.cinemasubito.biz/uploads/custom-logo.png</thumbnail>
-    <bannermenu>https://www.cinemasubito.biz/uploads/custom-logo.png</bannermenu>
+    <fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/cinemasubito.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/cinemasubito.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>9</version>
-    <date>11/04/2018</date>
+    <version>10</version>
+    <date>23/12/2018</date>
     <changes>Update</changes>
 
     <categories>

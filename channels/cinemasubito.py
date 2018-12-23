@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale cinemasubito
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
+
 import binascii
 import re
 import urlparse
@@ -17,14 +16,14 @@ from platformcode import logger
 
 __channel__ = "cinemasubito"
 
-host = "https://www.cinemasubito.org/"
+host = "https://www.cinemasubito.club"
 
 headers = [
     ['User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:58.0) Gecko/20100101 Firefox/58.0'],
     ['Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'],
     ['Accept-Encoding', 'gzip, deflate'],
     ['Accept-Language', 'en-US,en;q=0.5'],
-    ['Host', 'www.cinemasubito.org'],
+    ['Host', 'www.cinemasubito.club'],
     ['DNT', '1'],
     ['Upgrade-Insecure-Requests', '1'],
     ['Connection', 'keep-alive'],
@@ -33,39 +32,39 @@ headers = [
 ]
 
 def mainlist(item):
-    logger.info("streamondemand.cinemasubito mainlist")
+    logger.info("[thegroove360.cinemasubito] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film[/COLOR]",
                      action="peliculas",
                      url="%s/film/pagina/1" % host,
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film Per Categoria[/COLOR]",
                      action="categorias",
                      url=host,
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV[/COLOR]",
                      action="peliculas_tv",
                      url="%s/serie" % host,
                      extra="serie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Serie TV...[/COLOR]",
                      action="search",
                      extra="serie",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 def search(item, texto):
-    logger.info("streamondemand.cinemasubito " + item.url + " search " + texto)
+    logger.info("[thegroove360.cinemasubito] " + item.url + " search " + texto)
     item.url = host + "/cerca/" + texto
     try:
         if item.extra == "movie":
@@ -105,7 +104,7 @@ def categorias(item):
     return itemlist
 
 def peliculas(item):
-    logger.info("streamondemand.cinemasubito peliculas")
+    logger.info("[thegroove360.cinemasubito] peliculas")
     itemlist = []
 
     # Carica la pagina
@@ -118,10 +117,10 @@ def peliculas(item):
     for scrapedurl, scrapedtitle in matches:
         scrapedplot = ""
         scrapedthumbnail = ""
-        if host not in scrapedurl:
-            scrapedurl = host + scrapedurl
-        else:
-            scrapedurl = scrapedurl
+        #if host not in scrapedurl:
+            #scrapedurl = host + scrapedurl
+        #else:
+            #scrapedurl = scrapedurl
 
         itemlist.append(infoSod(
             Item(channel=__channel__,
@@ -150,13 +149,13 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 def peliculas_tv(item):
-    logger.info("streamondemand.cinemasubito peliculas")
+    logger.info("[thegroove360.cinemasubito] peliculas")
     itemlist = []
 
     # Carica la pagina
@@ -201,7 +200,7 @@ def peliculas_tv(item):
                  action="peliculas_tv",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -239,7 +238,7 @@ def episodios(item):
 
 
 def findvideos(item):
-    logger.info("streamondemand.cinemasubito findvideos_tv")
+    logger.info("[thegroove360.cinemasubito] findvideos_tv")
 
     links = set()
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -266,4 +265,4 @@ def findvideos(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
