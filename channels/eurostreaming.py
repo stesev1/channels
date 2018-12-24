@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Thegroove360 - XBMC Plugin
 # Canale  per eurostreaming.tv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
+
 import re
 import urlparse
 
@@ -15,12 +14,21 @@ from platformcode import logger
 
 __channel__ = "eurostreaming"
 
-host = "https://eurostreaming.news/"
+host = "https://eurostreaming.zone"
 
 
 def mainlist(item):
-    logger.info("streamondemand.eurostreaming mainlist")
+    logger.info("[thegroove360.eurostreaming] mainlist")
     itemlist = [
+        Item(
+            channel=__channel__,
+            title="[COLOR azure]Ultimi Aggiornamenti[/COLOR]",
+            action="serietv",
+            extra='serie',
+            url=host,
+            thumbnail=
+            "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"
+        ),
         Item(
             channel=__channel__,
             title="[COLOR azure]Serie TV[/COLOR]",
@@ -28,7 +36,7 @@ def mainlist(item):
             extra='serie',
             url="%s/category/serie-tv-archive/" % host,
             thumbnail=
-            "http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"
+            "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"
         ),
         Item(
             channel=__channel__,
@@ -45,21 +53,21 @@ def mainlist(item):
             action="search",
             extra='serie',
             thumbnail=
-            "http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")
+            "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")
     ]
 
     return itemlist
 
 
 def serietv(item):
-    logger.info("streamondemand.eurostreaming peliculas")
+    logger.info("[thegroove360.eurostreaming] peliculas")
     itemlist = []
 
     # Carica la pagina
     data = httptools.downloadpage(item.url).data
 
     # Estrae i contenuti
-    patron = '<div class="post-thumb">\s*<a href="([^"]+)" title="([^"]+)">\s*<img src="([^"]+)"'
+    patron = r'<div class="post-thumb">\s*<a href="([^"]+)" title="([^"]+)">\s*<img src="([^"]+)"'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedtitle, scrapedthumbnail in matches:
@@ -104,7 +112,7 @@ def serietv(item):
                 title="[COLOR orange]Successivo >>[/COLOR]",
                 url=scrapedurl,
                 thumbnail=
-                "http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                 extra=item.extra,
                 folder=True))
 
@@ -113,7 +121,7 @@ def serietv(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
 
 
 def search(item, texto):
@@ -149,12 +157,19 @@ def episodios(item):
                         fulltitle=scrapedtitle + " (" + lang_title + ")" + ' - ' + item.show,
                         show=item.show))
 
-    logger.info("[eurostreaming.py] episodios")
+    logger.info("[thegroove360.eurostreaming] episodios")
 
     itemlist = []
 
     ## Carica la pagina
     data = httptools.downloadpage(item.url).data
+
+    patron = r'go_to\":\"([^\"]+)\"'
+    matches = re.compile(patron, re.IGNORECASE).findall(data)
+
+    if len(matches) > 0:
+        url = matches[0].replace("\/", "/")
+        data = httptools.downloadpage(url).data
 
     patron = r"onclick=\"top.location=atob\('([^']+)'\)\""
     b64_link = scrapertools.find_single_match(data, patron)
@@ -169,7 +184,7 @@ def episodios(item):
 
     data = scrapertools.decodeHtmlentities(data)
 
-    patron = '</span>([^<]+)</div><div class="su-spoiler-content su-clearfix" style="display:none">(.+?)</div></div></div>'
+    patron = r'</span>([^<]+)</div><div class="su-spoiler-content su-clearfix" style="display:none">(.+?)</div></div></div>'
     matches = re.compile(patron, re.DOTALL).findall(data)
     for lang_title, match in matches:
         lang_title = 'SUB ITA' if 'SUB' in lang_title.upper() else 'ITA'
@@ -195,7 +210,7 @@ def episodios(item):
     return itemlist
 
 def findvideos(item):
-    logger.info("streamondemand.eurostreaming findvideos")
+    logger.info("[thegroove360.eurostreaming] findvideos")
     itemlist=[]
 
     # Carica la pagina
