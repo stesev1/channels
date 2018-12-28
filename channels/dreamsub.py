@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale  per dreamsub
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 - XBMC Plugin
+# Canale per dreamsub
 # ------------------------------------------------------------
+
 import re
 import urlparse
 
@@ -16,11 +15,11 @@ from core.tmdb import infoSod
 
 __channel__ = "dreamsub"
 
-host = "https://www.dreamsub.net"
+host = "https://www.dreamsub.online"
 
 
 def mainlist(item):
-    logger.info("streamondemand.dreamsub mainlist")
+    logger.info("[thegroove360.dreamsub] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Anime / Cartoni[/COLOR]",
                      action="serietv",
@@ -30,27 +29,27 @@ def mainlist(item):
                      title="[COLOR azure]Categorie[/COLOR]",
                      action="categorie",
                      url=host,
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Ultimi episodi Anime[/COLOR]",
                      action="ultimiep",
                      url=host,
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca...[/COLOR]",
                      action="search",
-                     thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
 
 
 def newest(categoria):
-    logger.info("streamondemand.altadefinizione01 newest" + categoria)
+    logger.info("[thegroove360.dreamsub] newest" + categoria)
     itemlist = []
     item = Item()
     try:
         if categoria == "anime":
-            item.url = "https://www.dreamsub.tv"
+            item.url = "https://www.dreamsub.online"
             item.action = "ultimiep"
             itemlist = ultimiep(item)
 
@@ -67,7 +66,7 @@ def newest(categoria):
 
 
 def serietv(item):
-    logger.info("streamondemand.dreamsub peliculas")
+    logger.info("[thegroove360.dreamsub] peliculas")
     itemlist = []
 
     # Carica la pagina 
@@ -119,7 +118,7 @@ def serietv(item):
 
 
 def ultimiep(item):
-    logger.info("streamondemand.dreamsub ultimiep")
+    logger.info("[thegroove360.dreamsub] ultimiep")
     itemlist = []
 
     # Carica la pagina 
@@ -150,7 +149,7 @@ def ultimiep(item):
 
 
 def categorie(item):
-    logger.info("[dreamsub.py] categorie")
+    logger.info("[thegroove360.dreamsub] categorie")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -173,11 +172,11 @@ def categorie(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
 
 
 def search(item, texto):
-    logger.info("[dreamsub.py] " + item.url + " search " + texto)
+    logger.info("[thegroove360.dreamsub] " + item.url + " search " + texto)
     item.url = "%s/search/%s" % (host, texto)
     try:
         return serietv(item)
@@ -190,7 +189,7 @@ def search(item, texto):
 
 
 def episodios(item):
-    logger.info("streamondemand.channels.dreamsub episodios")
+    logger.info("[thegroove360.dreamsub] episodios")
 
     itemlist = []
 

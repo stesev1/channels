@@ -7,14 +7,14 @@
 	<adult>false</adult>
 	<language>it</language>
 
-	<fanart></fanart>
-	<thumbnail>http://www.dreamsub.it/res/img/logo.png</thumbnail>
-	<bannermenu>http://www.dreamsub.it/res/img/logo.png</bannermenu>
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/dreamsub.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/dreamsub.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>11</version>
-	<date>06/09/2017</date>
-	<changes>Small Fix</changes>
+	<version>12</version>
+	<date>28/12/2018</date>
+	<changes>Update</changes>
 
 	<categories>
         	<category>anime</category>
