@@ -7,14 +7,14 @@
     <adult>false</adult>
     <language>it</language>
 
-    <thumbnail>https://www.dragonballforever.it/wp-content/uploads/2017/02/header_dbf-1.jpg</thumbnail>
-    <bannermenu>https://www.dragonballforever.it/wp-content/uploads/2017/02/header_dbf-1.jpg</bannermenu>
-    <fanart>https://www.dragonballforever.it/wp-content/uploads/2017/07/dbf_sfondo.jpg</fanart>
+	<fanart>https://vignette.wikia.nocookie.net/dragonuniverse/images/7/72/Goku_vs_Beerus_wallpaper.png/revision/latest?cb=20151121015016</fanart>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/dragonballforever.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/dragonballforever.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>1</version>
-    <date>23/10/2017</date>
-    <changes>New CHannel</changes>
+    <version>2</version>
+    <date>28/12/2018</date>
+    <changes>Update</changes>
 
     <categories>
         <category>anime</category>

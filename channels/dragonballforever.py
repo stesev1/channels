@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# TheGroove360 - XBMC Plugin
 # Canale per https://www.dragonballforever.it/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# By MrTruth
 # ------------------------------------------------------------
 
 import re
@@ -27,14 +24,14 @@ def mainlist(item):
                      url="%s/dragon-ball-kai-episodi/" % host,
                      extra="Kai",
                      show="Dragon Ball Kai",
-                     thumbnail="https://www.dragonballforever.it/wp-content/uploads/2016/11/dragonball_kai_cover.jpg"),
+                     thumbnail="https://is5-ssl.mzstatic.com/image/thumb/Music3/v4/08/ca/64/08ca64bd-3fb5-842a-d02b-a6e2e4b90b82/15UMGIM01444.jpg/268x0w.jpg"),
                 Item(channel=__channel__,
                      title=color("Dragon Ball Super", "azure"),
                      action="episodi",
                      url="%s/dragon-ball-super/" % host,
                      extra="Super",
                      show="Dragon Ball Super",
-                     thumbnail="https://www.dragonballforever.it/wp-content/uploads/2016/11/dbsuper-locandina.jpg")]
+                     thumbnail="https://i.imgur.com/hS4SqDI.png")]
 
     return itemlist
 
