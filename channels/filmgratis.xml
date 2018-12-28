@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
     <id>filmgratis</id>
-    <name>FilmGratis</name>
+    <name>FilmAltaDefinizione</name>
 
     <active>true</active>
     <adult>false</adult>
     <language>it</language>
 
-    <thumbnail>https://www.filmgratis.video/templates/itafilm/images/logo.png</thumbnail>
-    <bannermenu>https://www.filmgratis.video/templates/itafilm/images/logo.png</bannermenu>
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/filmaltadefinizione.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/filmaltadefinizione.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>1</version>
-    <date>15/09/2017</date>
-    <changes>Re-enabled Channel</changes>
+    <version>2</version>
+    <date>28/12/2018</date>
+    <changes>Update</changes>
 
     <categories>
         <category>movie</category>
+		<category>serie</category>
     </categories>
 
  	<settings>

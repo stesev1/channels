@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# TheGroove360 - XBMC Plugin
 # Canale  per http://filmgratis.cc/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# By MrTruth
 # ------------------------------------------------------------
 
 import re
@@ -19,7 +16,7 @@ from core.tmdb import infoSod
 
 __channel__ = "filmgratis"
 
-host = "https://www.filmgratis.one"
+host = "https://www.filmaltadefinizione.net/"
 
 # ----------------------------------------------------------------------------------------------------------------
 def mainlist(item):
@@ -50,10 +47,21 @@ def mainlist(item):
                      url=host,
                      thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
                 Item(channel=__channel__,
+                     action="peliculas",
+                     title=color("Serie TV", "orange"),
+                     url="%s/telefilm-serie-tv-streaming/" % host,
+                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                Item(channel=__channel__,
                      action="search",
-                     title=color("Cerca ...", "yellow"),
+                     title=color("Cerca Film...", "yellow"),
                      extra="movie",
-                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png")]
+                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"),
+                Item(channel=__channel__,
+                     action="search",
+                     title=color("Cerca Serie TV...", "yellow"),
+                     extra="serie",
+                     thumbnail="http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png")
+                ]
 
     return itemlist
 
@@ -197,24 +205,24 @@ def peliculas(item):
         year = scrapertools.find_single_match(scrapedtitle, r'\((\d{4})\)')
 
         # Bypass fake links
-        html = httptools.downloadpage(scrapedurl).data
+        # html = httptools.downloadpage(scrapedurl).data
 
-        patron = '<div class="video-player-plugin">([\s\S]*)<div class="wrapper-plugin-video">'
-        matches = re.compile(patron, re.DOTALL).findall(html)
-        for url in matches:
-            if "scrolling" not in url:
-                continue
+        #patron = '<div class="video-player-plugin">([\s\S]*)<div class="wrapper-plugin-video">'
+        #matches = re.compile(patron, re.DOTALL).findall(html)
+        #for url in matches:
+            #if "scrolling" not in url:
+                #continue
 
-            itemlist.append(infoSod(
-                Item(channel=__channel__,
-                     action="findvideos",
-                     contentType="movie",
-                     title=scrapedtitle.replace(year, color("%s" % year, "red")),
-                     fulltitle=scrapedtitle,
-                     url=scrapedurl,
-                     extra="movie",
-                     thumbnail=scrapedthumbnail,
-                     folder=True), tipo="movie"))
+        itemlist.append(infoSod(
+            Item(channel=__channel__,
+                action="findvideos",
+                contentType="movie",
+                title=scrapedtitle.replace(year, color("%s" % year, "red")),
+                fulltitle=scrapedtitle,
+                url=scrapedurl,
+                extra="movie",
+                thumbnail=scrapedthumbnail,
+                folder=True), tipo="movie"))
 
     # Pagine
     patronvideos = r'<a href="([^"]+)">>'
@@ -264,6 +272,6 @@ def color(text, color):
     
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand/)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/)")
 
 # ================================================================================================================
