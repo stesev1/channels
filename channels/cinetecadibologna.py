@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# TheGroove360 - XBMC Plugin
 # Canale cinetecadibologna
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 
 import re
@@ -21,28 +19,28 @@ host = "http://cinestore.cinetecadibologna.it"
 headers = [['Referer', host]]
 
 def mainlist(item):
-    logger.info("streamondemand.cinetecadibologna mainlist")
+    logger.info("[thegroove360.cinetecadibologna] mainlist")
     itemlist = [Item(channel=__channel__, 
                      title="[COLOR azure]Elenco Film - Cineteca di Bologna[/COLOR]", 
                      action="peliculas",
                      url="%s/video/alfabetico_completo" % host,
-                     thumbnail="http://cinestore.cinetecadibologna.it/pics/logo.gif"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/cinetecabologna.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Epoche - Cineteca di Bologna[/COLOR]",
                      action="epoche",
                      url="%s/video/epoche" % host,
-                     thumbnail="http://cinestore.cinetecadibologna.it/pics/logo.gif"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/cinetecabologna.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Percorsi Tematici - Cineteca di Bologna[/COLOR]",
                      action="percorsi",
                      url="%s/video/percorsi" % host,
-                     thumbnail="http://cinestore.cinetecadibologna.it/pics/logo.gif")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/cinetecabologna.png")]
 
     return itemlist
 
 
 def peliculas(item):
-    logger.info("streamondemand.cinetecadibologna peliculas")
+    logger.info("[thegroove360.cinetecadibologna] peliculas")
     itemlist = []
 
     # Carica la pagina 
@@ -80,13 +78,13 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url= scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 def epoche(item):
-    logger.info("streamondemand.cinetecadibologna categorias")
+    logger.info("[thegroove360.cinetecadibologna] categorias")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -114,7 +112,7 @@ def epoche(item):
     return itemlist
 
 def percorsi(item):
-    logger.info("streamondemand.cinetecadibologna categorias")
+    logger.info("[thegroove360.cinetecadibologna] categorias")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -137,7 +135,7 @@ def percorsi(item):
     return itemlist
 
 def findvideos(item):
-    logger.info("streamondemand.cinetecadibologna findvideos")
+    logger.info("[thegroove360.cinetecadibologna] findvideos")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
