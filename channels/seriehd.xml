@@ -7,14 +7,14 @@
     <adult>false</adult>
     <language>it</language>
 
-    <fanart></fanart>
-    <thumbnail>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/seriehd.png</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/seriehd.png</bannermenu>
+    <fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/seriehd.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/seriehd.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>14</version>
-    <date>15/09/2017</date>
-    <changes>small fix</changes>
+    <version>15</version>
+    <date>30/12/2018</date>
+    <changes>Update</changes>
 
     <categories>
         <category>serie</category>
