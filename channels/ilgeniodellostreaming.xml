@@ -7,14 +7,14 @@
 	<adult>false</adult>
 	<language>it</language>
 
-	<fanart></fanart>
-	<thumbnail>https://i.imgur.com/Nsa81r0.png</thumbnail>
-	<bannermenu>https://i.imgur.com/Nsa81r0.png</bannermenu>
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/ilgeniodellostreaming.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/ilgeniodellostreaming.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>11</version>
-	<date>27/05/2017</date>
-	<changes>Added newest</changes>
+	<version>12</version>
+	<date>30/12/2018</date>
+	<changes>Update</changes>
 
 	<categories>
 		<category>movie</category>
