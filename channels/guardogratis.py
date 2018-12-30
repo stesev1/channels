@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
+# TheGroove360 / XBMC Plugin
 # Canale GuardoGratis
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
 
 import re
@@ -25,53 +24,55 @@ headers = [['User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:52.0) Ge
 
 
 def mainlist(item):
-    logger.info("[guardogratis.py] mainlist")
+    logger.info("[thegroove360.guardogratis] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="Film[COLOR orange]   - Novita'[/COLOR]",
                      action="film",
                      url="%s/movies/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/popcorn_new.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_new.png"),
                 Item(channel=__channel__,
                      title="Film[COLOR orange]   - Top IMDB[/COLOR]",
                      action="film",
                      url="%s/top-imdb/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/hd_movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/hd_movies_P.png"),
                 Item(channel=__channel__,
                      title="Film[COLOR orange]   - Animazione[/COLOR]",
                      action="film",
                      url="%s/genre/animazione/" % host,
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/animated_movie_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/animated_movie_P.png"),
                 Item(channel=__channel__,
-                     title="Film[COLOR orange]   - Categorie[/COLOR]",
+                     title="Film[COLOR orange] - Categorie[/COLOR]",
                      action="genere",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
 	            Item(channel=__channel__,
                      title="Serie TV",
                      action="film",
                      url="%s/series/" % host,
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_series_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_series_P.png"),
                 Item(channel=__channel__,
-                     title="[COLOR orange]Cerca.....[/COLOR]",
+                     title="[COLOR orange]Cerca Film...[/COLOR]",
                      action="search",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
-				Item(channel=__channel__,
-					title="[COLOR orange]Cerca Serie...[/COLOR]",
-					action="search",
-					url=host,
-					extra="serie",
-					thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     extra="movie",
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
+                Item(channel=__channel__,
+                     title="[COLOR orange]Cerca Serie TV...[/COLOR]",
+                     action="search",
+                     url=host,
+                     extra="serie",
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")                ]
+
     return itemlist
 
 # ==================================================================================================================================================
 
 def search(item, texto):
-    logger.info("[guardogratis.py] search")
+    logger.info("[thegroove360.guardogratis] search")
     item.url = host + "/?s=" + texto
     try:
         return film(item)
@@ -85,7 +86,7 @@ def search(item, texto):
 # ==================================================================================================================================================
 
 def genere(item):
-    logger.info("[guardogratis.py] pergenere")
+    logger.info("[thegroove360.guardogratis] pergenere")
     itemlist = []
     
     data = scrapertools.anti_cloudflare(item.url, headers=headers)
@@ -103,7 +104,7 @@ def genere(item):
                  title=scrapedtitle,
                  url=scrapedurl,
                  extra="movie",
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  folder=True))
 
     return itemlist
@@ -111,7 +112,7 @@ def genere(item):
 # ==================================================================================================================================================
 
 def film(item):
-    logger.info("[guardogratis.py] film")
+    logger.info("[thegroove360.guardogratis] film")
     itemlist = []
 
 
@@ -151,7 +152,7 @@ def film(item):
                 action="film",
                 title="[COLOR orange]Successivi >>[/COLOR]",
                 url=scrapedurl,
-                thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                 folder=True))
 
 
@@ -160,7 +161,7 @@ def film(item):
 # ==================================================================================================================================================
 """
 def film_top(item):
-    logger.info("[guardogratis.py] film")
+    logger.info("[thegroove360.guardogratis] film")
     itemlist = []
 
     data = scrapertools.anti_cloudflare(item.url, headers=headers)
@@ -195,7 +196,7 @@ def film_top(item):
                 action="film_top",
                 title="[COLOR orange]Successivo >>[/COLOR]",
                 url=scrapedurl,
-                thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                 folder=True))
 
 
@@ -204,7 +205,7 @@ def film_top(item):
 # ==================================================================================================================================================
 	
 def film_new(item):
-    logger.info("[guardogratis.py] film")
+    logger.info("[thegroove360.guardogratis] film")
     itemlist = []
 
     data = scrapertools.anti_cloudflare(item.url, headers=headers)
@@ -243,7 +244,7 @@ def film_new(item):
                 action="film_new",
                 title="[COLOR orange]Successivo >>[/COLOR]",
                 url=scrapedurl,
-                thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                 folder=True))
 
 
@@ -294,4 +295,3 @@ def findvideos(item):
         videoitem.channel = __channel__
 
     return itemlist
-
