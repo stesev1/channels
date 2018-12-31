@@ -7,14 +7,14 @@
 	<adult>false</adult>
 	<language>it</language>
 
-	<fanart></fanart>
-	<thumbnail>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/filmpertutti.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/filmpertutti.png</bannermenu>
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/filmpertutti.png</thumbnail>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/filmpertutti.png</thumbnail>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>16</version>
-	<date>24/10/2018</date>
-	<changes>Added newest</changes>
+	<version>17</version>
+	<date>31/12/2018</date>
+	<changes>Update</changes>
 
 	<categories>
 		<category>movie</category>
