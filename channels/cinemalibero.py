@@ -15,7 +15,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "cinemalibero"
-host = "https://www.cinemalibero.red/"
+host = "https://www.cinemalibero.news/"
 headers = [['Referer', host]]
 
 
@@ -74,7 +74,8 @@ def categorias(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patron = '<li><small>[^>]+><a href="(.*?)">(.*?)</a></li>'
+    #patron = '<li><small>[^>]+><a href="(.*?)">(.*?)</a></li>'
+    patron = r'<a class="dropdown-item" href="(.*?)".*?">(.*?)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedtitle in matches:
@@ -84,6 +85,7 @@ def categorias(item):
             continue
         scrapedplot = ""
         scrapedthumbnail = ""
+        scrapedurl = host + scrapedurl
         itemlist.append(
             Item(channel=__channel__,
                  extra=item.extra,
@@ -124,25 +126,29 @@ def peliculas(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
+    #patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
+    patron = '<a href="([^"]+)" title="[^"]+" alt="[^"]+" class="locandina"\s*'
+    patron += 'style[^h]+([^\)]+)[^>]+>(?:<div class="voto">([^<]+)|)[^=]+="titolo">([^<]+)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
-    for scrapedurl, scrapedtitle in matches:
+    for scrapedurl, scrapedthumbnail, voto, scrapedtitle in matches:
         scrapedplot = ""
-        scrapedthumbnail = ""
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
+        scrapedtitle = scrapedtitle.replace("[", "(").replace("]", ")")
+        if voto:
+            voto = " ([COLOR yellow]" + voto + "[/COLOR])"
         itemlist.append(infoSod(
             Item(channel=__channel__,
                  extra=item.extra,
-                 action="findvideos",
+                 action="findvideos" if not "serie" in scrapedurl else "episodios",
                  contentType="movie",
                  fulltitle=scrapedtitle,
                  show=scrapedtitle,
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]" + voto,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
-                 folder=True), tipo='movie'))
+                 folder=True), tipo='movie' if not "serie" in scrapedurl else "tv"))
 
     # Paginazione
     patronvideos = '<a class="next page-numbers" href="(.*?)">'
