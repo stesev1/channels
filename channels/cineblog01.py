@@ -37,7 +37,7 @@ def mainlist(item):
                      url="%s/lista-film-ultimi-100-film-aggiornati/" % host,
                      extra="movie",
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
-				Item(channel=__channel__,
+                Item(channel=__channel__,
                      action="peliculas",
                      title="[COLOR azure]Film[COLOR orange] - Alta Definizione [HD][/COLOR]",
                      url="%s/tag/film-hd-altadefinizione/" % host,
@@ -124,14 +124,15 @@ def peliculas(item):
         matches = re.compile(patronvideos, re.DOTALL).findall(bloque)
 
         if len(matches) > 0:
-            next_page(itemlist,matches[0],"peliculas",item.extra)
+            next_page(itemlist, matches[0], "peliculas", item.extra)
 
     except:
         pass
 
     return itemlist
 
-def next_page(itemlist,np_url,np_action,np_extra):
+
+def next_page(itemlist, np_url, np_action, np_extra):
     scrapedtitle = "[COLOR orange]Successivo>>[/COLOR]"
     itemlist.append(
         Item(channel=__channel__,
@@ -150,21 +151,25 @@ def next_page(itemlist,np_url,np_action,np_extra):
 
 def updates(item):
     logger.info("[thegroove360.cineblog01] updates")
-    return menulist(item,'<select name="select1"(.*?)</select>')
-			 
+    return menulist(item, '<select name="select1"(.*?)</select>')
+
+
 def menugeneros(item):
     logger.info("[thegroove360.cineblog01] menugeneros")
-    return menulist(item,'<select name="select2"(.*?)</select>')
+    return menulist(item, '<select name="select2"(.*?)</select>')
+
 
 def menuhd(item):
     logger.info("[thegroove360.cineblog01] menuhd")
-    return menulist(item,'<select name="select1"(.*?)</select>')
+    return menulist(item, '<select name="select1"(.*?)</select>')
+
 
 def menuanyos(item):
     logger.info("[thegroove360.cineblog01] menuvk")
-    return menulist(item,'<select name="select3"(.*?)</select>')
+    return menulist(item, '<select name="select3"(.*?)</select>')
 
-def menulist(item,re_txt):
+
+def menulist(item, re_txt):
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -192,6 +197,7 @@ def menulist(item,re_txt):
                  plot=scrapedplot))
 
     return itemlist
+
 
 # Al llamarse "search" la función, el launcher pide un texto a buscar y lo añade como parámetro
 def search(item, texto):
@@ -245,7 +251,7 @@ def listserie(item):
     # Put the next page mark
     try:
         next_pagetxt = scrapertools.get_match(data, "<link rel='next' href='([^']+)'")
-        next_page(itemlist,next_pagetxt,"listserie",item.extra)
+        next_page(itemlist, next_pagetxt, "listserie", item.extra)
 
     except:
         pass
@@ -368,12 +374,12 @@ def findvideos(item):
 
 
 def findvid_film(item):
-    def load_links(itemlist,re_txt,color,desc_txt):
+    def load_links(itemlist, re_txt, color, desc_txt):
         streaming = scrapertools.find_single_match(data, re_txt)
         patron = '<td><a[^h]href="([^"]+)"[^>]+>([^<]+)<'
         matches = re.compile(patron, re.DOTALL).findall(streaming)
         for scrapedurl, scrapedtitle in matches:
-            logger.debug("##### findvideos %s ## %s ## %s ##" % (desc_txt,scrapedurl, scrapedtitle))
+            logger.debug("##### findvideos %s ## %s ## %s ##" % (desc_txt, scrapedurl, scrapedtitle))
             title = "[COLOR " + color + "]" + desc_txt + ":[/COLOR] " + item.title + " [COLOR grey]" + QualityStr + "[/COLOR] [COLOR blue][" + scrapedtitle + "][/COLOR]"
             itemlist.append(
                 Item(channel=__channel__,
@@ -407,19 +413,20 @@ def findvid_film(item):
     # if u: matches.append((u, 'Streamango'))
 
     # Estrae i contenuti - Streaming
-    load_links(itemlist,'<strong>Streaming:</strong>(.*?)<table height="30">',"orange","Streaming")
+    load_links(itemlist, '<strong>Streaming:</strong>(.*?)<table height="30">', "orange", "Streaming")
 
     # Estrae i contenuti - Streaming HD
-    load_links(itemlist,'<strong>Streaming HD[^<]+</strong>(.*?)<table height="30">',"yellow","Streaming HD")
+    load_links(itemlist, '<strong>Streaming HD[^<]+</strong>(.*?)<table height="30">', "yellow", "Streaming HD")
 
     # Estrae i contenuti - Streaming 3D
-    load_links(itemlist,'<strong>Streaming 3D[^<]+</strong>(.*?)<table height="30">',"pink","Streaming 3D")
+    load_links(itemlist, '<strong>Streaming 3D[^<]+</strong>(.*?)<table height="30">', "pink", "Streaming 3D")
 
     # Estrae i contenuti - Download
-    load_links(itemlist,'<strong>Download:</strong>(.*?)<table height="30">',"aqua","Download")
+    load_links(itemlist, '<strong>Download:</strong>(.*?)<table height="30">', "aqua", "Download")
 
     # Estrae i contenuti - Download HD
-    load_links(itemlist,'<strong>Download HD[^<]+</strong>(.*?)<table width="100%" height="20">',"azure","Download HD")
+    load_links(itemlist, '<strong>Download HD[^<]+</strong>(.*?)<table width="100%" height="20">', "azure",
+               "Download HD")
 
     if len(itemlist) == 0:
         itemlist = servertools.find_video_items(item=item)
@@ -493,11 +500,11 @@ def play(item):
     itemlist = []
 
     ### Handling new cb01 wrapper
-    if host[9:]+"/film/" in item.url:
-        iurl=httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location", "")
-        logger.info("/film/ wrapper: %s"%iurl)
+    if host[9:] + "/film/" in item.url:
+        iurl = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location", "")
+        logger.info("/film/ wrapper: %s" % iurl)
         if iurl:
-            item.url=iurl
+            item.url = iurl
 
     if '/goto/' in item.url:
         item.url = item.url.split('/goto/')[-1].decode('base64')
@@ -515,9 +522,8 @@ def play(item):
                 # In alternativa, dato che a volte compare "Clicca qui per proseguire":
                 data = scrapertools.get_match(data, r'<a href="([^"]+)".*?class="btn-wrapper">.*?licca.*?</a>')
             except IndexError:
-                data = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location", "")
-        while 'vcrypt' in data:
-            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location", "")
+                data = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get(
+                    "location", "")
         logger.debug("##### play go.php data ##\n%s\n##" % data)
     elif "/link/" in item.url:
         data = httptools.downloadpage(item.url, headers=headers).data
@@ -531,8 +537,7 @@ def play(item):
             logger.debug("##### The content is yet unpacked ##\n%s\n##" % data)
 
         data = scrapertools.find_single_match(data, 'var link(?:\s)?=(?:\s)?"([^"]+)";')
-        while 'vcrypt' in data:
-            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location", "")
+
         if data.startswith('/'):
             data = urlparse.urljoin("http://swzz.xyz", data)
             data = httptools.downloadpage(data, headers=headers).data
@@ -561,6 +566,7 @@ def HomePage(item):
     import xbmc
     xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
 
+
 # ==================================================================================================================================================
 
 def peliculas_lastupdate(item):
@@ -582,16 +588,16 @@ def peliculas_lastupdate(item):
     patron = '<a href="([^"]+)">([^<]+)</a><br>-'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
-
     for i, (scrapedurl, scrapedtitle) in enumerate(matches):
         if (p - 1) * numpage > i: continue
         if i >= p * numpage: break
         scrapedthumbnail = ""
         scrapedplot = ""
 
-        scrapedtitle=scrapedtitle.replace("&#8211;", "-").replace("&#215;", "").replace("[Sub-ITA]", "(Sub Ita)")
-        scrapedtitle=scrapedtitle.replace("/", " - ").replace("&#8217;", "'").replace("&#8230;", "...").replace("#", "# ")
-        scrapedtitle=scrapedtitle.strip()
+        scrapedtitle = scrapedtitle.replace("&#8211;", "-").replace("&#215;", "").replace("[Sub-ITA]", "(Sub Ita)")
+        scrapedtitle = scrapedtitle.replace("/", " - ").replace("&#8217;", "'").replace("&#8230;", "...").replace("#",
+                                                                                                                  "# ")
+        scrapedtitle = scrapedtitle.strip()
         title = scrapertools.decodeHtmlentities(scrapedtitle)
         itemlist.append(infoSod(
             Item(channel=__channel__,
@@ -605,7 +611,7 @@ def peliculas_lastupdate(item):
                  show=title,
                  plot=scrapedplot,
                  folder=True), tipo='movie'))
-				 
+
     # Extrae el paginador
     if len(matches) >= p * numpage:
         scrapedurl = item.url + '{}' + str(p + 1)
@@ -620,4 +626,4 @@ def peliculas_lastupdate(item):
 
     return itemlist
 
-# ==================================================================================================================================================	
+# ==================================================================================================================================================
