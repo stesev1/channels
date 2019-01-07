@@ -468,9 +468,9 @@ def play(item):
     if "rapidcrypt" in item.url:
        data = httptools.downloadpage(item.url).data
 	  
-    while 'vcrypt' in item.url:
-        item.url = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location")
-        data = item.url
+    #while 'vcrypt' in item.url:
+        #item.url = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location")
+        #data = item.url
 		
     #logger.debug(data)
 
