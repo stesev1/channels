@@ -73,7 +73,7 @@ def peliculas(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patron = '<article id.*\s?<a href="(.*?)".*\s.*?src="(.*?)".*\s.*?Title">(.*?)<'
+    patron = '<article id.*\s.*<a href="(.*?)".*\s.*\s.*src="(.*?)".*\s.*\s.*?Title">(.*?)<'
     matches = re.compile(patron, re.IGNORECASE).findall(data)
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
@@ -91,8 +91,7 @@ def peliculas(item):
                  extra=item.extra,
                  viewmode="movie_with_plot"), tipo='movie'))
 
-    next_page = scrapertools.find_single_match(data,
-                                               '<span aria-current=\'page\' class=\'page-numbers current\'>[^<]+</span> <a class=\'page-numbers\' href=\'(.*?)\'>')
+    next_page = scrapertools.find_single_match(data,'<a class="next page-numbers" href="(.*?)">')
 
     if next_page != "":
         itemlist.append(
@@ -282,4 +281,3 @@ def search(item, texto):
         for line in sys.exc_info():
             logger.error("%s" % line)
         return []
-
