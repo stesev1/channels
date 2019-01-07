@@ -2,7 +2,7 @@
 
 <channel>
 	<id>cb01io</id>
-	<name>Cineblog01 Studio</name>
+	<name>Cineblog01 Video</name>
 
 	<active>true</active>
 	<adult>false</adult>
@@ -13,8 +13,8 @@
 	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/cb01io.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>3</version>
-	<date>05/01/2019</date>
+	<version>4</version>
+	<date>07/01/2019</date>
 	<changes>Updates</changes>
 
 	<categories>
