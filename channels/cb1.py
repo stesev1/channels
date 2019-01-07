@@ -516,8 +516,8 @@ def play(item):
                 data = scrapertools.get_match(data, r'<a href="([^"]+)".*?class="btn-wrapper">.*?licca.*?</a>')
             except IndexError:
                 data = httptools.downloadpage(item.url, only_headers=True, follow_redirects=False).headers.get("location", "")
-        while 'vcrypt' in data:
-            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location", "")
+        #while 'vcrypt' in data:
+            #data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location", "")
         logger.debug("##### play go.php data ##\n%s\n##" % data)
     elif "/link/" in item.url:
         data = httptools.downloadpage(item.url, headers=headers).data
@@ -531,8 +531,8 @@ def play(item):
             logger.debug("##### The content is yet unpacked ##\n%s\n##" % data)
 
         data = scrapertools.find_single_match(data, 'var link(?:\s)?=(?:\s)?"([^"]+)";')
-        while 'vcrypt' in data:
-            data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location", "")
+        #while 'vcrypt' in data:
+            #data = httptools.downloadpage(data, only_headers=True, follow_redirects=False).headers.get("location", "")
         if data.startswith('/'):
             data = urlparse.urljoin("http://swzz.xyz", data)
             data = httptools.downloadpage(data, headers=headers).data
