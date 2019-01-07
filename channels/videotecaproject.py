@@ -837,36 +837,7 @@ def findvideos(item):
 # =============================================================================================================================================
 
 def play(item):
-    itemlist = []
-
     data = item.url
-    if 'vcrypt' in item.url:
-        idata = httptools.downloadpage(item.url).data
-        patron = r"document.cookie\s=\s.*?'(.*?);\s(.*?);\s(.*?)'\s.*\s.*?URL=([^\"]+)"
-        matches = re.compile(patron, re.IGNORECASE).findall(idata)
-
-        for cookie1, cookie2, cookie3, dest in matches:
-            import requests
-            c1, v1 = cookie1.split('=')
-            c2, v2 = cookie2.split('=')
-            c3, v3 = cookie3.split('=')
-
-            mcookie = {c1: v1, c2: v2, c3: v3}
-
-            r = requests.post(dest, cookies=mcookie)
-
-            desturl = r.url.replace("/out/", "/outlink/")
-            import os
-            par = os.path.basename(desturl)
-
-            rdata = requests.post(desturl, data={'url': par})
-
-            if "wstream" in rdata.url:
-                item.url = rdata.url.replace("/video/", "/")
-            else:
-                item.url = rdata.url
-
-        data = item.url
 
     itemlist = servertools.find_video_items(data=data)
 
