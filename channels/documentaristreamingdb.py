@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# Stefano.- XBMC Plugin
 # Canale documentaristreamingdb
 # http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
@@ -16,11 +16,11 @@ from core.item import Item
 
 __channel__ = "documentaristreamingdb"
 
-host = "https://documentari-streaming-da.com/"
+host = "http://documentari-streaming-da.com"
 
 
 def mainlist(item):
-    logger.info("streamondemand.documentaristreamingdb mainlist")
+    logger.info("Stefano.documentaristreamingdb mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Aggiornamenti[/COLOR]",
                      action="peliculas",
@@ -40,7 +40,7 @@ def mainlist(item):
 
 
 def newest(categoria):
-    logger.info("streamondemand.documentaristreamingdb newest" + categoria)
+    logger.info("Stefano.documentaristreamingdb newest" + categoria)
     itemlist = []
     item = Item()
     try:
@@ -52,7 +52,7 @@ def newest(categoria):
             if itemlist[-1].action == "peliculas":
                 itemlist.pop()
 
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -65,11 +65,11 @@ def newest(categoria):
 def categorias(item):
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url).data
     bloque = scrapertools.get_match(data, 'Categorie</a></li>(.*?)</ul>')
 
-    # Estrae i contenuti
+    # Estrae i contenuti 
     patron = '<a href="([^"]+)">([^<]+)</a></li>'
     matches = re.compile(patron, re.DOTALL).findall(bloque)
 
@@ -95,11 +95,11 @@ def categorias(item):
 
 
 def search(item, texto):
-    logger.info("streamondemand.documentaristreamingdb " + item.url + " search " + texto)
+    logger.info("Stefano.documentaristreamingdb " + item.url + " search " + texto)
     item.url = host + "/?searchtype=movie&post_type=movie&s=" + texto
     try:
         return peliculas(item)
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -108,13 +108,13 @@ def search(item, texto):
 
 
 def peliculas(item):
-    logger.info("streamondemand.documentaristreamingdb peliculas")
+    logger.info("Stefano.documentaristreamingdb peliculas")
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url).data
 
-    # Estrae i contenuti
+    # Estrae i contenuti 
     patron = '<div class="movie-poster">\s*<img[^s]+src="([^"]+)"[^=]+=[^=]+="([^"]+)"[^>]+>[^<]+<a[^h]+href="([^"]+)"'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
@@ -142,7 +142,7 @@ def peliculas(item):
                  plot=scrapedplot,
                  folder=True))
 
-    # Paginazione
+    # Paginazione 
     patronvideos = '<a class="next page-numbers" href="(.*?)">'
     matches = re.compile(patronvideos, re.DOTALL).findall(data)
 
@@ -166,7 +166,7 @@ def peliculas(item):
 
 
 def findvideos(item):
-    logger.info("streamondemand.documentaristreamingdb findvideos")
+    logger.info("Stefano.documentaristreamingdb findvideos")
 
     data = httptools.downloadpage(item.url).data
 
@@ -272,4 +272,4 @@ def findvideos(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
