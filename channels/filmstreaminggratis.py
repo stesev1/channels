@@ -20,9 +20,14 @@ host = "https://www.filmstreaminggratis.org"
 def mainlist(item):
     logger.info("[thegroove360.filmstreaminggratis] mainlist")
     itemlist = [Item(channel=__channel__,
-                     action="ultimifilm",
+                     action="loadfilms",
                      title=color("Ultimi Film", "azure"),
-                     url=host,
+                     url="%s/nuovi/" % host,
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_new.png"),
+                Item(channel=__channel__,
+                     action="loadfilms",
+                     title=color("Nuovi Film", "azure"),
+                     url="%s/blog/" % host,
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_new.png"),
                 Item(channel=__channel__,
                      action="categorie",
@@ -33,7 +38,18 @@ def mainlist(item):
                      action="search",
                      title=color("Cerca film ...", "yellow"),
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
+                Item(channel=__channel__,
+                     action="loadfilms",
+                     title=color("Serie TV", "azure"),
+                     url="%s/serie-tv/" % host,
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_new.png"),
+                Item(channel=__channel__,
+                     action="search",
+                     title=color("Cerca Serie TV...", "orange"),
+                     extra="serie",
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")
+                ]
 
     return itemlist
 
