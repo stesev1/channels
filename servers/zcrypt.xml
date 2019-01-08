@@ -1,28 +1,6 @@
-<?xml version="1.0" ?>
-<server>
-	<active>true</active>
-	<changes>
-		<change>
-			<autor></autor>
-			<date>05/01/2019</date>
-			<description>Update Vcrypt Wstream</description>
-		</change>
-	</changes>
-	<free>true</free>
-	<id>zcrypt</id>
-	<name>zcrypt</name>
-	<premium>
-		<value>realdebrid</value>
-	</premium>
-	<settings>
-		<default>100</default>
-		<enabled>true</enabled>
-		<id>favorites_servers_list</id>
-		<label>Incluir en lista de favoritos</label>
-		<type>list</type>
-		<visible>false</visible>
-	</settings>
-	<thumbnail></thumbnail>
-	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>5</version>
+<?xml version="1.0" ?>
+<server>	<active>true</active>		<changes>		<change>			<autor></autor>			<date>08/01/2019</date>			<description>Update Vcrypt Wstream</description>		</change>	</changes>
+	<free>true</free>	<id>zcrypt</id>	<name>zcrypt</name>		<premium>		<value>realdebrid</value>	</premium>
+	<settings>		<default>100</default>		<enabled>true</enabled>		<id>favorites_servers_list</id>		<label>Incluir en lista de favoritos</label>		<type>list</type>		<visible>false</visible>	</settings>
+	<thumbnail></thumbnail>	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>	<version>6</version>
 </server>

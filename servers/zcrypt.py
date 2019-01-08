@@ -19,7 +19,7 @@ def find_videos(text):
 
     patronvideos = [
         r'(https?://(gestyy|rapidteria|sprysphere)\.com/[a-zA-Z0-9]+)',
-        r'(https?://(vcrypt|linkup)\.[^/]+/[^/]+/[a-zA-Z0-9_]+)'
+        r'(https?://(?:www\.)?(vcrypt|linkup)\.[^/]+/[^/]+/[a-zA-Z0-9_]+)'
     ]
 
     for patron in patronvideos:
@@ -40,7 +40,7 @@ def find_videos(text):
                         replace_headers=True,
                         headers={'User-Agent': 'curl/7.59.0'})
                     data = resp.headers.get("location", "")
-                elif host == 'vcrypt':
+                elif 'vcrypt.net' in url:
                     idata = httptools.downloadpage(url).data
                     patron = r"document.cookie\s=\s.*?'(.*)'"
                     # matches = re.compile(patron, re.IGNORECASE).findall(idata)
