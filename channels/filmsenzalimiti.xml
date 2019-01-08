@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
 	<id>filmsenzalimiti</id>
-	<name>FilmSenzaLimiti</name>
+	<name>FilmSenzaLimiti Pink</name>
 
 	<active>true</active>
 	<adult>false</adult>
@@ -12,9 +12,9 @@
 	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/filmsenzalimiti.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>11</version>
-	<date>26/12/2018</date>
-	<changes>Update</changes>
+	<version>12</version>
+	<date>08/01/2019</date>
+	<changes>Updates</changes>
 
 	<categories>
 		<category>movie</category>
