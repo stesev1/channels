@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
     <id>guardaserieonline</id>
-    <name>GuardaSerie Watch</name>
+    <name>Guarda Serie Watch</name>
 
     <active>true</active>
     <adult>false</adult>
@@ -12,7 +12,7 @@
     <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/guardaserieonline.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>8</version>
+    <version>9</version>
     <date>08/01/2019</date>
     <changes>Updates</changes>
 
