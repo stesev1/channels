@@ -8,11 +8,11 @@
     <language>it</language>
 
 	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
-    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/filmstreaminglogo.png</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/filmstreaminglogo.png</bannermenu>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/filmstreaminggratis.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/filmstreaminggratis.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>3</version>
+    <version>4</version>
     <date>08/01/2019</date>
     <changes>Updates</changes>
 
