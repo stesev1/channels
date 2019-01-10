@@ -31,6 +31,9 @@ def find_videos(text):
                 logger.info("  url=" + url)
                 encontrados.add(url)
 
+                import requests
+                headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0'}
+
                 if host == 'gestyy':
                     resp = httptools.downloadpage(
                         url,
@@ -41,7 +44,9 @@ def find_videos(text):
                         headers={'User-Agent': 'curl/7.59.0'})
                     data = resp.headers.get("location", "")
                 elif 'vcrypt.net' in url:
-                    idata = httptools.downloadpage(url).data
+                    # req = httptools.downloadpage(url)
+                    req = requests.get(url, headers=headers)
+                    idata = req.content
                     patron = r"document.cookie\s=\s.*?'(.*)'"
                     # matches = re.compile(patron, re.IGNORECASE).findall(idata)
                     matches = re.finditer(patron, idata, re.MULTILINE)
@@ -51,12 +56,15 @@ def find_videos(text):
                             c, v = c.split('=')
                             mcookie[c] = v
 
-                    patron = r';URL=([^\"]+)\">'
-                    dest = scrapertools.get_match(idata, patron)
-                    import requests
-                    r = requests.post(dest, cookies=mcookie)
-
-                    url = r.url
+                    try:
+                        patron = r';URL=([^\"]+)\">'
+                        dest = scrapertools.get_match(idata, patron)
+                        r = requests.post(dest, cookies=mcookie)
+                        url = r.url
+                    except:
+                        r = requests.get(req.url, headers=headers)
+                        if r.url == url:
+                            url = ""
 
                     if "4snip" in url:
                         desturl = url.replace("/out/", "/outlink/")
