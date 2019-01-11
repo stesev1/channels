@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
+# TheGroove360 / XBMC Plugin
 # Canal guarda_serie
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
 
 import base64
@@ -23,7 +22,7 @@ headers = [['Referer', host]]
 
 
 def mainlist(item):
-    logger.info("[guarda_serie] mainlist")
+    logger.info("[thegroove360.guarda_serie] mainlist")
 
     itemlist = [
         Item(channel=__channel__,
@@ -31,46 +30,46 @@ def mainlist(item):
              action="peliculas_update",
              url=host,
              extra="serie",
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/new_tvshows_P.png"),
         Item(channel=__channel__,
              title="[COLOR azure]Serie TV[COLOR orange] - Novita'[/COLOR]",
              action="peliculas",
              url="%s/serietv/" % host,
              extra="serie",
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_series_P.png"),
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_series_P.png"),
         Item(channel=__channel__,
              title="[COLOR azure]Serie TV[COLOR orange] - TV Show[/COLOR]",
              action="peliculas",
              url="%s/genre/tv-show/" % host,
              extra="serie",
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_serie_P.png"),
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_serie_P.png"),
         Item(channel=__channel__,
              title="[COLOR azure]Serie TV[COLOR orange] - Animazione[/COLOR]",
              action="peliculas",
              url="%s/genre/animazione-e-bambini/" % host,
              extra="serie",
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/animation_P.png"),
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/animation_P.png"),
         Item(channel=__channel__,
              title="[COLOR azure]Serie TV[COLOR orange] - Categorie[/COLOR]",
              action="genere",
              url=host,
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
         Item(channel=__channel__,
              title="[COLOR orange]Cerca...[/COLOR]",
              action="search",
              extra="movie",
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
 		Item(channel=__channel__,
              title="[COLOR orange]Cerca Serie...[/COLOR]",
              action="search",
              extra="serie",
-             thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+             thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
     return itemlist
 
 # ==================================================================================================================================================
 
 def search(item, texto):
-    logger.info("[guarda_serie] " + item.url + " search " + texto)
+    logger.info("[thegroove360.guarda_serie] " + item.url + " search " + texto)
 
     item.url = host + "/?s=" + texto
 
@@ -88,7 +87,7 @@ def search(item, texto):
 
 
 def peliculas_search(item):
-    logger.info("[guarda_serie] peliculas_search")
+    logger.info("[thegroove360.guarda_serie] peliculas_search")
 
     itemlist = []
 
@@ -124,14 +123,14 @@ def peliculas_search(item):
                  action="peliculas",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=next_page,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
 
 # ==================================================================================================================================================		
 
 def genere(item):
-    logger.info("[guarda_serie] genere")
+    logger.info("[thegroove360.guarda_serie] genere")
     itemlist = []
 
     # Descarga la pagina
@@ -150,7 +149,7 @@ def genere(item):
                  action="peliculas",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  folder=True))
 
     return itemlist
@@ -158,7 +157,7 @@ def genere(item):
 # ==================================================================================================================================================
 
 def peliculas(item):
-    logger.info("[guarda_serie] peliculas")
+    logger.info("[thegroove360.guarda_serie] peliculas")
 
     itemlist = []
 
@@ -203,14 +202,14 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=next_page,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
 
 # ==================================================================================================================================================
 
 def peliculas_update(item):
-    logger.info("[guarda_serie] peliculas_last")
+    logger.info("[thegroove360.guarda_serie] peliculas_last")
 
     itemlist = []
 
@@ -253,14 +252,14 @@ def peliculas_update(item):
                  action="peliculas_update",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=next_page,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png"))
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
 
 # ==================================================================================================================================================
 
 def episodios(item):
-    logger.info("[guarda_serie] episodios")
+    logger.info("[thegroove360.guarda_serie] episodios")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -303,7 +302,7 @@ def episodios(item):
 # ==================================================================================================================================================
 
 def findvideos_tv(item):
-    logger.info("[guarda_serie] genere")
+    logger.info("[thegroove360.guarda_serie] genere")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -334,7 +333,7 @@ def findvideos_tv(item):
 # ==================================================================================================================================================
 
 def findvideos_server(item):
-    logger.info("[guarda_serie] genere")
+    logger.info("[thegroove360.guarda_serie] genere")
     itemlist = []
 
     # Descarga la pagina
@@ -389,7 +388,7 @@ def play(item):
 # ==================================================================================================================================================
 
 def findvideos(item):
-    logger.info("[guarda_serie] findvideos")
+    logger.info("[thegroove360.guarda_serie] findvideos")
     encontrados = set()
     itemlist = []
 
