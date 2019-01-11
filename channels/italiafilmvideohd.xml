@@ -7,14 +7,14 @@
     <adult>false</adult>
     <language>it</language>
 
-    <fanart></fanart>
-    <thumbnail>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/italiafilmvideohd.png</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/orione7/Pelis_images/master/bannermenu/italiafilmvideohd.png</bannermenu>
+    <fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/italiafilmvideohd.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/italiafilmvideohd.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>14</version>
-    <date>12/08/2018</date>
-    <changes>Update and Temporary Fix</changes>
+    <version>15</version>
+    <date>11/01/2019</date>
+    <changes>Updates</changes>
 
     <categories>
         <category>movie</category>
