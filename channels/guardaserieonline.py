@@ -20,7 +20,7 @@ __channel__ = "guardaserieonline"
 host = 'http://www.guardaserie.watch/'
 headers = [['Referer', host]]
 
-fanart_tvshow = "https://raw.githubusercontent.com/orione7/Pelis_images/master/fanart/tvshow_fanart.jpg"
+fanart_tvshow = "https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg"
 thumb_tvnew = "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/new_tvshows_P.png"
 thumb_tvlist = "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_serie_P.png"
 thumb_genres = "https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"
