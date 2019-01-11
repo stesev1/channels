@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
+# TheGroove360 - XBMC Plugin
 # Canale istitutoluce
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # ------------------------------------------------------------
 
 import re
@@ -24,27 +22,27 @@ PERPAGE = 7
 
 
 def mainlist(item):
-    logger.info("streamondemand.istitutoluce mainlist")
+    logger.info("[thegroove360.istitutoluce] mainlist")
     itemlist = [
         Item(
             channel=__channel__,
             title="[COLOR azure]Archivio - Tutti i Filmati[/COLOR]",
             action="peliculas",
             url="%s/luce-web/search/result.html?query=&perPage=7" % host,
-            thumbnail="http://www.archivioluce.com/wp-content/themes/wpbootstrap/bootstrap/img/luce-logo.png"
+            thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"
         ),
         Item(
             channel=__channel__,
             title="[COLOR azure]Categorie Tematiche[/COLOR]",
             action="categorie",
             url="%s/navigazione-tematica/" % host2,
-            thumbnail="http://www.archivioluce.com/wp-content/themes/wpbootstrap/bootstrap/img/luce-logo.png"
+            thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"
         ),
         Item(
             channel=__channel__,
             title="[COLOR yellow]Cerca...[/COLOR]",
             action="search",
-            thumbnail="http://dc467.4shared.com/img/fEbJqOum/s7/13feaf0c8c0/Search"
+            thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"
         )
     ]
 
@@ -74,7 +72,7 @@ def categorie(item):
 
 
 def cat_results(item):
-    logger.info("streamondemand.istitutoluce cat_results")
+    logger.info("[thegroove360.istitutoluce] cat_results")
     itemlist = []
 
     # Carica la pagina 
@@ -122,14 +120,14 @@ def cat_results(item):
                  action="cat_results",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 
 def peliculas(item):
-    logger.info("streamondemand.istitutoluce peliculas")
+    logger.info("[thegroove360.istitutoluce] peliculas")
     itemlist = []
 
     # Carica la pagina 
@@ -177,14 +175,14 @@ def peliculas(item):
                  action="peliculas",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 
 def peliculas_src(item):
-    logger.info("streamondemand.istitutoluce peliculas")
+    logger.info("[thegroove360.istitutoluce] peliculas")
     itemlist = []
 
     p = 1
@@ -237,14 +235,14 @@ def peliculas_src(item):
                  action="peliculas_src",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
 
 
 def search(item, texto):
-    logger.info("[istitutoluce.py] search")
+    logger.info("[thegroove360.istitutoluce] search")
 
     item.url = host + '/luce-web/search/result.html?archiveType_string="xDamsCineLuce"&archiveName_string="luceFondoCinegiornali"&archiveName_string="luceFondoDocumentari"&archiveName_string="luceFondoRepertori"&titoloADV=&descrizioneADV="' + texto + '"'
 
@@ -260,7 +258,7 @@ def search(item, texto):
 
 
 def findvideos(item):
-    logger.info("streamondemand.istitutoluce findvideos")
+    logger.info("[thegroove360.istitutoluce] findvideos")
 
     data = httptools.downloadpage(item.url, headers=headers).data
 
