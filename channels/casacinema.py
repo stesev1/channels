@@ -62,7 +62,7 @@ def mainlist(item):
                      extra="serie",
                      action="peliculas_tv",
                      url="%s/genere/serie-tv" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_/tv_serie_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_serie_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Serie TV ...[/COLOR]",
                      action="search",
