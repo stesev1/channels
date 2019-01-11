@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
     <id>altadefinizionezone</id>
-    <name>Altadefinizione01 Casa</name>
+    <name>Altadefinizione01 Club</name>
 
     <active>true</active>
     <adult>false</adult>
@@ -12,8 +12,8 @@
     <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/altadefinizione01casa.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>14</version>
-    <date>16/12/2018</date>
+    <version>15</version>
+    <date>11/01/2019</date>
     <changes>Update Channel</changes>
 
     <categories>

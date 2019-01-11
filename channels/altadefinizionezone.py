@@ -16,7 +16,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "altadefinizionezone"
-host = "https://www.altadefinizione01.casa"
+host = "https://www.altadefinizione01.club"
 headers = [['Referer', host]]
 
 def mainlist(item):
