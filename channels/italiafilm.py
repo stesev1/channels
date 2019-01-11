@@ -1,8 +1,7 @@
 # -*- coding: iso-8859-1 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
+# TheGroove360 / XBMC Plugin
 # Canale ItaliaFilm
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
 # ------------------------------------------------------------
 
 import os
@@ -20,7 +19,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "italiafilm"
-host = "https://www.italia-film.pro/"
+host = "https://www.italia-film.pro"
 
 headers = [['Referer', host]]
 
@@ -28,54 +27,53 @@ def isGeneric():
     return True
 
 def mainlist(item):
-    logger.info("[streamondemand-pureita italiafilm] mainlist")
+    logger.info("[thegroove360.italiafilm] mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR azure]Film & Serie TV[COLOR orange] - Novita'[/COLOR]",
                      action="peliculas",
                      extra="movie",
                      url="%s/novita-streaming-1/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/popcorn_cinema_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - Categorie[/COLOR]",
                      action="categorias",
                      extra="movie",
                      url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genres_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film[COLOR orange] - HD[/COLOR]",
                      action="peliculas",
                      extra="movie",
                      url="%s/category/film-hd/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/hd_movies_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/hd_movies_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Film...[/COLOR]",
                      action="search",
                      extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV[COLOR orange] - Novita'[/COLOR]",
                      action="peliculas_tv",
                      extra="serie",
                      url="%s/category/serie-tv/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_series_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_series_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Serie TV[COLOR orange] - Ultimi Aggiornamenti[/COLOR]",
                      action="pel_tv",
                      extra="serie",
                      url="%s/ultimi-telefilm-streaming/" % host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/new_tvshows_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca Serie TV...[/COLOR]",
                      action="search",
                      extra="serie",
-					 url=host,
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
     return itemlist
 
 # ==================================================================================================================================================
 	
 def categorias(item):
-    logger.info("[streamondemand-pureita italiafilm] categorias")
+    logger.info("[thegroove360.italiafilm] categorias")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -98,7 +96,7 @@ def categorias(item):
                  extra=item.extra,
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/genre_P.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
                  plot=scrapedplot,
                  folder=True))
 
@@ -107,7 +105,7 @@ def categorias(item):
 # ==================================================================================================================================================
 	
 def search(item, texto):
-    logger.info("[streamondemand-pureita italiafilm] search " + texto)
+    logger.info("[thegroove360.italiafilm] search " + texto)
     item.url = host + "/?s=" + texto
 
     try:
@@ -125,7 +123,7 @@ def search(item, texto):
 # ==================================================================================================================================================
 
 def peliculas(item):
-    logger.info("[streamondemand-pureita italiafilm] peliculas")
+    logger.info("[thegroove360.italiafilm] peliculas")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -163,7 +161,7 @@ def peliculas(item):
                  extra=item.extra,
                  title="[COLOR orange]Successivi >> [/COLOR]",
                  url=pagina_siguiente,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
     except:
         pass
@@ -173,7 +171,7 @@ def peliculas(item):
 # ==================================================================================================================================================
 
 def findvideos_movie(item):
-    logger.info("[streamondemand-pureita italiafilm] findvideos_movie")
+    logger.info("[thegroove360.italiafilm] findvideos_movie")
     itemlist = []
 
     # Descarga la pagina
@@ -211,7 +209,7 @@ def findvideos_movie(item):
 # ==================================================================================================================================================
 	
 def findvid_old(item):
-    logger.info("[streamondemand-pureita italiafilm] findvid_old")
+    logger.info("[thegroove360.italiafilm] findvid_old")
 
     itemlist = []
 
@@ -267,7 +265,7 @@ def findvid_old(item):
 # ==================================================================================================================================================	
 
 def peliculas_tv(item):
-    logger.info("[streamondemand-pureita italiafilm] peliculas_tv")
+    logger.info("[thegroove360.italiafilm] peliculas_tv")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -306,7 +304,7 @@ def peliculas_tv(item):
                  extra=item.extra,
                  title="[COLOR orange]Successivi >> [/COLOR]",
                  url=pagina_siguiente,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
     except:
         pass
@@ -316,7 +314,7 @@ def peliculas_tv(item):
 # ==================================================================================================================================================
 	
 def pel_tv_old(item):
-    logger.info("[streamondemand-pureita italiafilm] pel_tv_old")
+    logger.info("[thegroove360.italiafilm] pel_tv_old")
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
@@ -351,7 +349,7 @@ def pel_tv_old(item):
                  extra=item.extra,
                  title="[COLOR orange]Successivi >> [/COLOR]",
                  url=pagina_siguiente,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
     except:
         pass
@@ -361,7 +359,7 @@ def pel_tv_old(item):
 # ==================================================================================================================================================
 	
 def pel_tv(item):
-    logger.info("[streamondemand-pureita italiafilm] pel_tv")
+    logger.info("[thegroove360.italiafilm] pel_tv")
 
     itemlist = []
     PERPAGE = 8
@@ -409,7 +407,7 @@ def pel_tv(item):
                  action="pel_tv",
                  title="[COLOR orange]Successivi >>[/COLOR]",
                  url=scrapedurl,
-                 thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/next_1.png",
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
                  folder=True))
 
     return itemlist
@@ -444,7 +442,7 @@ def episodios(item):
                          plot="[COLOR yellow][B]" + item.fulltitle + "[/B][/COLOR] " + item.plot, 
                          show=item.show))
 
-    logger.info("[streamondemand-pureita italiafilm] episodios")
+    logger.info("[thegroove360.italiafilm] episodios")
 
     itemlist = []
 
@@ -488,7 +486,7 @@ def episodios(item):
 
 # ==================================================================================================================================================
 def findvideos_tv(item):
-    logger.info("[streamondemand-pureita italiafilm] findvideos_tv")
+    logger.info("[thegroove360.italiafilm] findvideos_tv")
     itemlist = []
 	
     data = httptools.downloadpage(item.url, headers=headers).data	
@@ -513,7 +511,7 @@ def findvideos_tv(item):
 # ==================================================================================================================================================	
 	
 def findvideos(item):
-    logger.info("[streamondemand-pureita italiafilm] findvideos")
+    logger.info("[thegroove360.italiafilm] findvideos")
 
     # Descarga la página
     data = item.url 
@@ -561,7 +559,7 @@ def play(item):
 # ==================================================================================================================================================
 	
 def findvideos_old(item):
-    logger.info("[streamondemand-pureita italiafilm] findvideos_old")
+    logger.info("[thegroove360.italiafilm] findvideos_old")
     itemlist = []
 
     # Descarga la pagina
