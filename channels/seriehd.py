@@ -8,7 +8,7 @@ import base64
 import re
 import urlparse
 
-from core import config 
+from core import config
 from core import httptools
 from core import logger
 from core import scrapertools
@@ -19,6 +19,7 @@ from core.tmdb import infoSod
 __channel__ = "seriehd"
 host = "https://www.seriehd.video"
 headers = [['Referer', host]]
+
 
 def mainlist(item):
     logger.info("[thegroove360.seriehd] mainlist")
@@ -51,6 +52,7 @@ def mainlist(item):
 
     return itemlist
 
+
 # ==============================================================================================================================================================================
 
 def search(item, texto):
@@ -68,6 +70,7 @@ def search(item, texto):
             logger.error("%s" % line)
         return []
 
+
 # ==============================================================================================================================================================================
 
 def sottomenu(item):
@@ -81,8 +84,8 @@ def sottomenu(item):
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedtitle in matches:
-        if "altadefinizione" in scrapedtitle or "Italiane" in scrapedtitle or "Americane" in scrapedtitle:  
-		    continue
+        if "altadefinizione" in scrapedtitle or "Italiane" in scrapedtitle or "Americane" in scrapedtitle:
+            continue
         itemlist.append(
             Item(channel=__channel__,
                  action="fichas",
@@ -94,6 +97,7 @@ def sottomenu(item):
     itemlist.pop(0)
 
     return itemlist
+
 
 # ==============================================================================================================================================================================
 
@@ -112,7 +116,7 @@ def fichas(item):
     for scrapedtitle, scrapedthumbnail, scrapedurl in matches:
         scrapedthumbnail = httptools.get_url_headers(scrapedthumbnail)
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle).strip()
-        scrapedplot=""
+        scrapedplot = ""
         itemlist.append(infoSod(
             Item(channel=__channel__,
                  action="episodios",
@@ -135,8 +139,9 @@ def fichas(item):
 
     return itemlist
 
-# ==============================================================================================================================================================================	
-	
+
+# ==============================================================================================================================================================================
+
 def episodios(item):
     logger.info("[thegroove360.seriehd] episodios")
     itemlist = []
@@ -146,21 +151,18 @@ def episodios(item):
     patron = r'<iframe width=".+?" height=".+?" src="([^"]+)" allowfullscreen frameborder="0">'
     url = scrapertools.find_single_match(data, patron).replace("?seriehd", "")
 
-    data = httptools.downloadpage(url).data.replace('\n', '').replace(' class="active"', '')
+    data = httptools.downloadpage(url).data
 
-
-    section_stagione = scrapertools.find_single_match(data, '<h3>STAGIONE</h3><ul>(.*?)</ul>')
-    patron = '<li[^>]+><a href="([^"]+)">(\d+)<'
-    seasons = re.compile(patron, re.DOTALL).findall(section_stagione)
+    patron = r'<li.*?\s><a href=\"([^\"]+)\">(\d+)<'
+    seasons = re.compile(patron, re.MULTILINE).findall(data)
 
     for scrapedseason_url, scrapedseason in seasons:
 
         season_url = urlparse.urljoin(url, scrapedseason_url)
-        data = httptools.downloadpage(season_url).data.replace('\n', '').replace(' class="active"', '')
+        data = httptools.downloadpage(season_url).data
 
-        section_episodio = scrapertools.find_single_match(data, '<h3>EPISODIO</h3><ul>(.*?)</ul>')
-        patron = '<li><a href="([^"]+)">(\d+)<'
-        episodes = re.compile(patron, re.DOTALL).findall(section_episodio)
+        patron = r'<li.*?\s><a href="([^"]+)">(\d+)<'
+        episodes = re.compile(patron, re.MULTILINE).findall(data)
 
         for scrapedepisode_url, scrapedepisode in episodes:
             episode_url = urlparse.urljoin(url, scrapedepisode_url)
@@ -178,11 +180,11 @@ def episodios(item):
                      plot="[COLOR orange]" + item.fulltitle + "[/COLOR] " + item.plot,
                      thumbnail=item.thumbnail))
 
-
     return itemlist
 
+
 # ==============================================================================================================================================================================
-	
+
 def findvideos(item):
     logger.info("[thegroove360.seriehd] findvideos")
 
@@ -194,7 +196,7 @@ def findvideos(item):
     patron = r'<iframe id="iframeVid" width=".+?" height=".+?" src="([^"]+)" allowfullscreen'
     url = scrapertools.find_single_match(data, patron)
     if not url.startswith("https:"):
-      url = "https:" + url
+        url = "https:" + url
 
     if 'hdpass' in url:
         data = httptools.downloadpage(url, headers=headers).data
@@ -210,7 +212,8 @@ def findvideos(item):
         res = scrapertools.find_single_match(data, patron_res)
 
         urls = []
-        for res_url, res_video in scrapertools.find_multiple_matches(res, '<option.*?value="([^"]+?)">([^<]+?)</option>'):
+        for res_url, res_video in scrapertools.find_multiple_matches(res,
+                                                                     '<option.*?value="([^"]+?)">([^<]+?)</option>'):
 
             data = httptools.downloadpage(urlparse.urljoin(url, res_url), headers=headers).data.replace('\n', '')
 
@@ -226,7 +229,8 @@ def findvideos(item):
         itemlist = servertools.find_video_items(data='\n'.join(urls))
         for videoitem in itemlist:
             servername = re.sub(r'[-\[\]\s]+', '', videoitem.title)
-            videoitem.title = "".join(['[COLOR azure][[COLOR orange]' + servername.capitalize() + '[/COLOR]] - ', item.fulltitle])
+            videoitem.title = "".join(
+                ['[COLOR azure][[COLOR orange]' + servername.capitalize() + '[/COLOR]] - ', item.fulltitle])
             videoitem.fulltitle = item.fulltitle
             videoitem.thumbnail = item.thumbnail
             videoitem.show = item.show
@@ -234,6 +238,7 @@ def findvideos(item):
             videoitem.channel = __channel__
 
     return itemlist
+
 
 # ==============================================================================================================================================================================
 
