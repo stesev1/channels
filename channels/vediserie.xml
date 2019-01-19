@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+    <id>vediserie</id>
+    <name>VediSerie</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <fanart></fanart>
+    <thumbnail>http://www.vediserie.com/wp-content/uploads/2015/09/logo-vediseriea.png</thumbnail>
+    <bannermenu>http://www.vediserie.com/wp-content/uploads/2015/09/logo-vediseriea.png</bannermenu>
+
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
+    <version>8</version>
+    <date>15/09/2017</date>
+    <changes>Fix Domain</changes>
+
+    <categories>
+        <category>serie</category>
+    </categories>
+
+    <settings>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+        <default>true</default>
+        <enabled>true</enabled>
+        <visible>true</visible>
+    </settings>
+</channel>

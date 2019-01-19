@@ -12,7 +12,7 @@
 	<thumbnail>https://lh4.ggpht.com/mJDgTDUOtIyHcrb69WM0cpaxFwCNW6f0VQ2ExA7dMKpMDrZ0A6ta64OCX3H-NMdRd20=w300</thumbnail>
 	<bannermenu>https://lh4.ggpht.com/mJDgTDUOtIyHcrb69WM0cpaxFwCNW6f0VQ2ExA7dMKpMDrZ0A6ta64OCX3H-NMdRd20=w300</bannermenu>
 
-	<update_url>https://thegroove360channels.000webhostapp.com/channels</update_url>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 	<version>3</version>
 	<date>18/10/2016</date>
 	<changes>fix ita</changes>
