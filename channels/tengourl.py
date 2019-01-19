@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
-#------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Canale ver un vídeo conociendo su URL
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-#------------------------------------------------------------
-
+# ------------------------------------------------------------
+# TheGroove360 / XBMC Plugin
+# Canale 
+# ------------------------------------------------------------
 from platformcode import logger
 from core import scrapertools
 from core import servertools

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale mmaiptv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# Version: 201803160900
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 import re  
 import urlparse

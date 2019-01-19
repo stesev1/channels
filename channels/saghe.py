@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Ricerca "Saghe"
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import re
@@ -34,7 +32,7 @@ tmdb_poster = 'http://image.tmdb.org/t/p/w500'
 
 
 def mainlist(item):
-    logger.info("streamondemand.saghe mainlist")
+    logger.info("Stefano.saghe mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR yellow]The Marvel Universe[/COLOR]",
                      action="tmdb_saghe",

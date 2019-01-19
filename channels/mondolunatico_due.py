@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
-# Canale mondolunatico_new
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 import os
 import re
@@ -54,12 +53,11 @@ def mainlist(item):
                      extra="serie",
                      url="%sstream/tvshows/" % host,
                      thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/new_tvshows_P.png"),
-                #Item(channel=__channel__,
-                     #title="[COLOR azure]Serie TV - [COLOR orange]Lista[/COLOR]",
-                     #action="peliculas_list",
-                     #extra="serie",
-                     #url="%sstream/lista-serie-tv/" % host,
-                     #thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/tv_serie_P.png"),
+                Item(channel=__channel__,
+                     title="[COLOR orange]Cerca Serie...[/COLOR]",
+                     action="search",
+                     extra="serie",
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca ...[/COLOR]",
                      action="search",

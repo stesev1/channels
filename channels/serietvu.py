@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale  per http://www.serietvu.com/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# By MrTruth
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import re
@@ -19,7 +16,7 @@ from platformcode import logger
 
 __channel__ = "serietvu"
 
-host = "https://www.serietvu.club/"
+host = "https://www.serietvu.online"
 
 headers = [['Referer', host]]
 
@@ -72,7 +69,7 @@ def newest(categoria):
             if itemlist[-1].action == "latestep":
                 itemlist.pop()
 
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -90,7 +87,7 @@ def search(item, texto):
     item.url = host + "/?s=" + texto
     try:
         return lista_serie(item)
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -295,7 +292,7 @@ def findepisodevideo(item):
 # ----------------------------------------------------------------------------------------------------------------
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand/)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/)")
 
 
 def color(text, color):

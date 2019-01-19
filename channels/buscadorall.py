@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Ricerca "buscadorall"
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
+
+
 import Queue
 import datetime
 import glob
@@ -40,7 +40,7 @@ TMDB_KEY = tmdb.tmdb_auth_key   ######TMDB_KEY = '92db8778ccb39d825150332b0a4606
 
 TMDB_URL_BASE = 'http://api.themoviedb.org/3/'
 TMDB_IMAGES_BASEURL = 'http://image.tmdb.org/t/p/'
-INCLUDE_ADULT =  False # True if config.get_setting("enableadultmode") else False
+INCLUDE_ADULT = True if config.get_setting("enableadultmode") else False
 LANGUAGE_ID = 'it'
 
 DTTIME = (datetime.datetime.utcnow() - datetime.timedelta(hours=5))
@@ -82,7 +82,7 @@ TMDb_genres = {}
 
 
 def mainlist(item):
-    logger.info("streamondemand.buscadorall mainlist")
+    logger.info("Stefano.buscadorall mainlist")
     itemlist = [Item(channel="buscador",
                      title="[COLOR lightgreen]Cerca nei Canali...[/COLOR]",
                      action="mainlist",
@@ -205,7 +205,7 @@ def mainlist(item):
 
 
 def list_movie(item):
-    logger.info("streamondemand.channels.database list_movie '%s/%s'" % (item.url, item.plot))
+    logger.info("Stefano.channels.database list_movie '%s/%s'" % (item.url, item.plot))
 
     results = [0, 0]
     page = int(item.plot)
@@ -223,7 +223,7 @@ def list_movie(item):
     return itemlist
 
 def list_tvshow(item):
-    logger.info("streamondemand.channels.database list_tvshow '%s/%s'" % (item.url, item.plot))
+    logger.info("Stefano.channels.database list_tvshow '%s/%s'" % (item.url, item.plot))
 
     results = [0, 0]
     page = int(item.plot)
@@ -241,7 +241,7 @@ def list_tvshow(item):
     return itemlist
 
 def list_genres(item):
-    logger.info("streamondemand.channels.database list_genres")
+    logger.info("Stefano.channels.database list_genres")
 
     tmdb_genre(1)
     itemlist = []
@@ -265,7 +265,7 @@ def search(item, search_terms):
 
 
 def search_tvshow_by_title(item, search_terms):
-    logger.info("streamondemand.channels.database search_tvshow_by_title '%s'" % (search_terms))
+    logger.info("Stefano.channels.database search_tvshow_by_title '%s'" % (search_terms))
 
     return list_movie(
         Item(channel=item.channel,
@@ -275,7 +275,7 @@ def search_tvshow_by_title(item, search_terms):
 
 
 def search_movie_by_title(item, search_terms):
-    logger.info("streamondemand.channels.database search_movie_by_title '%s'" % (search_terms))
+    logger.info("Stefano.channels.database search_movie_by_title '%s'" % (search_terms))
 
     return list_movie(
         Item(channel=item.channel,
@@ -285,7 +285,7 @@ def search_movie_by_title(item, search_terms):
 
 
 def search_similar_movie_by_title(item, search_terms):
-    logger.info("streamondemand.channels.database search_movie_by_title '%s'" % (search_terms))
+    logger.info("Stefano.channels.database search_movie_by_title '%s'" % (search_terms))
 
     return list_movie(
         Item(channel=item.channel,
@@ -295,7 +295,7 @@ def search_similar_movie_by_title(item, search_terms):
 
 
 def search_movie_by_year(item):
-    logger.info("streamondemand.channels.database search_movie_by_year")
+    logger.info("Stefano.channels.database search_movie_by_year")
     now = datetime.datetime.now()
     year = int(now.year)
     result = []
@@ -310,7 +310,7 @@ def search_movie_by_year(item):
     return result
 
 def search_person_by_name(item, search_terms):
-    logger.info("streamondemand.channels.database search_person_by_name '%s'" % (search_terms))
+    logger.info("Stefano.channels.database search_person_by_name '%s'" % (search_terms))
 
     persons = tmdb_get_data("search/person?query=%s&" % url_quote_plus(search_terms))
 
@@ -344,7 +344,7 @@ def search_person_by_name(item, search_terms):
 
 
 def search_movie_by_person(item):
-    logger.info("streamondemand.channels.database search_movie_by_person '%s'" % (item.extra))
+    logger.info("Stefano.channels.database search_movie_by_person '%s'" % (item.extra))
 
     # return list_movie(
     #     Item(channel=item.channel,
@@ -365,7 +365,7 @@ def search_movie_by_person(item):
 
 
 def search_collection_by_name(item, search_terms):
-    logger.info("streamondemand.channels.database search_collection_by_name '%s'" % (search_terms))
+    logger.info("Stefano.channels.database search_collection_by_name '%s'" % (search_terms))
 
     collections = tmdb_get_data("search/collection?query=%s&" % url_quote_plus(search_terms))
 
@@ -390,7 +390,7 @@ def search_collection_by_name(item, search_terms):
 
 
 def search_movie_by_collection(item):
-    logger.info("streamondemand.channels.database search_movie_by_collection '%s'" % (item.extra))
+    logger.info("Stefano.channels.database search_movie_by_collection '%s'" % (item.extra))
 
     collection = tmdb_get_data("collection/%s?" % item.extra)
 
@@ -433,7 +433,7 @@ def build_movie_list(item, movies):
         found = False
         kodi_db_movies = kodi_database_movies(title)
         for kodi_db_movie in kodi_db_movies:
-            logger.info('streamondemand.database set for local playing(%s):\n%s' % (title, str(kodi_db_movie)))
+            logger.info('Stefano.database set for local playing(%s):\n%s' % (title, str(kodi_db_movie)))
             if year == str(kodi_db_movie["year"]):
                 found = True
 
@@ -461,7 +461,7 @@ def build_movie_list(item, movies):
                 ))
 
         if not found:
-            logger.info('streamondemand.database set for channels search(%s)' % title)
+            logger.info('Stefano.database set for channels search(%s)' % title)
             itemlist.append(Item(
                     channel=item.channel,
                     action='do_channels_search',
@@ -544,9 +544,9 @@ def get_xbmc_jsonrpc_response(json_query=""):
         response = xbmc.executeJSONRPC(json_query)
         response = unicode(response, 'utf-8', errors='ignore')
         response = json.loads(response)
-        logger.info("streamondemand.channels.database jsonrpc %s" % response)
+        logger.info("Stefano.channels.database jsonrpc %s" % response)
     except Exception, e:
-        logger.info("streamondemand.channels.database jsonrpc error: %s" % str(e))
+        logger.info("Stefano.channels.database jsonrpc error: %s" % str(e))
         response = None
     return response
 
@@ -563,7 +563,7 @@ def get_json_response(url=""):
     try:
         results = json.loads(response)
     except:
-        logger.info("streamondemand.channels.database Exception: Could not get new JSON data from %s" % url)
+        logger.info("Stefano.channels.database Exception: Could not get new JSON data from %s" % url)
         results = []
     return results
 
@@ -608,7 +608,7 @@ def channel_search(queue, channel_parameters, category, title_year, tecleado):
 
 
 def do_channels_search(item):
-    logger.info("streamondemand.channels.buscadorall do_channels_search")
+    logger.info("Stefano.channels.buscadorall do_channels_search")
 
     tecleado, category, title_year = item.extra.split('{}')
 
@@ -620,13 +620,13 @@ def do_channels_search(item):
     itemlist = []
 
     channels_path = os.path.join(config.get_runtime_path(), "channels", '*.xml')
-    logger.info("streamondemand.channels.buscador channels_path=" + channels_path)
+    logger.info("Stefano.channels.buscador channels_path=" + channels_path)
 
     channel_language = config.get_setting("channel_language")
-    logger.info("streamondemand.channels.buscador channel_language=" + channel_language)
+    logger.info("Stefano.channels.buscador channel_language=" + channel_language)
     if channel_language == "":
         channel_language = "all"
-        logger.info("streamondemand.channels.buscador channel_language=" + channel_language)
+        logger.info("Stefano.channels.buscador channel_language=" + channel_language)
 
     progreso = platformtools.dialog_progress_bg(NLS_Looking_For % urllib.unquote_plus(tecleado))
 
@@ -728,7 +728,7 @@ def do_channels_search(item):
     return itemlist
 
 def links_list(itemlist):
-    logger.info("streamondemand.channels.buscadorall links_list")
+    logger.info("Stefano.channels.buscadorall links_list")
     itemlistresults=[]
     itemlistlist=[]
     allthreads=[]
@@ -762,7 +762,7 @@ def links_list(itemlist):
     return itemlistresults
 
 def list_single_site(queue, item):
-    logger.info("streamondemand.channels.buscadorall list_single_site")
+    logger.info("Stefano.channels.buscadorall list_single_site")
     channelitemlist=[]
     try:
         #logger.info(item.channel + " start channel search " + time.strftime("%Y-%m-%d %H:%M:%S"))
@@ -794,7 +794,7 @@ def list_single_site(queue, item):
 
 #utility function
 def item_url_in_itemlist(item, itemlist):
-    logger.info("streamondemand.channels.buscadorall item_url_in_itemlist")
+    logger.info("Stefano.channels.buscadorall item_url_in_itemlist")
     i = 0
     while i < len(itemlist):
         if itemlist[i].url == item.url:
@@ -805,7 +805,7 @@ def item_url_in_itemlist(item, itemlist):
 
 #utility function, optional
 def rewrite_item_title(item):
-    logger.info("streamondemand.channels.buscadorall rewrite_item_title")
+    logger.info("Stefano.channels.buscadorall rewrite_item_title")
     if "download" not in item.title.lower():
         item.title="[COLOR yellow][%s][/COLOR][COLOR orange][%s][/COLOR] %s" % (item.server, item.channel, item.fulltitle)
     else:

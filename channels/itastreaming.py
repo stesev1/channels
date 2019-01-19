@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale itastreaming.click
-# by SchisM
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 import base64
 import re
@@ -19,7 +16,7 @@ from platformcode import logger
 
 __channel__ = "itastreaming"
 
-host = "https://itastreaming.stream/"
+host = "http://itastreaming.org/"
 
 headers = [['Referer', host]]
 
@@ -77,7 +74,7 @@ def newest(categoria):
             if itemlist[-1].action == "fichas":
                 itemlist.pop()
 
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -95,7 +92,7 @@ def search(item, texto):
     try:
         return searchfilm(item)
 
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -108,7 +105,7 @@ def searchfilm(item):
 
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url, headers=headers).data
     # fix - calidad
     data = re.sub(
@@ -243,7 +240,7 @@ def fichas(item):
 
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url, headers=headers).data
     # fix - calidad
     data = re.sub(
@@ -298,7 +295,7 @@ def findvideos(item):
 
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url, headers=headers).data.replace('\n', '')
 
     patron = r'<iframe width=".+?" height=".+?" src="([^"]+)" allowfullscreen frameborder="0">'

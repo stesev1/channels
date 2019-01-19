@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale piratestreaming
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 import re
 import urlparse
@@ -17,7 +15,7 @@ from core.tmdb import infoSod
 
 __channel__ = "piratestreaming"
 
-host = "https://www.piratestreaming.watch/"
+host = "http://www.piratestreaming.club"
 
 
 def mainlist(item):
@@ -58,10 +56,10 @@ def peliculas(item):
     logger.info()
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url).data
 
-    # Estrae i contenuti
+    # Estrae i contenuti 
     patron = 'data-placement="bottom" title="(.*?)" alt=[^=]+="([^"]+)"> <img'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
@@ -82,7 +80,7 @@ def peliculas(item):
                  extra=item.extra,
                  folder=True), tipo='movie'))
 
-    # Paginazione
+    # Paginazione 
     patronvideos = '<a\s*class="nextpostslink" rel="next" href="([^"]+)">Avanti'
     matches = re.compile(patronvideos, re.DOTALL).findall(data)
 
@@ -107,10 +105,10 @@ def peliculas_tv(item):
     logger.info()
     itemlist = []
 
-    # Carica la pagina
+    # Carica la pagina 
     data = httptools.downloadpage(item.url).data
 
-    # Estrae i contenuti
+    # Estrae i contenuti 
     patron = 'data-placement="bottom" title="(.*?)" alt=[^=]+="([^"]+)"> <img'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
@@ -130,7 +128,7 @@ def peliculas_tv(item):
                  extra=item.extra,
                  folder=True), tipo='tv'))
 
-    # Paginazione
+    # Paginazione 
     patronvideos = '<a\s*class="nextpostslink" rel="next" href="([^"]+)">Avanti'
     matches = re.compile(patronvideos, re.DOTALL).findall(data)
 
@@ -153,7 +151,7 @@ def peliculas_tv(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
 
 def search(item, texto):
     logger.info("[piratestreaming.py] " + item.url + " search " + texto)
@@ -163,7 +161,7 @@ def search(item, texto):
             return peliculas(item)
         if item.extra == "serie":
             return peliculas_tv(item)
-    # Continua la ricerca in caso di errore
+    # Continua la ricerca in caso di errore 
     except:
         import sys
         for line in sys.exc_info():
@@ -185,15 +183,15 @@ def episodios(item):
         scrapedtitle = scrapedtitle.replace("<strong>", "")
         scrapedtitle = scrapedtitle.replace("</strong>", " ")
 
-        itemlist.append(
-            Item(channel=__channel__,
+        itemlist.append( 
+            Item(channel=__channel__, 
                  action="findvid_serie",
-                 contentType="episode",
-                 title=scrapedtitle,
-                 url=scrapedurl,
-                 thumbnail=item.thumbnail,
+                 contentType="episode", 
+                 title=scrapedtitle, 
+                 url=scrapedurl, 
+                 thumbnail=item.thumbnail, 
                  extra=item.extra,
-                 fulltitle=scrapedtitle,
+                 fulltitle=scrapedtitle, 
                  show=item.show))
 
 

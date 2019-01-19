@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale  per http://serietvsubita.net/
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
+
+
 import re
 import urlparse
 
@@ -20,7 +20,7 @@ host = "http://serietvsubita.net"
 
 
 def mainlist(item):
-    logger.info("streamondemand.channels.serietvsubita mainlist")
+    logger.info("Stefano.channels.serietvsubita mainlist")
 
     itemlist = [Item(channel=__channel__,
                      action="episodios",
@@ -44,7 +44,7 @@ def mainlist(item):
 
 
 def search(item, texto):
-    logger.info("streamondemand.channels.serietvsubita search")
+    logger.info("Stefano.channels.serietvsubita search")
     item.url = host + "/?s=" + texto + "&op.x=0&op.y=0"
 
     try:
@@ -58,7 +58,7 @@ def search(item, texto):
 
 
 def episodios(item):
-    logger.info("streamondemand.channels.serietvsubita episodios")
+    logger.info("Stefano.channels.serietvsubita episodios")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -105,7 +105,7 @@ def episodios(item):
 
 
 def series(item):
-    logger.info("streamondemand.channels.serietvsubita series")
+    logger.info("Stefano.channels.serietvsubita series")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data
@@ -146,7 +146,7 @@ def series(item):
 
 
 def episodiosearch(item):
-    logger.info("streamondemand.channels.serietvsubita episodios")
+    logger.info("Stefano.channels.serietvsubita episodios")
     itemlist = []
 
     data = httptools.downloadpage(item.url).data

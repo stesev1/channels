@@ -1,29 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand 5
-# Copyright 2015 tvalacarta@gmail.com
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-#
-# Distributed under the terms of GNU General Public License v3 (GPLv3)
-# http://www.gnu.org/licenses/gpl-3.0.html
-# ------------------------------------------------------------
-# This file is part of streamondemand 5.
-#
-# streamondemand 5 is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# streamondemand 5 is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with streamondemand 5.  If not, see <http://www.gnu.org/licenses/>.
-# ------------------------------------------------------------
-# Configuración
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import os
@@ -356,7 +334,7 @@ def get_all_versions(item):
     for entry in api_response["body"]:
 
         if entry["package"]=="plugin":
-            title = "streamondemand "+entry["tag"]+" (Publicada "+entry["date"]+")"
+            title = "Stefano "+entry["tag"]+" (Publicada "+entry["date"]+")"
             local_version_number = updater.get_current_plugin_version()
         elif entry["package"]=="channels":
             title = "Canales (Publicada "+entry["date"]+")"
@@ -896,7 +874,7 @@ def overwrite_tools(item):
                                            "Continuare?")
     if seleccion == 1:
         heading = 'Sovrascrivo la libreria....'
-        p_dialog = platformtools.dialog_progress_bg('streamondemand', heading)
+        p_dialog = platformtools.dialog_progress_bg('Stefano', heading)
         p_dialog.update(0, '')
 
         import glob

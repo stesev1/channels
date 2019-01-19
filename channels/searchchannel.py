@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Script per la ricerca di un canale in base al testo inserito
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# by MrTruth
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import glob

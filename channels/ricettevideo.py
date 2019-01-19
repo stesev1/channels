@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale ricettevideo
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 import re
 import urlparse
@@ -19,7 +17,7 @@ host = "http://ricettevideo.net"
 
 
 def mainlist(item):
-    logger.info("streamondemand.ricettevideo mainlist")
+    logger.info("Stefano.ricettevideo mainlist")
     itemlist = [Item(channel=__channel__, title="[COLOR azure]Videoricette[/COLOR]", action="peliculas",
                      url=host,
                      thumbnail="http://www.brinkmanscountrycorner.com/images/Recipies.png")]
@@ -28,7 +26,7 @@ def mainlist(item):
 
 
 def peliculas(item):
-    logger.info("streamondemand.ricettevideo peliculas")
+    logger.info("Stefano.ricettevideo peliculas")
     itemlist = []
 
     # Carica la pagina 
@@ -64,6 +62,6 @@ def peliculas(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")
 
 # test update

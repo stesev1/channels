@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
-# ----------------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# ayuda - Videos de ayuda y tutoriales para streamondemand
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# contribucion de jurrabi
-# ----------------------------------------------------------------------
+# ------------------------------------------------------------
+# TheGroove360 / XBMC Plugin
+# Canale 
+# ------------------------------------------------------------
 
 import os
 import xbmc
@@ -26,7 +23,7 @@ opt = ['20971520', '52428800', '157286400', '209715200']
 # =======================================================
 
 def mainlist(item):
-    logger.info("streamondemand.channels.ayuda mainlist")
+    logger.info("Stefano.channels.ayuda mainlist")
 
     itemlist = []
 
@@ -46,20 +43,20 @@ def tutoriales(item):
     itemlist = []
 
     for playlist in playlists:
-        if playlist.title == "Tutorial di streamondemand":
+        if playlist.title == "Tutorial di Stefano":
             itemlist = youtube_channel.videos(playlist)
 
     return itemlist
 
 def reset(item):
-    logger.info("streamondemand.channels.ayuda reset")
+    logger.info("Stefano.channels.ayuda reset")
     itemlist = []
     risp = platformtools.dialog_yesno("Reset Stream On Demand"," ","Sei sicuro di voler resettare tutte le impostazioni di SoD ?"," ",nolabel="Annulla", yeslabel="Conferma")
     if risp == 0: 
         logger.info("Annulla")
     if risp == 1: 
         logger.info("Conferma")
-        path=xbmc.translatePath("special://profile/addon_data/plugin.video.streamondemand")
+        path=xbmc.translatePath("special://profile/addon_data/plugin.video.Stefano")
         filetools.rmdirtree(path)
         config.verify_directories_created()   
         platformtools.dialog_ok("Reset Stream On Demand"," ","Reset delle impostazioni è avvenuto con successo!"," ")
@@ -194,7 +191,7 @@ def force_creation_advancedsettings_17(item):
     return platformtools.itemlist_refresh()
 
 def Leggi_Parametro():
-    logger.info("streamondemand.channels.ayuda Leggi_Parametro")
+    logger.info("Stefano.channels.ayuda Leggi_Parametro")
     itemlist=[]
 
     advancedsettings = xbmc.translatePath("special://userdata/advancedsettings.xml")

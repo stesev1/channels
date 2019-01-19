@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale  Video Corsi Programmazione
-# Creato da costaplus
-# http://www.mimediacenter.info/foro/viewforum.php?f=36.
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
+
 import re
 
 from core import httptools
@@ -19,7 +17,7 @@ site = "https://www.youtube.com"
 
 
 def mainlist(item):
-    logger.info("streamondemand.programmazione mainlist")
+    logger.info("Stefano.programmazione mainlist")
     itemlist = []
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Corso Html 5[/COLOR]", action="corsi", url="https://www.youtube.com/playlist?list=PL7A4A3449C649048F", thumbnail="http://i.ytimg.com/vi/TyCvfNt20nM/mqdefault.jpg"))
     itemlist.append( Item(channel=__channel__, title="[COLOR azure]Corso Css[/COLOR]", action="corsi", url="https://www.youtube.com/playlist?list=PLD74C5E763D39793D", thumbnail="http://i.ytimg.com/vi/hd8k82aG_O4/mqdefault.jpg"))
@@ -40,7 +38,7 @@ def mainlist(item):
 
 
 def corsi(item):
-    logger.info("streamondemand.programmazione peliculas")
+    logger.info("Stefano.programmazione peliculas")
     itemlist = []
 
     # scarrico il canale
@@ -84,4 +82,4 @@ def corsi(item):
 
 def HomePage(item):
     import xbmc
-    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano/?action=sod)")
+    xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.Stefano)")

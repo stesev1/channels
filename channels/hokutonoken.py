@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale  per I Cavalieri Dello Zodiaco
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# ------------------------------------------------------------
+# TheGroove360 / XBMC Plugin
+# Canale 
+# -------------------------------------------------------------
 import re
 
 from core import httptools

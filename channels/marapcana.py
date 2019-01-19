@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale marapcana
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-# Version: 201804132230
-# ------------------------------------------------------------
+# TheGroove360 / XBMC Plugin
+# Canale 
+# -------------------------------------------------------------
 import re
 
 from core import httptools, scrapertools, servertools

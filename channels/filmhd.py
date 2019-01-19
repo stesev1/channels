@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-# TheGroove360 - Kodi Addon
-
+# ------------------------------------------------------------
+# TheGroove360 / XBMC Plugin
+# Canale 
+# ------------------------------------------------------------
 from core import httptools, scrapertools
 from core import servertools
 from core.item import Item

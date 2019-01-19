@@ -1,29 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# pelisalacarta 4
-# Copyright 2015 tvalacarta@gmail.com
-# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
-#
-# Distributed under the terms of GNU General Public License v3 (GPLv3)
-# http://www.gnu.org/licenses/gpl-3.0.html
-# ------------------------------------------------------------
-# This file is part of pelisalacarta 4.
-#
-# pelisalacarta 4 is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# pelisalacarta 4 is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with pelisalacarta 4.  If not, see <http://www.gnu.org/licenses/>.
-# --------------------------------------------------------------------------------
-# Lista de vídeos favoritos
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import os
@@ -241,7 +219,7 @@ def check_bookmark(readpath):
     if itemlist:
         favourites_list = read_favourites()
         for item in itemlist:
-            data = "ActivateWindow(10025,&quot;plugin://plugin.video.streamondemand/?" + item.tourl() + "&quot;,return)"
+            data = "ActivateWindow(10025,&quot;plugin://plugin.video.Stefano/?" + item.tourl() + "&quot;,return)"
             favourites_list.append((item.title, item.thumbnail, data))
         if save_favourites(favourites_list):
             logger.debug("Conversion de txt a xml correcta")

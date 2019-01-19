@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# streamondemand.- XBMC Plugin
-# Canale mondolunatico
-# http://blog.tvalacarta.info/plugin-xbmc/streamondemand.
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 import os
 import re
@@ -56,8 +55,7 @@ def mainlist(item):
                      title="[COLOR yellow]Cerca Serie TV...[/COLOR]",
                      extra="serie",
                      action="search",
-                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png"),
-                ]
+                     thumbnail="https://raw.githubusercontent.com/orione7/Pelis_images/master/channels_icon_pureita/search_P.png")]
     return itemlist
 
 

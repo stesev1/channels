@@ -1,30 +1,8 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand 5
-# Copyright 2015 tvalacarta@gmail.com
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
-#
-# Distributed under the terms of GNU General Public License v3 (GPLv3)
-# http://www.gnu.org/licenses/gpl-3.0.html
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
-# This file is part of streamondemand 5.
-#
-# streamondemand 5 is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# streamondemand 5 is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with streamondemand 5.  If not, see <http://www.gnu.org/licenses/>.
-# --------------------------------------------------------------------------------
-# Search trailers from youtube, filmaffinity, abandomoviez, vimeo, etc...
-# --------------------------------------------------------------------------------
 
 import re
 import urllib
@@ -275,7 +253,7 @@ def abandomoviez_search(item):
 
 
 def search_links_abando(item):
-    logger.info("streamondemand.channels.trailertools search_links_abando")
+    logger.info("Stefano.channels.trailertools search_links_abando")
 
     data = scrapertools.downloadpage(item.url)
     itemlist = []
@@ -392,7 +370,7 @@ def filmaffinity_search(item):
 
 
 def search_links_filmaff(item):
-    logger.info("streamondemand.channels.trailertools search_links_filmaff")
+    logger.info("Stefano.channels.trailertools search_links_filmaff")
     
     itemlist = []
     data = scrapertools.downloadpage(item.url)

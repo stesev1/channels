@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Canale filmontv
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import re
@@ -23,7 +21,7 @@ TIMEOUT_TOTAL = 60
 
 
 def mainlist(item):
-    logger.info("streamondemand.filmontv mainlist")
+    logger.info("Stefano.filmontv mainlist")
     itemlist = [Item(channel=__channel__,
                      title="[COLOR red]IN ONDA ADESSO[/COLOR]",
                      action="tvoggi",
@@ -64,7 +62,7 @@ def mainlist(item):
 
 
 def tvoggi(item):
-    logger.info("streamondemand.filmontv tvoggi")
+    logger.info("Stefano.filmontv tvoggi")
     itemlist = []
 
     # Carica la pagina 

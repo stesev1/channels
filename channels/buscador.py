@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
+
+
 import Queue
 import glob
 import os
@@ -25,7 +26,7 @@ MAX_THREADS = config.get_setting("maxthreads")
 
 
 def mainlist(item, preferred_thumbnail="squares"):
-    logger.info("streamondemand.channels.buscador mainlist")
+    logger.info("Stefano.channels.buscador mainlist")
 
     context = [{"title": "Scegli i canali da includere",
                 "action": "settingCanal",
@@ -137,7 +138,7 @@ def save_settings(item, dict_values):
 
 
 def search(item, tecleado):
-    logger.info("streamondemand.channels.buscador search")
+    logger.info("Stefano.channels.buscador search")
 
     item.extra = tecleado + '{}' + item.extra
 
@@ -182,7 +183,7 @@ def channel_search(queue, channel_parameters, category, tecleado):
 
 # This is the search function
 def do_search(item):
-    logger.info("streamondemand.channels.buscador do_search")
+    logger.info("Stefano.channels.buscador do_search")
 
     if '{}' in item.extra:
         tecleado, category = item.extra.split('{}')
@@ -193,13 +194,13 @@ def do_search(item):
     itemlist = []
 
     channels_path = os.path.join(config.get_runtime_path(), "channels", '*.xml')
-    logger.info("streamondemand.channels.buscador channels_path=" + channels_path)
+    logger.info("Stefano.channels.buscador channels_path=" + channels_path)
 
     channel_language = config.get_setting("channel_language")
-    logger.info("streamondemand.channels.buscador channel_language=" + channel_language)
+    logger.info("Stefano.channels.buscador channel_language=" + channel_language)
     if channel_language == "":
         channel_language = "all"
-        logger.info("streamondemand.channels.buscador channel_language=" + channel_language)
+        logger.info("Stefano.channels.buscador channel_language=" + channel_language)
 
     progreso = platformtools.dialog_progress_bg("Cercando " + urllib.unquote_plus(tecleado), "")
     channel_files = sorted(glob.glob(channels_path))

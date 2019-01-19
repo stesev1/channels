@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Canale biblioteca de streamondemand
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
 
 import os
@@ -21,7 +19,7 @@ def check_for_library_format():
 
     if config.get_setting("library_version") == 'v4':
 
-        p_dialog = platformtools.dialog_progress_bg("Stream On Demand", "Conversione della libreria al nuovo formato...")
+        p_dialog = platformtools.dialog_progress_bg("Stefano On Demand", "Conversione della libreria al nuovo formato...")
         p_dialog.update(0)
 
         import glob
@@ -86,7 +84,7 @@ def file(item):
     logger.info("[bibiolteca.py] file")
     logger.info("[biblioteca.py] urlfile--->>>" + item.url)
 
-    risp = platformtools.dialog_select('Stream On Demand play video', ['Guarda', 'Rinomina', 'Elimina'])
+    risp = platformtools.dialog_select('Stefano On Demand play video', ['Guarda', 'Rinomina', 'Elimina'])
     try:
 
         if risp == 0:
@@ -565,7 +563,7 @@ def update_serie(item):
     # logger.debug("item:\n" + item.tostring('\n'))
 
     heading = 'Aggiornamento serie....'
-    p_dialog = platformtools.dialog_progress_bg('streamondemand', heading)
+    p_dialog = platformtools.dialog_progress_bg('Stefano', heading)
     p_dialog.update(0, heading, item.contentSerieName)
 
     import library_service

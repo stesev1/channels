@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
-# StreamOndemand-PureITA / XBMC Plugin
-# Canale MondoLunatico_HD
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
-# ============================================================
 
 import re
 import urlparse
