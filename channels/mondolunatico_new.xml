@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
-	<id>saghe</id>
-	<name>Saghe</name>
+	<id>mondolunatico_new</id>
+	<name>Mondo Lunatico New</name>
 
 	<active>true</active>
 	<adult>false</adult>
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>https://ideedaleggere.files.wordpress.com/2015/11/icona2.png?w=300&amp;h=300&amp;crop=1</thumbnail>
-	<bannermenu>https://ideedaleggere.files.wordpress.com/2015/11/icona2.png?w=300&amp;h=300&amp;crop=1</bannermenu>
+	<thumbnail>http://mondolunatico.org/stream/wp-content/uploads/2016/10/dooplay1-2.png</thumbnail>
+	<bannermenu>http://mondolunatico.org/stream/wp-content/uploads/2016/10/dooplay1-2.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 	<version>4</version>
-	<date>22/06/2016</date>
+	<date>27/08/2017</date>
 	<changes>update</changes>
 
 	<categories>
-		<category>saghe</category>
+		<category>movie</category>
+		<category>cult</category>
+		<category>top channels</category>
 	</categories>
 
 	<settings>
 		<id>include_in_global_search</id>
 		<type>bool</type>
 		<label>Includi ricerca globale</label>
-		<default>false</default>
-		<enabled>false</enabled>
-		<visible>false</visible>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
 	</settings>
 </channel>

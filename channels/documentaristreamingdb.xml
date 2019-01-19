@@ -1,40 +1,40 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<channel>
-	<id>documentaristreamingdb</id>
-	<name>Documentari Streaming DB</name>
-
-	<active>true</active>
-	<adult>false</adult>
-	<language>it</language>
-
-	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
-	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/documentaristreamingdb.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/documentaristreamingdb.png</bannermenu>
-
-	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>9</version>
-	<date>07/01/2019</date>
-	<changes>Updates</changes>
-
-	<categories>
-		<category>documentary</category>
-	</categories>
-
-	<settings>
-		<id>include_in_global_search</id>
-		<type>bool</type>
-		<label>Includi ricerca globale</label>
-		<default>false</default>
-		<enabled>false</enabled>
-		<visible>false</visible>
-	</settings>
-
-	<settings>
-		<id>include_in_newest_documentales</id>
-		<type>bool</type>
-		<label>Includi in novità - Documentari</label>
-		<default>true</default>
-		<enabled>true</enabled>
-		<visible>true</visible>
-	</settings>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>documentaristreamingdb</id>
+	<name>Documentari Streaming DB</name>
+
+	<active>true</active>
+	<adult>false</adult>
+	<language>it</language>
+
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/documentaristreamingdb.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/documentaristreamingdb.png</bannermenu>
+
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
+	<version>9</version>
+	<date>07/01/2019</date>
+	<changes>Updates</changes>
+
+	<categories>
+		<category>documentary</category>
+	</categories>
+
+	<settings>
+		<id>include_in_global_search</id>
+		<type>bool</type>
+		<label>Includi ricerca globale</label>
+		<default>false</default>
+		<enabled>false</enabled>
+		<visible>false</visible>
+	</settings>
+
+	<settings>
+		<id>include_in_newest_documentales</id>
+		<type>bool</type>
+		<label>Includi in novità - Documentari</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+</channel>

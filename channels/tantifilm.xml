@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<channel>
-	<id>tantifilm</id>
-	<name>Tantifilm</name>
-
-	<active>true</active>
-	<adult>false</adult>
-	<language>it</language>
-
-	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
-	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/tantifilm.png</thumbnail>
-	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/tantifilm.png</bannermenu>
-
-	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>25</version>
-	<date>19/01/2019</date>
-	<changes>Update</changes>
-
-	<categories>
-		<category>movie</category>
-		<category>serie</category>
-		<category>anime</category>
-	</categories>
-
-	<settings>
-		<include_in_global_search>true</include_in_global_search>
-	</settings>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<channel>
+	<id>tantifilm</id>
+	<name>Tantifilm</name>
+
+	<active>true</active>
+	<adult>false</adult>
+	<language>it</language>
+
+	<fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/tantifilm.png</thumbnail>
+	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/tantifilm.png</bannermenu>
+
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
+	<version>25</version>
+	<date>19/01/2019</date>
+	<changes>Update</changes>
+
+	<categories>
+		<category>movie</category>
+		<category>serie</category>
+		<category>anime</category>
+	</categories>
+
+	<settings>
+		<include_in_global_search>true</include_in_global_search>
+	</settings>
+</channel>

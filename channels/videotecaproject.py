@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
-# StreamOnDemand-PureITA / XBMC Plugin
-# Canale  videotecaproject
-# http://www.mimediacenter.info/foro/viewtopic.php?f=36&t=7808
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
+
 import re
 import urlparse
 

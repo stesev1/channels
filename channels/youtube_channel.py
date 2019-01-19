@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
 # ------------------------------------------------------------
-# tvalacarta - XBMC Plugin
-# Funciones para hacer canales a partir de un canal de YouTube
-# http://blog.tvalacarta.info/plugin-xbmc/tvalacarta/
+# TheGroove360 / XBMC Plugin
+# Canale 
 # ------------------------------------------------------------
+
+
 import urllib
 
 from core import jsontools, httptools

@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
-	<id>marapcana</id>
-	<name>Marapcana</name>
-  
+	<id>linkstreaming</id>
+	<name>LinkStreaming</name>
+
 	<active>true</active>
 	<adult>false</adult>
 	<language>it</language>
+
 	<fanart></fanart>
-	<thumbnail>http://marapcana.site/maraplogo7.png</thumbnail>
-	<bannermenu></bannermenu>
+	<thumbnail>https://www.linkstreaming.tv/wp-content/themes/linkstream/img/logo.png</thumbnail>
+	<bannermenu>https://www.linkstreaming.tv/wp-content/themes/linkstream/img/logo.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 	<version>1</version>
-	<date>13/04/2018</date>
-	<changes>update</changes>
+	<date>06/12/2017</date>
+	<changes>new channel</changes>
 
 	<categories>
 		<category>movie</category>
-		<category>vos</category>
+		<category>serie</category>
 	</categories>
 
 	<settings>
 		<id>include_in_global_search</id>
 		<type>bool</type>
 		<label>Includi ricerca globale</label>
+		<default>true</default>
+		<enabled>true</enabled>
+		<visible>true</visible>
+	</settings>
+
+	<settings>
+		<id>include_in_newest_peliculas</id>
+		<type>bool</type>
+		<label>Includi in novità - film</label>
 		<default>true</default>
 		<enabled>true</enabled>
 		<visible>true</visible>
