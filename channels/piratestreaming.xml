@@ -12,9 +12,9 @@
 	<bannermenu>https://raw.githubusercontent.com/Zanzibar82/images/master/posters/piratestreaming.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>6</version>
-	<date>07/09/2016</date>
-	<changes>Fix</changes>
+	<version>7</version>
+	<date>24/01/2019</date>
+	<changes>Change Domain</changes>
 
 	<categories>
 		<category>movie</category>

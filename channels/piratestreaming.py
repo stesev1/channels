@@ -15,7 +15,7 @@ from core.tmdb import infoSod
 
 __channel__ = "piratestreaming"
 
-host = "http://www.piratestreaming.club"
+host = "http://www.piratestreaming.watch"
 
 
 def mainlist(item):
