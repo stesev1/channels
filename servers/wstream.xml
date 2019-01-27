@@ -2,12 +2,12 @@
 <server>
 	<active>true</active>
 	<changes>Temporary Fix</changes>
-	<date>18/11/2018</date>
+	<date>27/01/2019</date>
 	<free>true</free>
 	<id>wstream</id>
 	<name>wstream</name>
 	<premium></premium>
 	<thumbnail></thumbnail>
 	<update_url>https://github.com/stesev1/channels/tree/master/servers</update_url>
-	<version>12</version>
+	<version>13</version>
 </server>
