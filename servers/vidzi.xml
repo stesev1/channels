@@ -3,17 +3,12 @@
 	<active>true</active>
 	<changes>
 		<change>
-			<autor>Intel1</autor>
-			<date>26/06/2017</date>
-			<description>Patrón actualizado</description>
-		</change>
-		<change>
 			<autor>Cmos</autor>
-			<date>21/03/2017</date>
-			<description>Conector corregido</description>
+			<date>22/04/2017</date>
+			<description>Corregido por cambios</description>
 		</change>
 		<change>
-			<autor></autor>
+			<autor>divadr</autor>
 			<date>25/03/2016</date>
 			<description>Versión incial</description>
 		</change>
@@ -22,17 +17,17 @@
 		<ignore_urls>
 		</ignore_urls>
 		<patterns>
-			<pattern>vidto.me/(?:embed-|)([A-z0-9]+)</pattern>
-			<url>http://vidto.me/embed-\1-640x360.html</url>
+			<pattern>vidzi.tv/embed-([a-z0-9A-Z]+)</pattern>
+			<url>http://vidzi.tv/embed-\1.html</url>
 		</patterns>
 		<patterns>
-			<pattern>vidtome.(?:co|stream)\/([A-z0-9]+)</pattern>
-			<url>http://vidtome.co/\1</url>
+			<pattern>vidzi.tv/([a-z0-9A-Z]+)</pattern>
+			<url>http://vidzi.tv/embed-\1.html</url>
 		</patterns>
 	</find_videos>
 	<free>true</free>
-	<id>vidtome</id>
-	<name>vidtome</name>
+	<id>vidzi</id>
+	<name>vidzi</name>
 	<premium>
 	</premium>
 	<settings>
@@ -44,7 +39,7 @@
 		<visible>true</visible>
 	</settings>
 	<settings>
-		<default>0</default>
+		<default>100</default>
 		<enabled>true</enabled>
 		<id>favorites_servers_list</id>
 		<label>Incluir en lista de favoritos</label>
@@ -57,7 +52,7 @@
 		<type>list</type>
 		<visible>false</visible>
 	</settings>
-	<thumbnail>http://media.tvalacarta.info/servers/server_vidtome.png</thumbnail>
-	<update_url>https://raw.githubusercontent.com/tvalacarta/pelisalacarta/master/python/main-classic/servers/</update_url>
-	<version>4</version>
+	<thumbnail>http://media.tvalacarta.info/servers/server_vidzi.png</thumbnail>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
+	<version>3</version>
 </server>

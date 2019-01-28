@@ -57,6 +57,7 @@ def find_videos(text):
                             mcookie[c] = v
 
                     try:
+                        print mcookie
                         patron = r';URL=([^\"]+)\">'
                         dest = scrapertools.get_match(idata, patron)
                         r = requests.post(dest, cookies=mcookie)
