@@ -1,37 +1,39 @@
 # -*- coding: utf-8 -*-
 #------------------------------------------------------------
-# streamondemand - XBMC Plugin
-# Conector para depositfiles
-# http://www.mimediacenter.info/foro/viewforum.php?f=36
+# pelisalacarta - XBMC Plugin
+# Conector para fooget
+# http://blog.tvalacarta.info/plugin-xbmc/pelisalacarta/
 #------------------------------------------------------------
 
-import re
+import urlparse,urllib2,urllib,re
+import os
 
-from core import logger
 from core import scrapertools
-
+from core import logger
+from core import config
 
 def test_video_exists( page_url ):
-    logger.info("[depositfiles.py] test_video_exists(page_url='%s')" % page_url)
+    logger.info("[fooget.py] test_video_exists(page_url='%s')" % page_url)
     
-    # Existe: http://depositfiles.com/files/vmhjug6t7
+    # Existe: http://www.fooget.com/s3k5gbuvfqel.html
     # No existe: 
     data = scrapertools.cache_page(page_url)
-    patron  = 'Nombre del Archivo: <b title="([^"]+)">([^<]+)</b>'
+    patron  = '<img src="http://fooget.com/images2/download-arrow.jpg"[^>]+>[^<]+'
+    patron += '<span[^>]+>([^<]+)</span>'
     matches = re.compile(patron,re.DOTALL).findall(data)
     
     if len(matches)>0:
         return True,""
     else:
-        patron  = '<div class="no_download_msg">([^<]+)<'
+        patron  = '<h2>(File Not Found)</h2>'
         matches = re.compile(patron,re.DOTALL).findall(data)
         if len(matches)>0:
-            return False,"El archivo ya no está disponible<br/>en depositfiles o ha sido borrado"
+            return False,"El archivo ya no está disponible<br/>en fooget o ha sido borrado"
     
     return True,""
 
 def get_video_url( page_url , premium = False , user="" , password="", video_password="" ):
-    logger.info("[depositfiles.py] get_video_url(page_url='%s')" % page_url)
+    logger.info("[fooget.py] get_video_url(page_url='%s')" % page_url)
     video_urls = []
     return video_urls
 
@@ -40,18 +42,17 @@ def find_videos(data):
     encontrados = set()
     devuelve = []
 
-    # http://depositfiles.com/files/jdxpu4cze
-    # http://www.depositfiles.com/files/zqeggnpa6
-    patronvideos  = '(depositfiles.com/files/[a-z0-9]+)'
-    logger.info("[depositfiles.py] find_videos #"+patronvideos+"#")
+    # http://www.filejungle.com/f/3Q7apX
+    patronvideos  = '(http://www.fooget.com/[a-z0-9]+.html)'
+    logger.info("[fooget.py] find_videos #"+patronvideos+"#")
     matches = re.compile(patronvideos,re.DOTALL).findall(data)
 
     for match in matches:
-        titulo = "[depositfiles]"
-        url = "http://"+match
+        titulo = "[fooget]"
+        url = match
         if url not in encontrados:
             logger.info("  url="+url)
-            devuelve.append( [ titulo , url , 'depositfiles' ] )
+            devuelve.append( [ titulo , url , 'fooget' ] )
             encontrados.add(url)
         else:
             logger.info("  url duplicada="+url)

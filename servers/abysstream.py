@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-# StreamOnDemand Community Edition - Kodi Addon
+# ------------------------------------------------------------
+# StreamOnDemand-PureITA - Kodi Plugin
+# Server per abysstream.com
+# http://www.mimediacenter.info/foro/viewforum.php?f=36
 # by DrZ3r0
 # Fix trovato qui (per varie ed eventuali - Zanzibar82) https://github.com/FusionwareIT/FusionBox-repo/
-
+# ------------------------------------------------------------
+import re
 import urllib
 
-from core import httptools, logger
+from core import logger
 from core import scrapertools
 
 headers = [
@@ -19,14 +23,14 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
     logger.info("[abysstream.py] url=" + page_url)
     video_urls = []
 
-    data = httptools.downloadpage(page_url, headers=headers).data
+    data = scrapertools.cache_page(page_url, headers=headers)
 
     stream_link = scrapertools.find_single_match(data, '<input type="hidden" name="streamLink" value="([^"]+)">')
     temp_link = scrapertools.find_single_match(data, '<input type="hidden" name="templink" value="([^"]+)">')
 
     headers.append(['Referer', page_url])
     post_data = 'streamLink=%s&templink=%s' % (stream_link, temp_link)
-    data = httptools.downloadpage('http://abysstream.com/viewvideo.php', post=post_data, headers=headers).data
+    data = scrapertools.cache_page('http://abysstream.com/viewvideo.php', post=post_data, headers=headers)
 
     # URL
     media_url = scrapertools.find_single_match(data, '<source src="([^"]+)" type="video/mp4"')
@@ -34,9 +38,32 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
 
     # URL del vídeo
     video_urls.append(
-        [scrapertools.get_filename_from_url(media_url)[-4:] + " [Abysstream]", media_url + '|' + _headers])
+            [scrapertools.get_filename_from_url(media_url)[-4:] + " [Abysstream]", media_url + '|' + _headers])
 
     for video_url in video_urls:
         logger.info("[abysstream.py] %s - %s" % (video_url[0], video_url[1]))
 
     return video_urls
+
+
+# Encuentra vídeos del servidor en el texto pasado
+def find_videos(text):
+    encontrados = set()
+    devuelve = []
+
+    # http://abysstream.net/v/iwbe6genso37
+    patronvideos = 'http://abysstream.com/videos?/([A-Za-z0-9]+)'
+    logger.info("[abysstream.py] find_videos #" + patronvideos + "#")
+    matches = re.compile(patronvideos, re.DOTALL).findall(text)
+
+    for match in matches:
+        titulo = "[Abysstream]"
+        url = "http://abysstream.com/v/" + match
+        if url not in encontrados:
+            logger.info("  url=" + url)
+            devuelve.append([titulo, url, 'abysstream'])
+            encontrados.add(url)
+        else:
+            logger.info("  url duplicada=" + url)
+
+    return devuelve
