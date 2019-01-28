@@ -8,6 +8,6 @@
 	<name>wstream</name>
 	<premium></premium>
 	<thumbnail></thumbnail>
-	<update_url>https://github.com/stesev1/channels/tree/master/servers</update_url>
-	<version>13</version>
+	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
+	<version>14</version>
 </server>
