@@ -12,9 +12,9 @@
     <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/videotecaprojectru.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>2</version>
-    <date>31/12/2018</date>
-    <changes>Update</changes>
+    <version>3</version>
+    <date>31/01/2019</date>
+    <changes>Change Domain</changes>
 
     <categories>
         <category>movie</category>
