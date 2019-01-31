@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <channel>
     <id>videotecaprojectru</id>
-    <name>VideotecaProject Ru</name>
+    <name>VideotecaProject</name>
 
     <active>true</active>
     <adult>false</adult>
@@ -12,7 +12,7 @@
     <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/videotecaprojectru.png</bannermenu>
 
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>3</version>
+    <version>4</version>
     <date>31/01/2019</date>
     <changes>Change Domain</changes>
 
