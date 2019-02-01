@@ -36,18 +36,18 @@ def mainlist(item):
                      url="%s/film/" % host,
                      extra="movie",
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
-	            Item(channel=__channel__,
-                     title="[COLOR azure]Film - [COLOR orange]Top Imdb[/COLOR]",
-                     action="peliculas_imdb",
-                     url="%s/top-imdb/" % host,
-                     extra="movie",
-                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movies_P.png"),
+                # Item(channel=__channel__,
+                #      title="[COLOR azure]Film - [COLOR orange]Top Imdb[/COLOR]",
+                #      action="peliculas_imdb",
+                #      url="%s/top-imdb/" % host,
+                #      extra="movie",
+                #      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movies_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Categorie[/COLOR]",
                      action="genere",
                      url=host,
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genres_P.png"),
-	            Item(channel=__channel__,
+                Item(channel=__channel__,
                      title="[COLOR azure]Film - [COLOR orange]Popolari[/COLOR]",
                      action="peliculas",
                      url="%s/trending/?get=movies" % host,
@@ -60,6 +60,7 @@ def mainlist(item):
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
 
     return itemlist
+
 
 # ========================================================================================================================================================
 
@@ -78,49 +79,60 @@ def search(item, texto):
             logger.error("%s" % line)
         return []
 
+
 # ========================================================================================================================================================
 
 def peliculas_search(item):
-    logger.info("[thegroove360.altadefinizionehd] peliculas_search")
+    logger.info("[thegroove360.altadefinizione] peliculas_search")
     itemlist = []
 
-    # Descarga la pagina 
-    data = httptools.downloadpage(item.url, headers=headers).data
-	
-    patron = '<div class="thumbnail animation-2">\s*<a href="([^"]+)">\s*'
-    patron += '<img src="([^"]+)"\s*alt="(.*?)"\s*\/>[^>]+>[^<]+<\/span>.*?rating">[^\d]+([^<]+)<\/span>'
-    patron += '<span[^>]+>([^<]+)<\/span><\/div>[^>]+>[^>]+>(.*?)<'
+    # Carica la pagina
+    data = httptools.downloadpage(item.url).data
 
+    # Estrae i contenuti
+    patron = r'<article.*?<a href=\"([^\"]+)\"><img src=\"([^\"]+)\".*?><a.*?>(.*?)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
-    for scrapedurl, scrapedthumbnail, scrapedtitle, rating, year, scrapedplot  in matches:
-        #quality = " ([COLOR yellow]" + quality.strip() + "[/COLOR])"
-        rating = " ([COLOR yellow]" + rating.strip() + "[/COLOR])"
-        year = " ([COLOR yellow]" + year + "[/COLOR])"
-        scrapedtitle = scrapedtitle.replace("&#8217;", "'").replace("&#8211;", "-")
-        itemlist.append(infoSod(
-            Item(channel=__channel__,
-                 action="play",
-                 title=scrapedtitle + year + rating,
-                 url=scrapedurl,
-                 thumbnail=scrapedthumbnail,
-                 fulltitle=scrapedtitle,
-                 plot=scrapedplot,
-                 show=scrapedtitle), tipo='movie'))
+    for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
+        scrapedplot = ""
 
-    # Extrae el paginador
-    paginador = scrapertools.find_single_match(data, "<span class=\"current\">\d+</span><a href='([^']+)' class=\"inactive\">\d+</a>")
-    if paginador != "":
         itemlist.append(
             Item(channel=__channel__,
-                 action="peliculas_search",
-                 title="[COLOR orange]Successivi >>[/COLOR]",
-                 url=paginador,
-                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
-				 
-    return itemlist		
+                 action="findvideos",
+                 contentType="movie",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR] ",
+                 url=scrapedurl,
+                 thumbnail=scrapedthumbnail,
+                 plot=scrapedplot,
+                 extra=item.extra,
+                 folder=True))
 
-# ========================================================================================================================================================		
+    # Paginazione
+    patronvideos = r'<a class=\'arrow_pag\' href=\"([^\"]+)\">'
+    matches = re.compile(patronvideos, re.DOTALL).findall(data)
+
+    if len(matches) > 0:
+        scrapedurl = matches[0]
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="HomePage",
+                 title="[COLOR yellow]Torna Home[/COLOR]",
+                 folder=True)),
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="peliculas",
+                 title="[COLOR orange]Successivo >>[/COLOR]",
+                 url=scrapedurl,
+                 thumbnail="http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png",
+                 extra=item.extra,
+                 folder=True))
+
+    return itemlist
+
+
+# ========================================================================================================================================================
 
 def genere(item):
     logger.info("[thegroove360.altadefinizionehd] genere")
@@ -134,7 +146,7 @@ def genere(item):
     matches = re.compile(patron, re.DOTALL).findall(bloque)
 
     for scrapedurl, scrapedtitle, quantity in matches:
-        scrapedtitle=scrapedtitle.replace("televisione film", "Film TV")
+        scrapedtitle = scrapedtitle.replace("televisione film", "Film TV")
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
@@ -146,6 +158,7 @@ def genere(item):
 
     return itemlist
 
+
 # ========================================================================================================================================================
 
 def year(item):
@@ -155,13 +168,13 @@ def year(item):
     # Descarga la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
     bloque = scrapertools.get_match(data, 'Anno</a>(.*?)</ul>')
-	
+
     # Extrae las entradas (carpetas)
     patron = '<a href="([^"]+)">([^<]+)</a>'
     matches = re.compile(patron, re.DOTALL).findall(bloque)
 
     for scrapedurl, scrapedtitle in matches:
-        scrapedurl=host + scrapedurl
+        scrapedurl = host + scrapedurl
         itemlist.append(
             Item(channel=__channel__,
                  action="peliculas",
@@ -172,43 +185,45 @@ def year(item):
 
     return itemlist
 
+
 # ========================================================================================================================================================
 
 def peliculas(item):
     logger.info("[thegroove360.altadefinizionehd] peliculas")
     itemlist = []
 
-    # Descarga la pagina 
+    # Descarga la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
-	
+
     patron = '<div class="poster">\s*<img\s*src="([^"]+)"\s*alt="([^"]+)">\s*<div class="rating">'
     patron += '<span class="icon-star2"><\/span>\s*([^<]+)<\/div>\s*<div class="mepo">\s*'
     patron += '<span class="quality">([^<]+)<\/span>\s*<\/div>\s*<a href="([^"]+)">'
-    #patron += '<div class="texto">([^<]+)</div>'
+    # patron += '<div class="texto">([^<]+)</div>'
 
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedthumbnail, scrapedtitle, rating, quality, scrapedurl in matches:
         if rating:
-          rating = " ([COLOR yellow]" + rating.strip() + "[/COLOR])"
+            rating = " ([COLOR yellow]" + rating.strip() + "[/COLOR])"
         if quality:
-          quality=quality.replace("1080p", "Full HD").replace("720P", "HD")
-          quality = " ([COLOR yellow]" + quality.strip() + "[/COLOR])"
+            quality = quality.replace("1080p", "Full HD").replace("720P", "HD")
+            quality = " ([COLOR yellow]" + quality.strip() + "[/COLOR])"
 
-        scrapedtitle = scrapedtitle.replace("&#8217;", "'").replace("&#8211;", "-")		
-        scrapedplot=""	
-        itemlist.append(infoSod(
+        scrapedtitle = scrapedtitle.replace("&#8217;", "'").replace("&#8211;", "-")
+        scrapedplot = ""
+        itemlist.append(
             Item(channel=__channel__,
-                 action="play",
+                 action="findvideos",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]" + quality + rating,
                  thumbnail=scrapedthumbnail,
                  url=scrapedurl,
                  fulltitle=scrapedtitle,
                  plot=scrapedplot,
-                 show=scrapedtitle), tipo='movie'))
+                 show=scrapedtitle))
 
     # Extrae el paginador
-    paginador = scrapertools.find_single_match(data, '<a class=\'arrow_pag\' href="([^"]+)"><i id=\'nextpagination\' class=\'icon-caret-right\'>')
+    paginador = scrapertools.find_single_match(data,
+                                               '<a class=\'arrow_pag\' href="([^"]+)"><i id=\'nextpagination\' class=\'icon-caret-right\'>')
     if paginador != "":
         itemlist.append(
             Item(channel=__channel__,
@@ -218,6 +233,7 @@ def peliculas(item):
                  thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
+
 
 # ========================================================================================================================================================
 
@@ -230,15 +246,14 @@ def peliculas_imdb(item):
     if '{}' in item.url:
         item.url, p = item.url.split('{}')
         p = int(p)
-		
-    # Descarga la pagina 
+
+    # Descarga la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
-	
+
     patron = '<img\s*src="([^"]+)" \/><\/a><\/div><\/div>\s*<div class="puesto">(.*?)<\/div>\s*'
     patron += '<div class="rating">(.*?)<\/div>\s*<div class="title"><a href="([^"]+)">([^<]+)<\/a>'
 
     matches = re.compile(patron, re.DOTALL).findall(data)
-
 
     for i, (scrapedthumbnail, position, rating, scrapedurl, scrapedtitle) in enumerate(matches):
         if (p - 1) * minpage > i: continue
@@ -246,18 +261,17 @@ def peliculas_imdb(item):
         position = "[COLOR red]" + position.strip() + "[/COLOR] - "
         rating = " ([COLOR yellow]" + rating.strip() + "[/COLOR])"
 
-
         scrapedtitle = scrapedtitle.replace("&#8217;", "'").replace("&#8211;", "-")
         scrapedplot = ""
-        itemlist.append(infoSod(
+        itemlist.append(
             Item(channel=__channel__,
-                 action="play",
+                 action="findvideos",
                  title=position + "[COLOR azure]" + scrapedtitle + "[/COLOR]" + rating,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
                  fulltitle=scrapedtitle,
-                 show=scrapedtitle), tipo='movie'))
+                 show=scrapedtitle))
 
     # Extrae el paginador
     if len(matches) >= p * minpage:
@@ -273,59 +287,51 @@ def peliculas_imdb(item):
 
     return itemlist
 
+
 # ========================================================================================================================================================
 
+
 def findvideos(item):
-    logger.info("[thegroove360.altadefinizionehd] findvideos")
+    data = httptools.downloadpage(item.url).data
+    patron = r"<li id='player-.*?'.*?class='dooplay_player_option'\sdata-type='(.*?)'\sdata-post='(.*?)'\sdata-nume='(.*?)'>.*?'title'>(.*?)</"
+    matches = re.compile(patron, re.IGNORECASE).findall(data)
+
     itemlist = []
 
-    # Descarga la pagina
-    data = httptools.downloadpage(item.url, headers=headers).data
-	
-    # Extrae las entradas (carpetas)
-    patron = '<a class="options" href="#option-(\d+)">\s*<b class="icon-play_arrow"></b>\s*(.*?)\s*</a></li>'
-
-    matches = re.compile(patron, re.DOTALL).findall(data)
-
-    for option, scrapedtitle  in matches:
+    for scrapedtype, scrapedpost, scrapednume, scrapedtitle in matches:
         itemlist.append(
             Item(channel=__channel__,
                  action="play",
-                 title="[[COLOR orange]" + scrapedtitle + "[/COLOR]] " + item.title,
-                 fulltitle=item.title,
-                 show=item.show,
-                 url=item.url,
-                 thumbnail=item.thumbnail,
-                 extra=option,
-                 plot=item.plot,
+                 fulltitle=item.title + " [" + scrapedtitle + "]",
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + item.title + "[/COLOR] " + " [" + scrapedtitle + "]",
+                 url="%swp-admin/admin-ajax.php" % host,
+                 post=scrapedpost,
+                 nume=scrapednume,
+                 type=scrapedtype,
+                 extra=item.extra,
                  folder=True))
 
     return itemlist
 
+
 # ========================================================================================================================================================
 
-def play(item):
-    logger.info("[thegroove360.altadefinizionehd] play")
-    itemlist = []
 
-    data = scrapertools.anti_cloudflare(item.url, headers)
-         
-    patron = ('<div id="option-\d+" class="play-box-iframe fixidtab">\s*<iframe class="metaframe rptss" src="([^"]+)" [^>]+></iframe>') #% item.extra
-    matches = re.compile(patron, re.DOTALL).findall(data)
-	
-    for scrapedurl in matches:
-        data = scrapertools.anti_cloudflare(scrapedurl.strip(), headers)
-        videos = servertools.find_video_items(data=data)
-        for video in videos:
-            itemlist.append(video)
-			
-    for videoitem in itemlist:
-        servername = re.sub(r'[-\[\]\s]+', '', videoitem.title)
-        videoitem.title = "[COLOR orange][" + servername.capitalize() + "][COLOR azure] - " + item.fulltitle +"[/COLOR]"
-        videoitem.fulltitle = item.fulltitle
-        videoitem.show = item.show
-        videoitem.thumbnail = item.thumbnail
-        videoitem.channel = __channel__
+def play(item):
+    import urllib
+    payload = urllib.urlencode({'action': 'doo_player_ajax', 'post': item.post, 'nume': item.nume, 'type': item.type})
+    data = httptools.downloadpage(item.url, post=payload).data
+
+    patron = r"<iframe.*src='(([^']+))'\s"
+    matches = re.compile(patron, re.IGNORECASE).findall(data)
+
+    url = matches[0][0]
+    url = url.strip()
+    data = httptools.downloadpage(url, headers=headers).data
+
+    itemlist = servertools.find_video_items(data=data)
+
     return itemlist
 
 # ========================================================================================================================================================
