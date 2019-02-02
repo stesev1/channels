@@ -43,10 +43,10 @@ def mainlist(item):
     itemlist = [
         Item(channel=__channel__,
              title="[COLOR azure]Film - [COLOR orange]Al Cinema[/COLOR]",
-             action="cinema",
+             action="fichas",
              url=host + "/al-cinema/",
              thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_serie_P.png"),
-		Item(channel=__channel__,
+        Item(channel=__channel__,
              title="[COLOR azure]Film - [COLOR orange]Novita'[/COLOR]",
              action="fichas",
              url=host + "/nuove-uscite/",
@@ -74,6 +74,7 @@ def mainlist(item):
 
     return itemlist
 
+
 # ==============================================================================================================================================
 
 def search(item, texto):
@@ -91,22 +92,21 @@ def search(item, texto):
             logger.error("%s" % line)
         return []
 
+
 # ==============================================================================================================================================
 
 def genere(item):
     logger.info("[thegroove360.altadefinizione_2] genere")
     itemlist = []
 
-    data = scrapertools.anti_cloudflare(item.url, headers)
+    data = httptools.downloadpage(item.url, headers=headers).data
 
-    patron = '<ul class="listSubCat" id="Film">(.*?)</ul>'
-    data = scrapertools.find_single_match(data, patron)
-
-    patron = '<li><a href="(.*?)">(.*?)</a></li>'
-    matches = re.compile(patron, re.DOTALL).findall(data)
-    scrapertools.printMatches(matches)
+    patron = r'<option value=\"([^\"]+)\">(.*?)</'
+    matches = re.compile(patron, re.MULTILINE).findall(data)
 
     for scrapedurl, scrapedtitle in matches:
+        if scrapedurl == host:
+            continue
         itemlist.append(
             Item(channel=__channel__,
                  action="fichas",
@@ -117,13 +117,14 @@ def genere(item):
 
     return itemlist
 
+
 # ==============================================================================================================================================
 
 def anno(item):
     logger.info("[thegroove360.altadefinizione_2] genere")
     itemlist = []
 
-    data = scrapertools.anti_cloudflare(item.url, headers)
+    data = httptools.downloadpage(item.url, headers=headers).data
 
     patron = '<ul class="listSubCat" id="Anno">(.*?)</div>'
     data = scrapertools.find_single_match(data, patron)
@@ -138,86 +139,15 @@ def anno(item):
                  action="fichas",
                  title=scrapedtitle,
                  url=scrapedurl,
+                 extra="nospace",
                  thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_year_P.png",
                  folder=True))
 
     return itemlist
 
+
 # ==============================================================================================================================================
 
-def cinema(item):
-    logger.info("[thegroove360.altadefinizione_2] fichas")
-
-    itemlist = []
-
-    # Descarga la pagina
-    data = scrapertools.anti_cloudflare(item.url, headers)
-    # fix - calidad
-    data = re.sub(
-        r'<div class="wrapperImage".*[^<]+<a',
-        '<div class="wrapperImage"><fix>SD</fix><a',
-        data
-    )
-    # fix - IMDB
-    data = re.sub(
-        r'<h5> </div>',
-        '<fix>IMDB: 0.0</fix>',
-        data
-    )
-
-    if "/?s=" in item.url:
-        patron = '<div class="col-lg-3 col-md-3 col-xs-3">.*?'
-        patron += 'href="([^"]+)".*?'
-        patron += '<div class="wrapperImage"[^<]+'
-        patron += '<[^>]+>([^<]+)<.*?'
-        patron += 'src="([^"]+)".*?'
-        patron += 'class="titleFilm">([^<]+)<.*?'
-        patron += 'IMDB: ([^<]+)<'
-    else:
-        patron = '<div class="wrapperImage"[^<]+\s*[^>]+>([^<]+).*?\s*<a href="([^"]+)">'
-        patron += '<img width=".*?" height=".*?" src="([^"]+)" class="attachment-loc-film size-loc-film wp-post-image" alt="[^>]+"\s*/>'
-        patron += '</a>\s*<div class="info">\s*<h2 class="titleFilm"><a href[^>]+>([^<]+)</a></h2>\s*[^>]+>[^>]+>\s*IMDB: ([^<]+)<'
-
-    matches = re.compile(patron, re.DOTALL).findall(data)
-
-    for scraped_1, scraped_2, scrapedthumbnail, scrapedtitle, scrapedpuntuacion in matches:
-
-        scrapedurl = scraped_2
-        scrapedcalidad = scraped_1
-        if "/?s=" in item.url:
-            scrapedurl = scraped_1
-            scrapedcalidad = scraped_2
-
-        title = scrapertools.decodeHtmlentities(scrapedtitle)
-        title += " (" + scrapedcalidad + ") (" + scrapedpuntuacion + ")"
-
-        # ------------------------------------------------
-        scrapedthumbnail = httptools.get_url_headers(scrapedthumbnail)
-        # ------------------------------------------------
-
-        itemlist.append(infoSod(
-            Item(channel=__channel__,
-                 action="findvideos",
-                 contentType="movie",
-                 title="[COLOR azure]" + title + "[/COLOR]",
-                 url=scrapedurl,
-                 thumbnail=scrapedthumbnail,
-                 fulltitle=title,
-                 show=title), tipo='movie'))
-
-    # Paginación
-    next_page = scrapertools.find_single_match(data, '<a class="next page-numbers" href="([^"]+)">')
-    if next_page != "":
-        itemlist.append(
-            Item(channel=__channel__,
-                 action="fichas",
-                 title="[COLOR orange]Successivo >>[/COLOR]",
-                 url=next_page,
-                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
-
-    return itemlist
-	
-# ==============================================================================================================================================
 
 def fichas(item):
     logger.info("[thegroove360.altadefinizione_2] fichas")
@@ -225,71 +155,57 @@ def fichas(item):
     itemlist = []
 
     # Descarga la pagina
-    data = scrapertools.anti_cloudflare(item.url, headers)
-    # fix - calidad
-    data = re.sub(
-        r'<div class="wrapperImage"[^<]+<a',
-        '<div class="wrapperImage"><fix>SD</fix><a',
-        data
-    )
-    # fix - IMDB
-    data = re.sub(
-        r'<h5> </div>',
-        '<fix>IMDB: 0.0</fix>',
-        data
-    )
+    data = httptools.downloadpage(item.url, headers=headers).data
 
-    if "/?s=" in item.url:
-        patron = '<div class="col-lg-3 col-md-3 col-xs-3">.*?'
-        patron += 'href="([^"]+)".*?'
-        patron += '<div class="wrapperImage"[^<]+'
-        patron += '<[^>]+>([^<]+)<.*?'
-        patron += 'src="([^"]+)".*?'
-        patron += 'class="titleFilm">([^<]+)<.*?'
-        patron += 'IMDB: ([^<]+)<'
+    if item.extra == "nospace":
+        patron = r'<div class=\"wrapperImage\">(<a|<span.*?>(.*?)<.*?<a) href=\"([^\"]+)\".*?<img width=.*?src=\"([^\"]+)\".*?\s.*?<h2.*?<a.*?>(.*)</a>.*?<div.*?/>(.*?)<'
+    elif item.action == "search":
+        patron = r'<a href=\"([^\"]+)\">\s<div class=\"wrapperImage\">?(<img|<span.*?>(.*?)<.*?<img) width=.*?src=\"([^\"]+)\".*?\s.*?<h5.*?>(.*?)</h5>.*?<div.*?/>(.*?)<'
     else:
-        patron = '<div class="wrapperImage"[^<]+\s*[^>]+>([^<]+).*?\s*<a href="([^"]+)">'
-        patron += '<img width=".*?" height=".*?" src="([^"]+)" class="attachment-loc-film size-loc-film wp-post-image" alt="[^>]+"\s*/>'
-        patron += '</a>\s*<div class="info">\s*<h2 class="titleFilm"><a href[^>]+>([^<]+)</a></h2>\s*[^>]+>[^>]+>\s*IMDB: ([^<]+)<'
+        patron = r'<div class=\"wrapperImage\">?(\s|\s<span.*?>(.*?)</.*?\s)<a href=\"([^\"]+)\"><img width=.*?src=\"([^\"]+)\".*?\s.*?<h2.*?<a.*?>(.*)</a>.*?\s<div.*?/>(.*)<'
+    matches = re.finditer(patron, data, re.MULTILINE)
 
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    for matchNum, match in enumerate(matches, start=1):
 
-    for scraped_1, scraped_2, scrapedthumbnail, scrapedtitle, scrapedpuntuacion in matches:
+        scrapedq = "SD"
+        if match.group(2):
+            scrapedq = match.group(2)
 
-        scrapedurl = scraped_2
-        scrapedcalidad = scraped_1
-        if "/?s=" in item.url:
-            scrapedurl = scraped_1
-            scrapedcalidad = scraped_2
+        scrapedurl = match.group(3)
 
-        title = scrapertools.decodeHtmlentities(scrapedtitle)
-        title += " (" + scrapedcalidad + ") (" + scrapedpuntuacion + ")"
+        if item.action == "search":
+            scrapedurl = match.group(1)
 
-        # ------------------------------------------------
-        scrapedthumbnail = httptools.get_url_headers(scrapedthumbnail)
-        # ------------------------------------------------
+            scrapedq = "SD"
+            if match.group(3):
+                scrapedq = match.group(3)
 
-        itemlist.append(infoSod(
+        scrapedthumbnail = match.group(4)
+        scrapedtitle = match.group(5)
+        scrapedvote = match.group(6).strip()
+
+        itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
                  contentType="movie",
-                 title="[COLOR azure]" + title + "[/COLOR]",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR] [" + scrapedq + "] " + scrapedvote,
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
-                 fulltitle=title,
-                 show=title), tipo='movie'))
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle))
 
     # Paginación
-    next_page = scrapertools.find_single_match(data, '<a class="next page-numbers" href="([^"]+)">')
+    next_page = scrapertools.find_single_match(data, '<a class=\"next page-numbers\" href=\"([^\"]+)\">')
     if next_page != "":
         itemlist.append(
             Item(channel=__channel__,
-                 action="fichas",
+                 action="cinema",
                  title="[COLOR orange]Successivo >>[/COLOR]",
                  url=next_page,
                  thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
 
     return itemlist
+
 
 # ==============================================================================================================================================
 
@@ -299,7 +215,7 @@ def findvideos(item):
     itemlist = []
 
     # Descarga la página
-    data = scrapertools.anti_cloudflare(item.url, headers).replace('\n', '')
+    data = httptools.downloadpage(item.url, headers=headers).data.replace('\n', '')
     patron = r'<iframe width=".+?" height=".+?" src="([^"]+)"></iframe>'
     url = scrapertools.find_single_match(data, patron).replace("?alta", "")
     url = url.replace("&download=1", "")
@@ -318,7 +234,8 @@ def findvideos(item):
         res = scrapertools.find_single_match(data, patron_res)
 
         urls = []
-        for res_url, res_video in scrapertools.find_multiple_matches(res, '<option.*?value="([^"]+?)">([^<]+?)</option>'):
+        for res_url, res_video in scrapertools.find_multiple_matches(res,
+                                                                     '<option.*?value="([^"]+?)">([^<]+?)</option>'):
 
             data = scrapertools.cache_page(urlparse.urljoin(url, res_url), headers=headers).replace('\n', '')
 
@@ -341,6 +258,7 @@ def findvideos(item):
             videoitem.channel = __channel__
 
     return itemlist
+
 
 # -----------------------------------------------
 # -----------------------------------------------
