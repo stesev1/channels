@@ -47,6 +47,7 @@ def find_videos(text):
                     # req = httptools.downloadpage(url)
                     req = requests.get(url, headers=headers)
                     idata = req.content
+                    print idata
                     patron = r"document.cookie\s=\s.*?'(.*)'"
                     # matches = re.compile(patron, re.IGNORECASE).findall(idata)
                     matches = re.finditer(patron, idata, re.MULTILINE)
@@ -57,10 +58,9 @@ def find_videos(text):
                             mcookie[c] = v
 
                     try:
-                        print mcookie
                         patron = r';URL=([^\"]+)\">'
                         dest = scrapertools.get_match(idata, patron)
-                        r = requests.post(dest, cookies=mcookie)
+                        r = requests.post(dest, cookies=mcookie, headers=headers)
                         url = r.url
                     except:
                         r = requests.get(req.url, headers=headers)
