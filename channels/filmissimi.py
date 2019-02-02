@@ -10,7 +10,7 @@ import re
 import xbmc
 
 from core import httptools
-from platformcode import logger
+from platformcode import logger, servertools
 from core import scrapertools
 from core.item import Item
 from core.tmdb import infoSod
@@ -18,6 +18,7 @@ from core.tmdb import infoSod
 __channel__ = "filmissimi"
 host = "https://altadefinizione.wiki/"
 headers = [['Referer', host]]
+
 
 # -------------------------------------------------------------------------------------------------------------------------------------------
 def mainlist(item):
@@ -72,7 +73,7 @@ def newest(categoria):
             if itemlist[-1].action == "elenco":
                 itemlist.pop()
 
-    # Continua la ricerca in caso di errore 
+    # Continua la ricerca in caso di errore
     except:
         import sys
         for line in sys.exc_info():
@@ -90,10 +91,10 @@ def genere(item):
     itemlist = []
 
     data = httptools.downloadpage(item.url, headers=headers).data
-    bloque = scrapertools.get_match(data, '<ul id="menu-categorie-1" class="ge">(.*?)</div>')
+    # bloque = scrapertools.get_match(data, '<ul id="menu-categorie-1" class="ge">(.*?)</div>')
 
-    patron = '<li id=[^>]+><a href="(.*?)">(.*?)</a></li>'
-    matches = re.compile(patron, re.DOTALL).findall(bloque)
+    patron = '<li id=\"menu-item-.*?menu-item-object-category.*?<a href=\"([^\"]+)\">(.*?)<'
+    matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedtitle in matches:
         scrapedplot = ""
@@ -119,23 +120,24 @@ def elenco(item):
 
     data = httptools.downloadpage(item.url, headers=headers).data
 
-    elemento = scrapertools.find_single_match(data, '<div class="estre">(.*?)<div class="paginacion">')
+    # elemento = scrapertools.find_single_match(data, '<div class="estre">(.*?)<div class="paginacion">')
 
-    patron = '<div class="item">[^<]+<a href="(.*?)"[^<]+<[^<]+<img.*?icon[^<]+<img src="(.*?)" alt="(.*?)"[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+<[^<]+</div>'
-    matches = re.compile(patron, re.DOTALL).findall(elemento)
+    patron = '<div class=\"item\">\s<a href=\"([^\"]+)\" title=\"(.*?)\">\s.*?\s.*?<img src=\"([^\"]+)'
+    matches = re.compile(patron, re.DOTALL).findall(data)
 
-    for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
+    for scrapedurl, scrapedtitle, scrapedthumbnail in matches:
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
-        scrapedtitle = scrapedtitle.split("(")[0]
+        scrapedtitle = scrapedtitle.split(" (")[0]
         logger.info("title=[" + scrapedtitle + "] url=[" + scrapedurl + "] thumbnail=[" + scrapedthumbnail + "]")
-        itemlist.append(infoSod(
+        itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
                  contentType="movie",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  fulltitle=scrapedtitle,
+                 extra="movie",
                  url=scrapedurl,
-                 thumbnail=scrapedthumbnail), tipo="movie"))
+                 thumbnail=scrapedthumbnail))
 
     # Paginazione
     # ===========================================================================================================================
@@ -152,6 +154,39 @@ def elenco(item):
     return itemlist
 
 
+def findvideos(item):
+
+    data = httptools.downloadpage(item.url).data
+
+    patron = r'<div class=\"(.*?) tr\">\s+<iframe.*?data-lazy-src=\"([^\"]+)\">'
+    matches = re.compile(patron, re.MULTILINE).findall(data)
+
+    data = ""
+    for scrapedtitle, scrapedurl in matches:
+        print scrapedurl
+        sdata = httptools.downloadpage(scrapedurl, headers=headers).data
+
+        if "protectlink.stream" in scrapedurl:
+            regex = r"Base64.decode\('([^']+)'"
+            b64data = scrapertools.find_single_match(sdata, regex)
+            import base64
+            sdata = base64.b64decode(b64data)
+
+        data += sdata + "\n"
+
+    itemlist = servertools.find_video_items(data=data)
+
+    for videoitem in itemlist:
+        videoitem.title = item.title + videoitem.title
+        videoitem.fulltitle = item.fulltitle
+        videoitem.thumbnail = item.thumbnail
+        videoitem.show = item.show
+        videoitem.plot = item.plot
+        videoitem.channel = __channel__
+
+    return itemlist
+
+
 # ===========================================================================================================================================
 
 
@@ -163,18 +198,19 @@ def search(item, texto):
 
     data = httptools.downloadpage(url, headers=headers).data
 
-    patron = 'class="s-img">[^<]+<.*?src="(.*?)"[^<]+<[^<]+<[^<]+</div>[^<]+<[^<]+<[^<]+<[^<]+</span>[^<]+</span>[^<]+<h3><a href="(.*?)">(.*?)</a></h3>'
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    patron = r's-item.*?\s.*?\s.*?\ssrc=\"([^\"]+)\".*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*?\s.*\s.*?\s.*?\s.*?\s.*?<a href=\"([^\"]+)\">(.*?)<'
+    matches = re.compile(patron, re.MULTILINE).findall(data)
 
     for scrapedthumbnail, scrapedurl, scrapedtitle in matches:
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
-        itemlist.append(infoSod(
+        itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  fulltitle=scrapedtitle,
+                 extra="movie",
                  url=scrapedurl,
-                 thumbnail=scrapedthumbnail), tipo="movie"))
+                 thumbnail=scrapedthumbnail))
 
     # Paginazione
     # ===========================================================================================================================
@@ -239,4 +275,5 @@ ListTxt = "[COLOR orange]Torna a elenco principale [/COLOR]"
 AvantiTxt = "[COLOR orange]Successivo>>[/COLOR]"
 AvantiImg = "http://2.bp.blogspot.com/-fE9tzwmjaeQ/UcM2apxDtjI/AAAAAAAAeeg/WKSGM2TADLM/s1600/pager+old.png"
 thumbnail = "http://orig03.deviantart.net/6889/f/2014/079/7/b/movies_and_popcorn_folder_icon_by_matheusgrilo-d7ay4tw.png"
+
 # ----------------------------------------------------------------------------------------------------------------------------------#----------------------------------------------------------------------------------------------------------------------------------
