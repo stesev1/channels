@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
 # Thegroove360 - XBMC Plugin
-# Canale altadefinizione.center
+# Canale altadefinizione.im
 # ------------------------------------------------------------
 
 import base64
@@ -21,7 +21,7 @@ __type__ = "generic"
 __title__ = "AltaDefinizione"
 __language__ = "IT"
 
-host = "https://altadefinizione.center"
+host = "https://altadefinizione.im"
 
 headers = [
     ['User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'],
@@ -43,12 +43,12 @@ def mainlist(item):
     itemlist = [
         Item(channel=__channel__,
              title="[COLOR azure]Film - [COLOR orange]Al Cinema[/COLOR]",
-             action="fichas",
+             action="peliculas",
              url=host + "/al-cinema/",
              thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_serie_P.png"),
         Item(channel=__channel__,
              title="[COLOR azure]Film - [COLOR orange]Novita'[/COLOR]",
-             action="fichas",
+             action="peliculas",
              url=host + "/nuove-uscite/",
              thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
         Item(channel=__channel__,
@@ -63,7 +63,7 @@ def mainlist(item):
              thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_year_P.png"),
         Item(channel=__channel__,
              title="[COLOR azure]Film - [COLOR orange]Sottotitolati[/COLOR]",
-             action="fichas",
+             action="peliculas",
              url=host + "/sub-ita/",
              thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_sub_P.png"),
         Item(channel=__channel__,
@@ -74,13 +74,12 @@ def mainlist(item):
 
     return itemlist
 
-
 # ==============================================================================================================================================
 
 def search(item, texto):
     logger.info("[thegroove360.altadefinizione_2] " + item.url + " search " + texto)
 
-    item.url = host + "/?s=" + texto
+    item.url = host + "/?search=" + texto
 
     try:
         return fichas(item)
@@ -99,17 +98,20 @@ def genere(item):
     logger.info("[thegroove360.altadefinizione_2] genere")
     itemlist = []
 
-    data = httptools.downloadpage(item.url, headers=headers).data
+    data = scrapertools.anti_cloudflare(item.url, headers)
 
-    patron = r'<option value=\"([^\"]+)\">(.*?)</'
-    matches = re.compile(patron, re.MULTILINE).findall(data)
+    patron = '<ul class="listSubCat" id="Film">(.*?)</ul>'
+    data = scrapertools.find_single_match(data, patron)
+
+    patron = '<li><a href="(.*?)">(.*?)</a></li>'
+    matches = re.compile(patron, re.DOTALL).findall(data)
+    scrapertools.printMatches(matches)
 
     for scrapedurl, scrapedtitle in matches:
-        if scrapedurl == host:
-            continue
+        scrapedurl = host + scrapedurl
         itemlist.append(
             Item(channel=__channel__,
-                 action="fichas",
+                 action="peliculas",
                  title=scrapedtitle,
                  url=scrapedurl,
                  thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/genre_P.png",
@@ -117,14 +119,13 @@ def genere(item):
 
     return itemlist
 
-
 # ==============================================================================================================================================
 
 def anno(item):
     logger.info("[thegroove360.altadefinizione_2] genere")
     itemlist = []
 
-    data = httptools.downloadpage(item.url, headers=headers).data
+    data = scrapertools.anti_cloudflare(item.url, headers)
 
     patron = '<ul class="listSubCat" id="Anno">(.*?)</div>'
     data = scrapertools.find_single_match(data, patron)
@@ -134,134 +135,90 @@ def anno(item):
     scrapertools.printMatches(matches)
 
     for scrapedurl, scrapedtitle in matches:
+        scrapedurl = host + scrapedurl
         itemlist.append(
             Item(channel=__channel__,
-                 action="fichas",
+                 action="peliculas",
                  title=scrapedtitle,
                  url=scrapedurl,
-                 extra="nospace",
                  thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_year_P.png",
                  folder=True))
 
     return itemlist
 
+# ==============================================================================================================================================
+
+def peliculas(item):
+    logger.info("[thegroove360.altadefinzione_2] peliculas")
+    itemlist = []
+
+    # Carica la pagina
+    data = httptools.downloadpage(item.url, headers=headers).data
+
+    #Estrae il contenuto
+    patron = r'<div class="col-lg-3 col-md-3 col-xs-3">.*?<div class="wrapperImage">.*?<span class=.*?<span class=.*?<a href="(.*?)".*?src="(.*?)".*?<a href=.*?">.*?(\S[^\"]+?)\s\s'
+    matches = re.compile(patron, re.DOTALL).findall(data)
+
+    for scrapedurl, scrapedthumbnail,scrapedtitle in matches:
+        itemlist.append(infoSod(
+            Item(channel=__channel__,
+                 action="findlink",
+                 contentType="movie",
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 url=host + scrapedurl,
+                 thumbnail=scrapedthumbnail,
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle), tipo='movie'))
+
+    # Paginación
+    next_page = scrapertools.find_single_match(data, '<span aria-current="page" class="page-numbers current">(.*?)</span></li><li>')
+    if next_page != "":
+        next_page = int(next_page) + 1
+        next_page = host + "/page/" + str(next_page) + "/"
+        itemlist.append(
+            Item(channel=__channel__,
+                action="peliculas",
+                title="[COLOR orange]Successivo >>[/COLOR]",
+                url=next_page,
+                thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
+
+    return itemlist
 
 # ==============================================================================================================================================
 
-
-def fichas(item):
-    logger.info("[thegroove360.altadefinizione_2] fichas")
-
+def findlink(item):
+    logger.info("[thegroove360.altadefinzione_2] findlink")
     itemlist = []
 
-    # Descarga la pagina
+    #Carica la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
 
-    if item.extra == "nospace":
-        patron = r'<div class=\"wrapperImage\">(<a|<span.*?>(.*?)<.*?<a) href=\"([^\"]+)\".*?<img width=.*?src=\"([^\"]+)\".*?\s.*?<h2.*?<a.*?>(.*)</a>.*?<div.*?/>(.*?)<'
-    elif item.action == "search":
-        patron = r'<a href=\"([^\"]+)\">\s<div class=\"wrapperImage\">?(<img|<span.*?>(.*?)<.*?<img) width=.*?src=\"([^\"]+)\".*?\s.*?<h5.*?>(.*?)</h5>.*?<div.*?/>(.*?)<'
-    else:
-        patron = r'<div class=\"wrapperImage\">?(\s|\s<span.*?>(.*?)</.*?\s)<a href=\"([^\"]+)\"><img width=.*?src=\"([^\"]+)\".*?\s.*?<h2.*?<a.*?>(.*)</a>.*?\s<div.*?/>(.*)<'
-    matches = re.finditer(patron, data, re.MULTILINE)
+    #Estrae il contenuto
+    patron = r'<div class="col-lg-12 frameDown">.*?src="(.*?)"'
+    matches = re.compile(patron, re.DOTALL).findall(data)
 
-    for matchNum, match in enumerate(matches, start=1):
+    #Ricarico la pagina
+    url = host + matches[0]
+    data = httptools.downloadpage(url).data
 
-        scrapedq = "SD"
-        if match.group(2):
-            scrapedq = match.group(2)
+    #Estrae il contenuto
+    patron = r'class="dwnMob linkDown" href="(.*?)".*?alt="(.*?)\s'
+    matches = re.compile(patron, re.DOTALL).findall(data)
 
-        scrapedurl = match.group(3)
-
-        if item.action == "search":
-            scrapedurl = match.group(1)
-
-            scrapedq = "SD"
-            if match.group(3):
-                scrapedq = match.group(3)
-
-        scrapedthumbnail = match.group(4)
-        scrapedtitle = match.group(5)
-        scrapedvote = match.group(6).strip()
-
-        itemlist.append(
+    for scrapedurl, scrapedserver in matches:
+        itemlist.append(infoSod(
             Item(channel=__channel__,
                  action="findvideos",
                  contentType="movie",
-                 title="[COLOR azure]" + scrapedtitle + "[/COLOR] [" + scrapedq + "] " + scrapedvote,
+                 title="[COLOR orange][" + scrapedserver + "] - [/COLOR]" + "[COLOR azure]" + item.title + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail=scrapedthumbnail,
-                 fulltitle=scrapedtitle,
-                 show=scrapedtitle))
-
-    # Paginación
-    next_page = scrapertools.find_single_match(data, '<a class=\"next page-numbers\" href=\"([^\"]+)\">')
-    if next_page != "":
-        itemlist.append(
-            Item(channel=__channel__,
-                 action="cinema",
-                 title="[COLOR orange]Successivo >>[/COLOR]",
-                 url=next_page,
-                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png"))
+                 thumbnail=item.thumbnail,
+                 fulltitle="[COLOR orange][" + scrapedserver + "] - [/COLOR]" + "[COLOR azure]" + item.title + "[/COLOR]",
+                 show="[COLOR orange][" + scrapedserver + "] - [/COLOR]" + "[COLOR azure]" + item.title + "[/COLOR]"), tipo='movie'))
 
     return itemlist
-
 
 # ==============================================================================================================================================
-
-def findvideos(item):
-    logger.info("[thegroove360.altadefinizione_2] findvideos")
-
-    itemlist = []
-
-    # Descarga la página
-    data = httptools.downloadpage(item.url, headers=headers).data.replace('\n', '')
-    patron = r'<iframe width=".+?" height=".+?" src="([^"]+)"></iframe>'
-    url = scrapertools.find_single_match(data, patron).replace("?alta", "")
-    url = url.replace("&download=1", "")
-
-    if 'hdpass' in url:
-        data = scrapertools.cache_page(url, headers=headers)
-
-        start = data.find('<div class="row mobileRes">')
-        end = data.find('<div id="playerFront">', start)
-        data = data[start:end]
-
-        patron_res = '<div class="row mobileRes">(.*?)</div>'
-        patron_mir = '<div class="row mobileMirrs">(.*?)</div>'
-        patron_media = r'<input type="hidden" name="urlEmbed" data-mirror="([^"]+)" id="urlEmbed" value="([^"]+)" />'
-
-        res = scrapertools.find_single_match(data, patron_res)
-
-        urls = []
-        for res_url, res_video in scrapertools.find_multiple_matches(res,
-                                                                     '<option.*?value="([^"]+?)">([^<]+?)</option>'):
-
-            data = scrapertools.cache_page(urlparse.urljoin(url, res_url), headers=headers).replace('\n', '')
-
-            mir = scrapertools.find_single_match(data, patron_mir)
-
-            for mir_url in scrapertools.find_multiple_matches(mir, '<option.*?value="([^"]+?)">[^<]+?</value>'):
-
-                data = scrapertools.cache_page(urlparse.urljoin(url, mir_url), headers=headers).replace('\n', '')
-
-                for media_label, media_url in re.compile(patron_media).findall(data):
-                    urls.append(url_decode(media_url))
-
-        itemlist = servertools.find_video_items(data='\n'.join(urls))
-        for videoitem in itemlist:
-            videoitem.title = item.title + videoitem.title
-            videoitem.fulltitle = item.fulltitle
-            videoitem.thumbnail = item.thumbnail
-            videoitem.show = item.show
-            videoitem.plot = item.plot
-            videoitem.channel = __channel__
-
-    return itemlist
-
-
-# -----------------------------------------------
-# -----------------------------------------------
 
 def url_decode(url_enc):
     lenght = len(url_enc)
