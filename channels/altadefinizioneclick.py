@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
 # Thegroove360 - XBMC Plugin
-# Canale altadefinizione.casa
+# Canale altadefinizione.to
 # ------------------------------------------------------------
 
 import base64
