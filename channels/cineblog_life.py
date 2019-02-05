@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
 # Thegroove360 - XBMC Plugin
-# Canale  cineblog_life
+# Canale  cineblog_men
 # ------------------------------------------------------------
 
 import re
@@ -16,7 +16,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "cineblog_life"
-host = "https://www.cineblog.life"
+host = "https://www.cineblog.men"
 headers = [['Referer', host]]
 
 def mainlist(item):
