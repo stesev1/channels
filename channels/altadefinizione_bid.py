@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
 # Thegroove360 - XBMC Plugin
-# Canale altadefinizione.casa
+# Canale altadefinizione.band
 # ------------------------------------------------------------
 
 import base64
@@ -21,7 +21,7 @@ __type__ = "generic"
 __title__ = "AltaDefinizione"
 __language__ = "IT"
 
-host = "https://altadefinizione.casa"
+host = "https://altadefinizione.band"
 
 headers = [
     ['User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0'],
