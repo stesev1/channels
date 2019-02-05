@@ -1,42 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<channel>
-    <id>cineblog_life</id>
-    <name>Cineblog Life</name>
-
-    <active>true</active>
-    <adult>false</adult>
-    <language>it</language>
-
-    <fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
-    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/cinebloglife.png</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/cinebloglife.png</bannermenu>
-
-    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-    <version>10</version>
-    <date>16/12/2018</date>
-    <changes>Update and Fix</changes>
-
-    <categories>
-        <category>movie</category>
-        <category>vos</category>
-    </categories>
-
-    <settings>
-        <include_in_global_search>true</include_in_global_search>
-        <id>include_in_global_search</id>
-        <type>bool</type>
-        <label>Includi ricerca globale</label>
-        <default>false</default>
-        <enabled>false</enabled>
-        <visible>false</visible>
-    </settings>
-	
-    <settings>
-        <id>include_in_newest_peliculas</id>
-        <type>bool</type>
-        <label>Includi in novità - film</label>
-        <default>true</default>
-        <enabled>true</enabled>
-        <visible>true</visible>
-    </settings>
-</channel>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<channel>
+    <id>cineblog_life</id>
+    <name>Cineblog Men</name>
+
+    <active>true</active>
+    <adult>false</adult>
+    <language>it</language>
+
+    <fanart>https://raw.githubusercontent.com/stesev1/channels/master/images/background/background.jpg</fanart>
+    <thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/cinebloglife.png</thumbnail>
+    <bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/cinebloglife.png</bannermenu>
+
+    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
+    <version>11</version>
+    <date>05/01/2019</date>
+    <changes>Change Domain</changes>
+
+    <categories>
+        <category>movie</category>
+        <category>vos</category>
+    </categories>
+
+    <settings>
+        <include_in_global_search>true</include_in_global_search>
+        <id>include_in_global_search</id>
+        <type>bool</type>
+        <label>Includi ricerca globale</label>
+        <default>false</default>
+        <enabled>false</enabled>
+        <visible>false</visible>
+    </settings>
+
+    <settings>
+        <id>include_in_newest_peliculas</id>
+        <type>bool</type>
+        <label>Includi in novità - film</label>
+        <default>true</default>
+        <enabled>true</enabled>
+        <visible>true</visible>
+    </settings>
+
+</channel>
