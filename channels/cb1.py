@@ -80,6 +80,7 @@ def mainlist(item):
 
     return itemlist
 
+# ==================================================================================================================================================
 
 def peliculas(item):
     logger.info("[thegroove360.cb1] peliculas")
@@ -131,8 +132,11 @@ def peliculas(item):
 
     return itemlist
 
+# ==================================================================================================================================================
+
 def next_page(itemlist,np_url,np_action,np_extra):
     scrapedtitle = "[COLOR orange]Successivo>>[/COLOR]"
+    np_url = host + np_url
     itemlist.append(
         Item(channel=__channel__,
              action=np_action,
@@ -147,22 +151,31 @@ def next_page(itemlist,np_url,np_action,np_extra):
              title="[COLOR yellow]Torna Home[/COLOR]",
              folder=True))
 
+# ==================================================================================================================================================
 
 def updates(item):
     logger.info("[thegroove360.cb1] updates")
     return menulist(item,'<select name="select1"(.*?)</select>')
-			 
+
+# ==================================================================================================================================================
+
 def menugeneros(item):
     logger.info("[thegroove360.cb1] menugeneros")
     return menulist(item,'<select name="select2"(.*?)</select>')
+
+# ==================================================================================================================================================
 
 def menuhd(item):
     logger.info("[thegroove360.cb1] menuhd")
     return menulist(item,'<select name="select1"(.*?)</select>')
 
+# ==================================================================================================================================================
+
 def menuanyos(item):
     logger.info("[thegroove360.cb1] menuvk")
     return menulist(item,'<select name="select3"(.*?)</select>')
+
+# ==================================================================================================================================================
 
 def menulist(item,re_txt):
     itemlist = []
@@ -193,6 +206,8 @@ def menulist(item,re_txt):
 
     return itemlist
 
+# ==================================================================================================================================================
+
 # Al llamarse "search" la función, el launcher pide un texto a buscar y lo añade como parámetro
 def search(item, texto):
     logger.info("[thegroove360.cb1] " + item.url + " search " + texto)
@@ -213,6 +228,7 @@ def search(item, texto):
             logger.error("%s" % line)
         return []
 
+# ==================================================================================================================================================
 
 def listserie(item):
     logger.info("[thegroove360.cb1] listaserie")
@@ -227,7 +243,7 @@ def listserie(item):
 
     for match in matches:
         scrapedtitle = scrapertools.unescape(match.group(3))
-        scrapedurl = match.group(1)
+        scrapedurl = host + match.group(1)
         scrapedthumbnail = match.group(2)
         scrapedplot = scrapertools.unescape(match.group(4))
         scrapedplot = scrapertools.htmlclean(scrapedplot).strip()
@@ -252,6 +268,7 @@ def listserie(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def season_serietv(item):
     def load_season_serietv(html, item, itemlist, season_title):
@@ -300,6 +317,7 @@ def season_serietv(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def episodios(item):
     itemlist = []
@@ -318,6 +336,7 @@ def episodios(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def episodios_serie_new(item):
     def load_episodios(html, item, itemlist, lang_title):
@@ -358,6 +377,7 @@ def episodios_serie_new(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def findvideos(item):
     if item.extra == "movie":
@@ -366,6 +386,7 @@ def findvideos(item):
         return findvid_serie(item)
     return []
 
+#========================================================================================================================================
 
 def findvid_film(item):
     def load_links(itemlist,re_txt,color,desc_txt):
@@ -426,6 +447,7 @@ def findvid_film(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def findvid_serie(item):
     def load_vid_series(html, item, itemlist, blktxt):
@@ -487,6 +509,7 @@ def findvid_serie(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def play(item):
     logger.info("[thegroove360.cb1] play")
@@ -556,6 +579,7 @@ def play(item):
 
     return itemlist
 
+#========================================================================================================================================
 
 def HomePage(item):
     import xbmc
