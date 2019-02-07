@@ -15,7 +15,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "cinemalibero"
-host = "https://www.cinemalibero.news/"
+host = "https://www.cinemalibero.center/"
 headers = [['Referer', host]]
 
 
@@ -57,10 +57,16 @@ def mainlist(item):
                      url="%s/aggiornamenti-serie-tv/" % host,
                      thumbnail="ttps://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/tv_serie_P.png"),
                 Item(channel=__channel__,
-                     title="[COLOR yellow]Cerca Serie TV...[/COLOR]",
+                     title="[COLOR yellow]Cerca Serie TV con Stagioni...[/COLOR]",
                      action="search",
                      extra="serie",
-                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")]
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png"),
+                Item(channel=__channel__,
+                     title="[COLOR yellow]Cerca Serie TV...[/COLOR]",
+                     action="search",
+                     extra="serie2",
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/search_P.png")
+                ]
 
     return itemlist
 
@@ -108,6 +114,8 @@ def search(item, texto):
             return peliculas(item)
         if item.extra == "serie":
             return peliculas_tv(item)
+        if item.extra == "serie2":
+            return peliculas_tv_2(item)
     # Continua la ricerca in caso di errore
     except:
         import sys
@@ -226,6 +234,7 @@ def peliculas_tv(item):
 
     return itemlist
 
+# ==================================================================================================================================================
 
 def seasons(item):
     logger.info("[thegroove360.cinemalibero] seasons")
@@ -233,15 +242,15 @@ def seasons(item):
     itemlist = []
     data = httptools.downloadpage(item.url, headers=headers).data
 
-    patron = r'<p><strong>(.*?)</strong></p>'
+    patron = r'<p><strong>(.*?)</strong></p>(.*?)</a></p>'
     matches = re.compile(patron, re.MULTILINE).findall(data)
 
-    for scrapedtitle in matches:
+    for scrapedtitle, scrapedurl in matches:
         itemlist.append(
             Item(channel=__channel__,
-                 action="episodios",
+                 action="episodios_new",
                  title="[COLOR azure]%s[/COLOR]" % scrapedtitle,
-                 url=item.url,
+                 url=scrapedurl,
                  thumbnail=item.thumbnail,
                  extra=item.extra,
                  fulltitle=scrapedtitle,
@@ -251,6 +260,7 @@ def seasons(item):
 
 
 # ==================================================================================================================================================
+
 def episodios(item):
     logger.info("[thegroove360.cinemalibero] episodios")
 
@@ -270,8 +280,7 @@ def episodios(item):
     for match in matches:
 
         scrapedtitle = match.group(1) if match.group(1) is not None else match.group(2)
-
-        lang_title = ""
+        scrapedtitle = scrapedtitle.replace("&#8211;" , "")
 
         #patron = scrapedtitle.replace("(", "\(").replace(")", "\)") + '(<a href.*?</a>)<br />'
         patron = '(<a href.*?</a>)<br />'
@@ -284,11 +293,11 @@ def episodios(item):
             Item(channel=__channel__,
                  action="findvideos",
                  contentType="episode",
-                 title="[COLOR azure]%s[/COLOR]" % (scrapedtitle + " (" + lang_title + ")"),
+                 title=scrapedtitle,
                  url=itemdata,
                  thumbnail=item.thumbnail,
                  extra=item.extra,
-                 fulltitle=scrapedtitle + " (" + lang_title + ")" + ' - ' + item.show,
+                 fulltitle=scrapedtitle,
                  show=item.show))
 
     if config.get_library_support() and len(itemlist) != 0:
@@ -302,6 +311,86 @@ def episodios(item):
 
     return itemlist
 
+# ==================================================================================================================================================
+
+def episodios_new(item):
+    logger.info("[thegroove360.cinemalibero] episodios")
+
+    itemlist = []
+
+    #Estaggo il contenuto del ScrapeURLD precedente
+    patron = r'</p><p>(.*?)<(.*?)</a><|br />(.*?)<(.*?)</a><'
+    matches = re.compile(patron, re.DOTALL).findall(item.url)
+
+    for match in matches:
+        scrapedtitle = match[0] or match[2]
+        scrapedurl = match[1] or match[3]
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="findvideos_new",
+                 contentType="episode",
+                 title=scrapedtitle,
+                 url=scrapedurl,
+                 thumbnail=item.thumbnail,
+                 extra=item.extra,
+                 fulltitle=scrapedtitle,
+                 show=item.show))
+
+    return itemlist
+
+# ==================================================================================================================================================
+
+def peliculas_tv_2(item):
+    logger.info("[thegroove360.cinemalibero] peliculas_tv")
+    itemlist = []
+
+    # Carica la pagina
+    data = httptools.downloadpage(item.url, headers=headers).data
+
+    # Estrae i contenuti
+    patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
+    matches = re.compile(patron, re.DOTALL).findall(data)
+
+    for scrapedurl, scrapedtitle in matches:
+        scrapedplot = ""
+        scrapedthumbnail = ""
+        scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
+        itemlist.append(infoSod(
+            Item(channel=__channel__,
+                 extra=item.extra,
+                 action="findvideos",
+                 fulltitle=scrapedtitle,
+                 show=scrapedtitle,
+                 title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
+                 url=scrapedurl,
+                 thumbnail=scrapedthumbnail,
+                 plot=scrapedplot,
+                 folder=True), tipo='tv'))
+
+    # Paginazione
+    patronvideos = '<a class="next page-numbers" href="(.*?)">'
+    # patronvideos = '<link rel=\'next\' href=\'(.*?)\' />'
+    matches = re.compile(patronvideos, re.DOTALL).findall(data)
+
+    if len(matches) > 0:
+        scrapedurl = urlparse.urljoin(item.url, matches[0])
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="HomePage",
+                 title="[COLOR yellow]Torna Home[/COLOR]",
+                 folder=True)),
+        itemlist.append(
+            Item(channel=__channel__,
+                 extra=item.extra,
+                 action="peliculas_tv",
+                 title="[COLOR orange]Successivo >>[/COLOR]",
+                 url=scrapedurl,
+                 thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/next_1.png",
+                 folder=True))
+
+    return itemlist
+
+# ==================================================================================================================================================
 
 # def episodios(item):
 #     def load_episodios(html, item, itemlist, lang_title):
@@ -369,11 +458,13 @@ def episodios(item):
 #
 #     return itemlist
 
+# ==================================================================================================================================================
 
-def findvideos(item):
+def findvideos_new(item):
     logger.info("[thegroove360.cinemalibero] findvideos")
 
-    data = item.url if item.extra == "serie" else httptools.downloadpage(item.url, headers=headers).data
+    #data = item.url if item.extra == "serie" else httptools.downloadpage(item.url, headers=headers).data
+    data = item.url
 
     itemlist = servertools.find_video_items(data=data)
     for videoitem in itemlist:
@@ -386,11 +477,13 @@ def findvideos(item):
 
     return itemlist
 
+# ==================================================================================================================================================
 
 def HomePage(item):
     import xbmc
     xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
 
+# ==================================================================================================================================================
 
 def peliculas_work(item):
     logger.info("[[thegroove360.cinemalibero] peliculas_work")
