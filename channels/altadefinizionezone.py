@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ------------------------------------------------------------
 # Thegroove360 - XBMC Plugin
-# Canale  altadefinizione01.best
+# Canale  altadefinizione01
 # ------------------------------------------------------------
 
 import re
@@ -16,7 +16,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "altadefinizionezone"
-host = "https://www.altadefinizione01.best"
+host = "https://www.altadefinizione01.party"
 headers = [['Referer', host]]
 
 def mainlist(item):
