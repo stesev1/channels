@@ -16,7 +16,7 @@ from core.tmdb import infoSod
 
 __channel__ = "serietvsubita"
 
-host = "http://serietvsubita.net"
+host = "http://serietvsubita.ws"
 
 
 def mainlist(item):
