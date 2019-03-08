@@ -133,7 +133,7 @@ def peliculas(item):
     # Carica la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
 
-    patron = r'<div class="box">.<div class="wrapperImage">.*?href="(.*?)".*?src="(.*?)".*?<h2.*?<a.*?">(.*?)<'
+    patron = r'</span><a href="(.*?)".*?src="(.*?)".*?alt="(.*?)"'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedthumbnail,scrapedtitle in matches:
