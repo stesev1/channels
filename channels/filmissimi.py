@@ -16,7 +16,7 @@ from core.item import Item
 from core.tmdb import infoSod
 
 __channel__ = "filmissimi"
-host = "https://altadefinizione.wiki/"
+host = "https://altadefinizione.doctor"
 headers = [['Referer', host]]
 
 
@@ -122,10 +122,10 @@ def elenco(item):
 
     # elemento = scrapertools.find_single_match(data, '<div class="estre">(.*?)<div class="paginacion">')
 
-    patron = '<div class=\"item\">\s<a href=\"([^\"]+)\" title=\"(.*?)\">\s.*?\s.*?<img src=\"([^\"]+)'
+    patron = '<div class="poster"><img src="(.*?)" alt="(.*?)">.*?href="(.*?)">'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
-    for scrapedurl, scrapedtitle, scrapedthumbnail in matches:
+    for scrapedthumbnail, scrapedtitle, scrapedurl in matches:
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         scrapedtitle = scrapedtitle.split(" (")[0]
         logger.info("title=[" + scrapedtitle + "] url=[" + scrapedurl + "] thumbnail=[" + scrapedthumbnail + "]")
