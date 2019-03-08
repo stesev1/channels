@@ -2,9 +2,9 @@
 
 <channel>
 	<id>altadefinizioneclub</id>
-	<name>Altadefinizione Pink</name>
+	<name>Altadefinizione Cash</name>
 
-	<active>false</active>
+	<active>true</active>
 	<adult>false</adult>
 	<language>it</language>
 
@@ -13,9 +13,9 @@
 	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/altadefinizioneclub.png</bannermenu>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
 
-	<version>13</version>
-	<date>05/02/2019</date>
-	<changes>Disabled</changes>
+	<version>14</version>
+	<date>08/03/2019</date>
+	<changes>Change Domain</changes>
 
 	<categories>
 		<category>movie</category>
