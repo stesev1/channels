@@ -16,12 +16,14 @@ __channel__ = "animeleggendari"
 host = "https://animeleggendari.com"
 
 # ----------------------------------------------------------------------------------------------------------------
+
+
 def mainlist(item):
     logger.info()
     itemlist = [Item(channel=__channel__,
-                     action="lista_anime",
+                     action="leggendari",
                      title=color("Anime Leggendari", "red"),
-                     url="%s/category/anime-leggendari/" % host,
+                     url=host,
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="lista_anime",
@@ -31,7 +33,22 @@ def mainlist(item):
                 Item(channel=__channel__,
                      action="lista_anime",
                      title=color("Anime in corso", "azure"),
-                     url="%s/category/anime-in-corso/" % host,
+                     url="%s/category/serie-anime-in-corso/" % host,
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
+                Item(channel=__channel__,
+                     action="lista_anime",
+                     title=color("Anime ITA", "azure"),
+                     url="%s/category/anime-ita/" % host,
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
+                Item(channel=__channel__,
+                     action="lista_anime",
+                     title=color("Anime SUB ITA", "azure"),
+                     url="%s/category/anime-sub-ita/" % host,
+                     thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
+                Item(channel=__channel__,
+                     action="generi",
+                     title=color("Generi", "orange"),
+                     url=host,
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/popcorn_cinema_movie_.png"),
                 Item(channel=__channel__,
                      action="search",
@@ -57,6 +74,32 @@ def search(item, texto):
 
 
 # ================================================================================================================
+
+def leggendari(item):
+    logger.info()
+    itemlist = []
+
+    data = httptools.downloadpage(item.url).data
+    patron = r'<li .*? class=\"menu-item menu-item-type-post_type menu-item-object-post menu-item-.*?\"><a href=\"([^\"]+)\">(.*?)</a>'
+    matches = re.compile(patron, re.DOTALL).findall(data)
+
+    for scrapedurl, scrapedtitle in matches:
+        scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle.strip()).replace("streaming", "")
+        if 'top 10 anime da vedere' in scrapedtitle.lower(): continue
+
+        lang = scrapertools.find_single_match(scrapedtitle, r"((?:SUB ITA|ITA))")
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="episodi",
+                 contentType="tv",
+                 title=scrapedtitle.replace(lang, color(lang, "red")),
+                 fulltitle=scrapedtitle.replace(lang, ""),
+                 url=scrapedurl,
+                 extra="tv",
+                 thumbnail="",
+                 folder=True))
+
+    return itemlist
 
 # ----------------------------------------------------------------------------------------------------------------
 def lista_anime(item):
@@ -105,6 +148,32 @@ def lista_anime(item):
 
 # ================================================================================================================
 
+
+def generi(item):
+    logger.info()
+    itemlist = []
+
+    data = httptools.downloadpage(item.url).data
+    patron = r'Generi</a>\s<ul class=\"sub-menu\">(.*?)</ul>'
+    blocco = re.compile(patron, re.S).findall(data)[0]
+
+    regex = r'<li .*?<a href=\"([^\"]+)\">(.*?)</a>'
+    matches = re.compile(regex, re.MULTILINE).findall(blocco)
+
+    for scrapedurl, scrapedtitle in matches:
+        itemlist.append(
+            Item(channel=__channel__,
+                 action="lista_anime",
+                 contentType="tv",
+                 title=scrapedtitle,
+                 fulltitle=scrapedtitle,
+                 url=scrapedurl,
+                 extra="tv",
+                 thumbnail="",
+                 folder=True))
+
+    return itemlist
+
 # ----------------------------------------------------------------------------------------------------------------
 def episodi(item):
     logger.info()
@@ -125,7 +194,7 @@ def episodi(item):
              thumbnail=item.thumbnail,
              folder=True))
     if blocco != "":
-        patron = r'<a href="([^"]+)"><span class="pagelink">(\d+)</span></a>'
+        patron = r'<a href=\"([^\"]+)\" class=\"post-page-numbers\".*?><span class=\"pagelink\">(\d+)</span>'
         matches = re.compile(patron, re.DOTALL).findall(data)
         for scrapedurl, scrapednumber in matches:
             itemlist.append(
