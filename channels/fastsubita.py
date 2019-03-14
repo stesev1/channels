@@ -17,10 +17,10 @@ from platformcode import logger
 
 __channel__ = "fastsubita"
 
-host = "http://fastsubita.gq"
+host = "http://fastsubita.com"
 
 headers = [
-    ['Host', 'fastsubita.gq'],
+    ['Host', 'fastsubita.com'],
     ['User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0'],
     ['Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'],
     ['Accept-Language', 'en-US,en;q=0.5'],
@@ -32,7 +32,7 @@ headers = [
     ['Cache-Control', 'max-age=0']
 ]
 
-PERPAGE = 14
+PERPAGE = 50
 
 
 def mainlist(item):
@@ -47,7 +47,7 @@ def mainlist(item):
                      title="[COLOR azure]Tutte le Serie TV[/COLOR]",
                      action="all_quick",
                      extra='serie',
-                     url="%s/tutte-le-serie-tv/" % host,
+                     url="%s/elenco-serie-tv/" % host,
                      thumbnail="https://raw.githubusercontent.com/stesev1/channels/master/images/channels_icon/movie_new_P.png"),
                 Item(channel=__channel__,
                      title="[COLOR yellow]Cerca...[/COLOR]",
@@ -153,19 +153,14 @@ def all_quick(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti 
-    patron = '<a href="([^"]+)"[^>]+>[^<]+<\/a>\s*<\/li>'
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    patron = '<li.*<a style=".*" href="([^"]+)">([^"]+)<\/a>'
+    matches = re.compile(patron, re.MULTILINE).findall(data)
 
-    for i, (scrapedurl) in enumerate(matches):
+    for i, (scrapedurl,scrapedtitle) in enumerate(matches):
         if (p - 1) * PERPAGE > i: continue
         if i >= p * PERPAGE: break
         scrapedplot = ""
         scrapedthumbnail = ""
-        scrapedtitle = scrapedurl
-        scrapedtitle = scrapedtitle.replace("%s/serietv/" % host, "")
-        scrapedtitle = scrapedtitle.replace("/", "")
-        scrapedtitle = scrapedtitle.replace("-", " ")
-        scrapedtitle = scrapedtitle.title()
 
         if "http:" in scrapedurl:
             scrapedurl = scrapedurl

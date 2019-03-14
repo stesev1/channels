@@ -3,17 +3,17 @@
 	<id>fastsubita</id>
 	<name>Fastsubita</name>
 
-	<active>false</active>
+	<active>true</active>
 	<adult>false</adult>
 	<language>it</language>
 
 	<fanart></fanart>
-	<thumbnail>http://fastsubita.ml/wp-content/uploads/2017/10/Untitled-222255xxx.jpg</thumbnail>
-	<bannermenu>http://fastsubita.ml/wp-content/uploads/2017/10/Untitled-222255xxx.jpg</bannermenu>
+	<thumbnail>http://fastsubita.com/wp-content/uploads/2017/10/Untitled-222255xxx.jpg</thumbnail>
+	<bannermenu>http://fastsubita.com/wp-content/uploads/2017/10/Untitled-222255xxx.jpg</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>5</version>
-	<date>28/01/2019</date>
+	<version>6</version>
+	<date>14/03/2019</date>
 	<changes>Disabled</changes>
 
 	<categories>
