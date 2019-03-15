@@ -4,8 +4,8 @@
 	<changes>
 		<change>
 			<autor></autor>
-			<date>25/03/2016</date>
-			<description>Versión incial</description>
+			<date>15/03/2019</date>
+			<description>Bugfix</description>
 		</change>
 	</changes>
 	<find_videos>
@@ -45,5 +45,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_backin.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>3</version>
+	<version>4</version>
 </server>
