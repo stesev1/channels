@@ -39,7 +39,7 @@ def get_video_url(page_url, premium=False, user="", password="", video_password=
     i = 0
 
     for media_url in media_url:
-        video_urls.append([" mp4 [wstream] ", media_url + '|' + _headers])
+        video_urls.append([" mp4 [wstream] ", media_url.replace("https://", "http://") + '|' + _headers])
         i = i + 1
 
     for video_url in video_urls:

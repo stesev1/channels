@@ -15,26 +15,27 @@ from core import scrapertools
 
 headers = [['User-Agent', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0']]
 
+
 def get_video_url(page_url, premium=False, user="", password="", video_password=""):
     logger.info("[akstream.py] url=" + page_url)
     video_urls = []
 
     data = scrapertools.cache_page(page_url, headers=headers)
-    vid = scrapertools.find_multiple_matches(data,'nowrap[^>]+>([^,]+)')
+    vid = scrapertools.find_multiple_matches(data, 'nowrap[^>]+>([^,]+)')
 
     headers.append(['Referer', page_url])
     post_data = scrapertools.find_single_match(data, "(eval.function.p,a,c,k,e,.*?)\s*</script>")
     if post_data != "":
-       from lib import jsunpack
-       data = jsunpack.unpack(post_data)
+        from lib import jsunpack
+        data = jsunpack.unpack(post_data)
 
     media_url = scrapertools.find_multiple_matches(data, '(http.*?\.mp4)')
     _headers = urllib.urlencode(dict(headers))
-    i=0
+    i = 0
 
     for media_url in media_url:
-        video_urls.append([vid[i] + " mp4 [Akstream] ", media_url + '|' + _headers])
-        i=i+1
+        video_urls.append([vid[i] + " mp4 [Akstream] ", media_url.replace("https://", "http://") + '|' + _headers])
+        i = i + 1
 
     for video_url in video_urls:
         logger.info("[akstream.py] %s - %s" % (video_url[0], video_url[1]))
