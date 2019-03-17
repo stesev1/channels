@@ -12,9 +12,9 @@
 	<thumbnail>https://raw.githubusercontent.com/stesev1/channels/master/images/filmpertutti.png</thumbnail>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>18</version>
-	<date>31/12/2018</date>
-	<changes>Update</changes>
+	<version>19</version>
+	<date>17/03/2019</date>
+	<changes>New Channel</changes>
 
 	<categories>
 		<category>movie</category>
