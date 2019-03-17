@@ -21,7 +21,7 @@ __type__ = "generic"
 __title__ = "filmpertutti"
 __language__ = "IT"
 
-host = "https://www.filmpertutti.uno"
+host = "https://www.filmpertutti.club"
 
 
 def mainlist(item):
