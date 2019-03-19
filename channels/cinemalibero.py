@@ -80,7 +80,7 @@ def categorias(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    #patron = '<li><small>[^>]+><a href="(.*?)">(.*?)</a></li>'
+    # patron = '<li><small>[^>]+><a href="(.*?)">(.*?)</a></li>'
     patron = r'<a class="dropdown-item" href="(.*?)".*?">(.*?)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
@@ -134,9 +134,9 @@ def peliculas(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    #patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
-    patron = '<a href="([^"]+)" title="[^"]+" alt="[^"]+" class="locandina"\s*'
-    patron += 'style[^h]+([^\)]+)[^>]+>(?:<div class="voto">([^<]+)|)[^=]+="titolo">([^<]+)<'
+    # patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
+    patron = r'<a href="([^"]+)" title="[^"]+" alt="[^"]+" class="locandina"\s*'
+    patron += r'style[^h]+([^\)]+)[^>]+>(?:<div class="voto">([^<]+)|)[^=]+="titolo">([^<]+)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedthumbnail, voto, scrapedtitle in matches:
@@ -148,7 +148,7 @@ def peliculas(item):
         itemlist.append(infoSod(
             Item(channel=__channel__,
                  extra=item.extra,
-                 action="findvideos" if not "serie" in scrapedurl else "episodios",
+                 action="findvideos" if not "serie" in item.extra else "episodios",
                  contentType="movie",
                  fulltitle=scrapedtitle,
                  show=scrapedtitle,
@@ -156,7 +156,7 @@ def peliculas(item):
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
-                 folder=True), tipo='movie' if not "serie" in scrapedurl else "tv"))
+                 folder=True), tipo='movie' if not "serie" in item.extra else "tv"))
 
     # Paginazione
     patronvideos = '<a class="next page-numbers" href="(.*?)">'
@@ -192,7 +192,7 @@ def peliculas_tv(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
+    patron = r'<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedtitle in matches:
@@ -234,6 +234,7 @@ def peliculas_tv(item):
 
     return itemlist
 
+
 # ==================================================================================================================================================
 
 def seasons(item):
@@ -272,33 +273,33 @@ def episodios(item):
     # data = scrapertools.get_match(data, '<section id="content">(.*?)<div class="wprc-form">')
 
     patron = r'</strong></p>(.*?)</a></p>'
-    blocco = re.compile(patron, re.IGNORECASE).findall(data)[0]
+    blocco = re.compile(patron, re.MULTILINE).findall(data)
 
-    patron = r'<p>(.*?)<a|</a><br />(.*?)<a'
+    for bl in blocco:
+        patron = r'<p>(.*?)<a|</a><br />(.*?)<a'
 
-    matches = re.compile(patron, re.IGNORECASE).finditer(blocco)
-    for match in matches:
+        matches = re.compile(patron, re.MULTILINE).finditer(bl)
+        for match in matches:
 
-        scrapedtitle = match.group(1) if match.group(1) is not None else match.group(2)
-        scrapedtitle = scrapedtitle.replace("&#8211;" , "")
+            scrapedtitle = match.group(1) if match.group(1) is not None else match.group(2)
+            scrapedtitle = scrapedtitle.replace("&#8211;", "").replace("–", "")
+            patron = '(<a href.*?</a>)<br />'
 
-        #patron = scrapedtitle.replace("(", "\(").replace(")", "\)") + '(<a href.*?</a>)<br />'
-        patron = '(<a href.*?</a>)<br />'
+            if scrapedtitle.strip().lower().startswith("stagione completa"):
+                break
 
-        if scrapedtitle.startswith("Stagione Completa"): break
+            itemdata = re.compile(patron, re.IGNORECASE).findall(data)[0]
 
-        itemdata = re.compile(patron, re.IGNORECASE).findall(data)[0]
-
-        itemlist.append(
-            Item(channel=__channel__,
-                 action="findvideos",
-                 contentType="episode",
-                 title=scrapedtitle,
-                 url=itemdata,
-                 thumbnail=item.thumbnail,
-                 extra=item.extra,
-                 fulltitle=scrapedtitle,
-                 show=item.show))
+            itemlist.append(
+                Item(channel=__channel__,
+                     action="findvideos",
+                     contentType="episode",
+                     title=scrapedtitle,
+                     url=itemdata,
+                     thumbnail=item.thumbnail,
+                     extra=item.extra,
+                     fulltitle=scrapedtitle,
+                     show=item.show))
 
     if config.get_library_support() and len(itemlist) != 0:
         itemlist.append(
@@ -311,6 +312,7 @@ def episodios(item):
 
     return itemlist
 
+
 # ==================================================================================================================================================
 
 def episodios_new(item):
@@ -318,7 +320,7 @@ def episodios_new(item):
 
     itemlist = []
 
-    #Estaggo il contenuto del ScrapeURLD precedente
+    # Estaggo il contenuto del ScrapeURLD precedente
     patron = r'</p><p>(.*?)<(.*?)</a><|br />(.*?)<(.*?)</a><'
     matches = re.compile(patron, re.DOTALL).findall(item.url)
 
@@ -338,6 +340,7 @@ def episodios_new(item):
 
     return itemlist
 
+
 # ==================================================================================================================================================
 
 def peliculas_tv_2(item):
@@ -348,7 +351,7 @@ def peliculas_tv_2(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patron = '<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
+    patron = r'<a href="([^"]+)" class="locandina"[^>]+>\s*<div class="voto">[^=]+=[^>]+>(.*?)<'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for scrapedurl, scrapedtitle in matches:
@@ -389,6 +392,7 @@ def peliculas_tv_2(item):
                  folder=True))
 
     return itemlist
+
 
 # ==================================================================================================================================================
 
@@ -463,7 +467,7 @@ def peliculas_tv_2(item):
 def findvideos_new(item):
     logger.info("[thegroove360.cinemalibero] findvideos")
 
-    #data = item.url if item.extra == "serie" else httptools.downloadpage(item.url, headers=headers).data
+    # data = item.url if item.extra == "serie" else httptools.downloadpage(item.url, headers=headers).data
     data = item.url
 
     itemlist = servertools.find_video_items(data=data)
@@ -477,11 +481,13 @@ def findvideos_new(item):
 
     return itemlist
 
+
 # ==================================================================================================================================================
 
 def HomePage(item):
     import xbmc
     xbmc.executebuiltin("ReplaceWindow(10024,plugin://plugin.video.streamondemand)")
+
 
 # ==================================================================================================================================================
 
@@ -493,12 +499,11 @@ def peliculas_work(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Extrae las entradas (carpetas)
-    patron = '<a href="([^"]+)" title="[^"]+" alt="[^"]+" class="locandina"\s*'
-    patron += 'style[^h]+([^\)]+)[^>]+>(?:<div class="voto">([^<]+)|)[^=]+="titolo">([^<]+)<'
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    patron = r'<a href=\"([^\"]+)\" title=\"[^\"]+\" alt=\"[^\"]+\" class=\"locandina\"\s*style[^h]+([^\)]+)[^>]+>(?:<div class=\"voto\">([^<]+)|).*?=\"titolo\">([^<]+)<'
+    matches = re.compile(patron, re.MULTILINE).findall(data)
 
     for scrapedurl, scrapedthumbnail, voto, scrapedtitle in matches:
-        scrapedplot = ""
+        scrapedplot = scrapedtitle + " " + voto
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
         scrapedtitle = scrapedtitle.replace("[", "(").replace("]", ")")
         if voto:
@@ -506,7 +511,7 @@ def peliculas_work(item):
         itemlist.append(infoSod(
             Item(channel=__channel__,
                  extra=item.extra,
-                 action="findvideos" if not "serie" in scrapedurl else "episodios",
+                 action="findvideos" if not "serie" in item.extra else "episodios",
                  contentType="movie",
                  fulltitle=scrapedtitle,
                  show=scrapedtitle,
@@ -514,7 +519,7 @@ def peliculas_work(item):
                  url=scrapedurl,
                  thumbnail=scrapedthumbnail,
                  plot=scrapedplot,
-                 folder=True), tipo='movie' if not "serie" in scrapedurl else "tv"))
+                 folder=True), tipo='movie' if not "serie" in item.extra else "tv"))
 
     # Extrae el paginador
     patronvideos = '<a class="next page-numbers" href="(.*?)">'
