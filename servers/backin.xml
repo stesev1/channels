@@ -4,7 +4,7 @@
 	<changes>
 		<change>
 			<autor></autor>
-			<date>15/03/2019</date>
+			<date>19/03/2019</date>
 			<description>Bugfix</description>
 		</change>
 	</changes>
@@ -45,5 +45,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_backin.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>4</version>
+	<version>5</version>
 </server>
