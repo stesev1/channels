@@ -91,7 +91,7 @@ def peliculas(item):
     # Carica la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
 
-    patronvideos = r"class=\"card-image\">.*?\s+<a href=\"([^\"]+)\">\s+<img src=\"([^\"]+)\".*?card-title\">.*?>(.*?)</a>"
+    patronvideos = r"class=card-image>.*?\s+<a\shref=([^\>]+)>\s+<img\ssrc=([^\>]+).*?card-title\">.*?>(.*?)</a>"
     matches = re.compile(patronvideos, re.MULTILINE | re.S).findall(data)
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
@@ -110,7 +110,7 @@ def peliculas(item):
 
     # Next page mark
     try:
-        patronvideos = 'href=\"([^\"]+)\"><i class=\"fa fa-angle-right\"></i>'
+        patronvideos = 'href=([^\>]+)><i\sclass=\"fa fa-angle-right\"></i>'
         matches = re.compile(patronvideos, re.DOTALL).findall(data)
 
         if len(matches) > 0:
@@ -146,17 +146,17 @@ def updates(item):
 
 def menugeneros(item):
     logger.info("[thegroove360.cineblog01] menugeneros")
-    return menulist(item, 'Film per Genere<span class=\"mega-indicator\">.*?<ul.*?>(.*?)<a class=\"mega-menu-link\" aria-haspopup=\"true\"')
+    return menulist(item, 'Film per Genere<span\sclass=mega-indicator>.*?<ul\s(.*?)<a\sclass=mega-menu-link aria-haspopup=true')
 
 
 def menuhd(item):
     logger.info("[thegroove360.cineblog01] menuhd")
-    return menulist(item, 'Film HD Streaming<span class=\"mega-indicator\">.*?<ul.*?>(.*?)<a class=\"mega-menu-link\" aria-haspopup=\"true\"')
+    return menulist(item, 'Film HD Streaming<span\sclass=mega-indicator>.*?<ul\s(.*?)<a\sclass=mega-menu-link aria-haspopup=true')
 
 
 def menuanyos(item):
     logger.info("[thegroove360.cineblog01] menuvk")
-    return menulist(item, 'Film per Anno<span class=\"mega-indicator\">.*?<ul.*?>(.*?)</ul>')
+    return menulist(item, 'Film per Anno<span\sclass=mega-indicator>.*?<ul.*?>(.*?)</ul>')
 
 
 def menulist(item, re_txt):
@@ -168,7 +168,7 @@ def menulist(item, re_txt):
     bloque = scrapertools.get_match(data, re_txt)
 
     # The categories are the options for the combo
-    patron = r'<a .*?href=\"([^\"]+)\">(.*?)</a>'
+    patron = r'<a\s.*?href=([^>]+)>(.*?)</a>'
     matches = re.compile(patron, re.DOTALL).findall(bloque)
     scrapertools.printMatches(matches)
 
@@ -218,7 +218,7 @@ def listserie(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patronvideos = r'class=\"card-image\">.*?\s+<a href=\"([^\"]+)\">\s+<img src=\"([^\"]+)\".*?card-title\">.*?>(.*?)</a>'
+    patronvideos = r'class=card-image>.*?\s+<a\shref=([^\>]+)>\s+<img\ssrc=([^\s]+).*?card-title\">.*?>(.*?)</a>'
     matches = re.compile(patronvideos, re.S | re.MULTILINE).findall(data)
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
@@ -250,7 +250,7 @@ def season_serietv(item):
             itemlist.append(
                 Item(channel=__channel__,
                      action="episodios",
-                     title="[COLOR azure]%s[/COLOR]" % season_title,
+                     title="[COLOR azure]%s[/COLOR]" % season_title.replace("</", ""),
                      contentType="episode",
                      url=html,
                      extra='serie',
@@ -261,7 +261,7 @@ def season_serietv(item):
     # Carica la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
     data = scrapertools.decodeHtmlentities(data)
-    data = scrapertools.get_match(data, '<td bgcolor="#ECEAE1">(.*?)</table>')
+    data = scrapertools.get_match(data, r'<td\sbgcolor=#ECEAE1>(.*?)</table>')
 
     #   for x in range(0, len(scrapedtitle)-1):
     #        logger.debug('%x: %s - %s',x,ord(scrapedtitle[x]),chr(ord(scrapedtitle[x])))
@@ -270,8 +270,10 @@ def season_serietv(item):
 
     starts = []
     season_titles = []
-    patron = '^(?:seri|stagion)[i|e].*$'
+    # print data
+    patron = '^((?:seri|stagion)[i|e].*?)</'
     matches = re.compile(patron, re.MULTILINE | re.IGNORECASE).finditer(data)
+
     for match in matches:
         if match.group() != '':
             season_titles.append(match.group())
@@ -313,16 +315,12 @@ def episodios(item):
 def episodios_serie_new(item):
     def load_episodios(html, item, itemlist, lang_title):
         # for data in scrapertools.decodeHtmlentities(html).splitlines():
-        patron = '((?:.*?<a href=".*?"[^=]+="_blank"[^>]+>.*?<\/a>)+)'
-        matches = re.compile(patron).findall(html)
+        patron = r'(<p>.*?</a>)</p>'
+        matches = re.compile(patron, re.MULTILINE).findall(html)
         for data in matches:
             # Estrae i contenuti
-            scrapedtitle = data.split('<a ')[0]
-            scrapedtitle = re.sub(r'<[^>]*>', '', scrapedtitle).strip()
+            scrapedtitle = scrapertools.find_single_match(data.replace("<strong>", ""), r'<p>([\d].*?)<a')
             if scrapedtitle != 'Categorie':
-                scrapedtitle = scrapedtitle.replace('&#215;', 'x')
-                if scrapedtitle.find(' - ') > 0:
-                    scrapedtitle = scrapedtitle[0:scrapedtitle.find(' - ')]
                 itemlist.append(
                     Item(channel=__channel__,
                          action="findvideos",
@@ -361,7 +359,7 @@ def findvideos(item):
 def findvid_film(item):
     def load_links(itemlist, re_txt, color, desc_txt):
         streaming = scrapertools.find_single_match(data, re_txt)
-        patron = '<td><a[^h]href="([^"]+)"[^>]+>([^<]+)<'
+        patron = r'<td><a\shref=([^\s]+)[^>]+>([^<]+)<'
         matches = re.compile(patron, re.DOTALL).findall(streaming)
         for scrapedurl, scrapedtitle in matches:
             logger.debug("##### findvideos %s ## %s ## %s ##" % (desc_txt, scrapedurl, scrapedtitle))
@@ -375,6 +373,7 @@ def findvid_film(item):
                      fulltitle=item.fulltitle,
                      thumbnail=item.thumbnail,
                      show=item.show,
+                     plot=item.title + " [COLOR blue][" + scrapedtitle + "][/COLOR]",
                      folder=False))
 
     logger.info("[thegroove360.cineblog01] findvid_film")
@@ -398,19 +397,19 @@ def findvid_film(item):
     # if u: matches.append((u, 'Streamango'))
 
     # Estrae i contenuti - Streaming
-    load_links(itemlist, '<strong>Streaming:</strong>(.*?)<table class="cbtable" height="30">', "orange", "Streaming")
+    load_links(itemlist, r'<strong>Streaming:</strong>(.*?)<td\svalign=bottom>', "orange", "Streaming")
 
     # Estrae i contenuti - Streaming HD
-    load_links(itemlist, '<strong>Streaming HD[^<]+</strong>(.*?)<table class="cbtable" height="30">', "yellow", "Streaming HD")
+    load_links(itemlist, r'<strong>Streaming HD[^<]+</strong>(.*?)<td\svalign=bottom>', "yellow", "Streaming HD")
 
     # Estrae i contenuti - Streaming 3D
-    load_links(itemlist, '<strong>Streaming 3D[^<]+</strong>(.*?)<table class="cbtable" height="30">', "pink", "Streaming 3D")
+    load_links(itemlist, r'<strong>Streaming 3D[^<]+</strong>(.*?)<td\svalign=bottom>', "pink", "Streaming 3D")
 
     # Estrae i contenuti - Download
-    load_links(itemlist, '<strong>Download:</strong>(.*?)<table class="cbtable" height="30">', "aqua", "Download")
+    load_links(itemlist, r'<strong>Download:</strong>(.*?)<td\svalign=bottom>', "aqua", "Download")
 
     # Estrae i contenuti - Download HD
-    load_links(itemlist, '<strong>Download HD[^<]+</strong>(.*?)<table class="cbtable" width="100%" height="20">', "azure",
+    load_links(itemlist, r'<strong>Download HD[^<]+</strong>(.*?)<td\svalign=bottom>>', "azure",
                "Download HD")
 
     if len(itemlist) == 0:
@@ -425,7 +424,7 @@ def findvid_serie(item):
             vtype = blktxt.strip()[:-1] + " - "
         else:
             vtype = ''
-        patron = '<a href="([^"]+)"[^=]+="_blank"[^>]+>(.*?)</a>'
+        patron = r'<a href=([^\s]+)\starget=_blank.*?>(.*?)<'
         # Estrae i contenuti
         matches = re.compile(patron, re.DOTALL).finditer(html)
         for match in matches:
@@ -483,6 +482,8 @@ def findvid_serie(item):
 def play(item):
     logger.info("[thegroove360.cineblog01] play")
     itemlist = []
+
+    item.url = item.url.replace('"', "")
 
     ### Handling new cb01 wrapper
     if host[9:] + "/film/" in item.url:
@@ -570,7 +571,7 @@ def peliculas_lastupdate(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patron = '<a href="([^"]+)">([^<]+)</a><br>-'
+    patron = r'<a\shref=([^<]+)>([^<]+)</a><br>-'
     matches = re.compile(patron, re.DOTALL).findall(data)
 
     for i, (scrapedurl, scrapedtitle) in enumerate(matches):
