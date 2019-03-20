@@ -38,7 +38,7 @@ def lista(item):
 
     # Estrae i contenuti
     patron = '<a href="(.*?)".*<h1>(.*?)<.*?"(.*?)"'
-    matches = re.compile(patron, re.DOTALL).findall(data)
+    matches = re.compile(patron, re.MULTILINE).findall(data)
 
     for scrapedurl, scrapedtitle, scrapedthumbnail in matches:
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
