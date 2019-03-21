@@ -261,35 +261,12 @@ def season_serietv(item):
     # Carica la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
     data = scrapertools.decodeHtmlentities(data)
-    data = scrapertools.get_match(data, r'<td\sbgcolor=#ECEAE1>(.*?)</table>')
 
-    #   for x in range(0, len(scrapedtitle)-1):
-    #        logger.debug('%x: %s - %s',x,ord(scrapedtitle[x]),chr(ord(scrapedtitle[x])))
-    blkseparator = chr(32) + chr(226) + chr(128) + chr(147) + chr(32)
-    data = data.replace(blkseparator, ' - ')
+    patron = r'title=Espandi>\s(.*?)</div>(.*?)</div></div>'
+    matches = re.compile(patron, re.MULTILINE | re.S).findall(data)
 
-    starts = []
-    season_titles = []
-    # print data
-    patron = '^((?:seri|stagion)[i|e].*?)</'
-    matches = re.compile(patron, re.MULTILINE | re.IGNORECASE).finditer(data)
-
-    for match in matches:
-        if match.group() != '':
-            season_titles.append(match.group())
-            starts.append(match.end())
-
-    i = 1
-    len_season_titles = len(season_titles)
-
-    while i <= len_season_titles:
-        inizio = starts[i - 1]
-        fine = starts[i] if i < len_season_titles else -1
-
-        html = data[inizio:fine]
-        season_title = season_titles[i - 1]
+    for season_title, html in matches:
         load_season_serietv(html, item, itemlist, season_title)
-        i += 1
 
     return itemlist
 
@@ -343,6 +320,7 @@ def episodios_serie_new(item):
         lang_title = 'ITA'
 
     html = item.url
+
     load_episodios(html, item, itemlist, lang_title)
 
     return itemlist
@@ -421,7 +399,7 @@ def findvid_film(item):
 def findvid_serie(item):
     def load_vid_series(html, item, itemlist, blktxt):
         if len(blktxt) > 2:
-            vtype = blktxt.strip()[:-1] + " - "
+            vtype = scrapertools.remove_htmltags(blktxt.strip()[:-1]) + " - "
         else:
             vtype = ''
         patron = r'<a href=([^\s]+)\starget=_blank.*?>(.*?)<'
@@ -457,11 +435,11 @@ def findvid_serie(item):
         lnkblkp.append(data.find('<a'))
 
     # Find new blocks of links
-    patron = '<a\s[^>]+>[^<]+</a>([^<]+)'
+    patron = '</a>(.*?)<a'
     matches = re.compile(patron, re.DOTALL).finditer(data)
     for match in matches:
         sep = match.group(1)
-        if sep != ' - ':
+        if sep != ' – ':
             lnkblk.append(sep)
 
     i = 0
