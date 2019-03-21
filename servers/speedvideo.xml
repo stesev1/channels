@@ -4,7 +4,7 @@
 	<changes>
 		<change>
 			<autor></autor>
-			<date>18/11/2018</date>
+			<date>21/03/2019</date>
 			<description>Fix</description>
 		</change>
 	</changes>
@@ -16,8 +16,8 @@
 			<url>http://speedvideo.net/embed-\1.html</url>
 		</patterns>
 		<patterns>
-			<pattern>speedvideo.net/([A-Z0-9a-z])/</pattern>
-			<url>http://speedvideo.net/embed-\1.html</url>
+			<pattern>speedvideo.net/(?:embed-|)([A-Z0-9a-z]+)</pattern>
+			<url>http://speedvideo.net/embed-\\1.html</url>
 		</patterns>
 	</find_videos>
 	<free>true</free>
