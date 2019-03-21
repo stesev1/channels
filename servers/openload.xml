@@ -26,7 +26,7 @@
         <ignore_urls>
         </ignore_urls>
         <patterns>
-            <pattern>(?:openload|oload)s?\.[^/]+/(?:embed|f)/([0-9a-zA-Z-_]+)</pattern>
+            <pattern>(?:openload|oload|oloadblock).*?/(?:embed|f)/([0-9a-zA-Z-_]+)</pattern>
             <url>https://openload.co/embed/\1/</url>
         </patterns>
     </find_videos>
