@@ -6,19 +6,9 @@
 
     <changes>
         <change>
-            <autor>Cmos</autor>
-            <date>18/11/2018</date>
-            <description>Corregido por cambios en el servidor</description>
-        </change>
-        <change>
-            <autor>Cmos</autor>
-            <date>07/02/2017</date>
-            <description>Corregido por cambios en el servidor y adaptado al uso de httptools</description>
-        </change>
-        <change>
-            <autor>Cmos</autor>
-            <date>11/01/2017</date>
-            <description>Reparado por cambios en el servidor</description>
+            <autor>32Dexter</autor>
+            <date>21/03/2019</date>
+            <description>Aggiunto nuovo dominio oloadblock</description>
         </change>
     </changes>
 
@@ -64,5 +54,5 @@
 
     <thumbnail>http://media.tvalacarta.info/servers/server_openload.png</thumbnail>
     <update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-    <version>38</version>
+    <version>39</version>
 </server>
