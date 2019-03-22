@@ -15,10 +15,6 @@
 			<pattern>speedvideo.net/(?:embed-|)([A-Z0-9a-z]{12})</pattern>
 			<url>http://speedvideo.net/embed-\1.html</url>
 		</patterns>
-		<patterns>
-			<pattern>speedvideo.net/(?:embed-|)([A-Z0-9a-z]+)</pattern>
-			<url>http://speedvideo.net/embed-\\1.html</url>
-		</patterns>
 	</find_videos>
 	<free>true</free>
 	<id>speedvideo</id>
@@ -49,5 +45,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_speedvideo.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>9</version>
+	<version>10</version>
 </server>
