@@ -4,7 +4,7 @@
 	<changes>
 		<change>
 			<autor></autor>
-			<date>21/03/2019</date>
+			<date>22/03/2019</date>
 			<description>Fix</description>
 		</change>
 	</changes>
@@ -49,5 +49,5 @@
 	</settings>
 	<thumbnail>http://media.tvalacarta.info/servers/server_speedvideo.png</thumbnail>
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/servers/</update_url>
-	<version>8</version>
+	<version>9</version>
 </server>
