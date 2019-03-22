@@ -37,11 +37,13 @@ def lista(item):
     data = httptools.downloadpage(item.url).data
 
     # Estrae i contenuti
-    patron = '<a href="(.*?)".*<h1>(.*?)<.*?"(.*?)"'
-    matches = re.compile(patron, re.MULTILINE).findall(data)
+    matches = re.compile('<div>(.*?)</div>', re.MULTILINE | re.S).findall(data)
 
-    for scrapedurl, scrapedtitle, scrapedthumbnail in matches:
+    for match in matches:
+        scrapedtitle = scrapertools.find_single_match(match, '<h1>([^<]+)</h1>')
         scrapedtitle = scrapertools.decodeHtmlentities(scrapedtitle)
+        scrapedthumbnail = scrapertools.find_single_match(match, '<img src=\"([^\"]+)\"')
+        scrapedurl = scrapertools.find_single_match(match, '<p>(.*?)</p>')
         itemlist.append(
             Item(channel=__channel__,
                  action="findvideos",

@@ -1,46 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-
-
-<channel>
-    <id>altastreaming</id>
-    <name>Dexter Channel</name>
-
-
-    <active>true</active>
-    <adult>false</adult>
-    <language>it</language>
-
-
-    <fanart>https://raw.githubusercontent.com/32Dexter/DexterRepo/master/Dexter%20Channel/dexter_wallpaper.jpg</fanart>
-    <thumbnail>https://raw.githubusercontent.com/32Dexter/DexterRepo/master/Dexter%20Channel/dexter_channel.jpg</thumbnail>
-    <bannermenu>https://raw.githubusercontent.com/32Dexter/DexterRepo/master/Dexter%20Channel/dexter_channel.jpg</bannermenu>
-
-
-    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-
-
-    <version>14</version>
-    <date>20/03/2019</date>
-    <changes>Dexter Channel</changes>
-
-
-    <categories>
-        <category>movie</category>
-		<category>serie</category>
-
-    </categories>
-
-
-    <settings>
-        <id>include_in_global_search</id>
-        <type>bool</type>
-        <label>Includi ricerca globale</label>
-        <default>false</default>
-        <enabled>false</enabled>
-        <visible>false</visible>
-    </settings>
-
-
-</channel>
-
-
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><channel>    <id>altastreaming</id>    <name>Dexter Channel</name>    <active>true</active>    <adult>false</adult>    <language>it</language>    <fanart>https://raw.githubusercontent.com/32Dexter/DexterRepo/master/Dexter%20Channel/dexter_wallpaper.jpg</fanart>    <thumbnail>https://raw.githubusercontent.com/32Dexter/DexterRepo/master/Dexter%20Channel/dexter_channel.jpg</thumbnail>    <bannermenu>https://raw.githubusercontent.com/32Dexter/DexterRepo/master/Dexter%20Channel/dexter_channel.jpg</bannermenu>    <update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>    <version>15</version>    <date>21/03/2019</date>    <changes>Dexter Channel</changes>    <categories>        <category>movie</category>		<category>serie</category>    </categories>    <settings>        <id>include_in_global_search</id>        <type>bool</type>        <label>Includi ricerca globale</label>        <default>false</default>        <enabled>false</enabled>        <visible>false</visible>    </settings></channel>
