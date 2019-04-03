@@ -16,9 +16,10 @@ from core.tmdb import infoSod
 
 __channel__ = "cineblog01"
 
-host = "https://www.cb01.green/"
+host = "https://www.cb01.bid"
 
 headers = [['Referer', host]]
+thumbUA = "|User-Agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
 
 
 def mainlist(item):
@@ -91,7 +92,7 @@ def peliculas(item):
     # Carica la pagina
     data = httptools.downloadpage(item.url, headers=headers).data
 
-    patronvideos = r"class=card-image>.*?\s+<a\shref=([^\>]+)>\s+<img\ssrc=([^\>]+).*?card-title\">.*?>(.*?)</a>"
+    patronvideos = r"class=card-image>.*?\s+<a\shref=([^\>]+)>\s+<img\ssrc=([^\s>]+).*?card-title\">.*?>(.*?)</a>"
     matches = re.compile(patronvideos, re.MULTILINE | re.S).findall(data)
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
@@ -103,7 +104,7 @@ def peliculas(item):
                  show=scrapedtitle,
                  title=scrapedtitle,
                  url=scrapedurl,
-                 thumbnail=scrapedthumbnail,
+                 thumbnail=scrapedthumbnail + thumbUA,
                  plot=scrapedtitle,
                  extra=item.extra,
                  viewmode="movie_with_plot"), tipo='movie'))
@@ -218,7 +219,7 @@ def listserie(item):
     data = httptools.downloadpage(item.url, headers=headers).data
 
     # Estrae i contenuti
-    patronvideos = r'class=card-image>.*?\s+<a\shref=([^\>]+)>\s+<img\ssrc=([^\s]+).*?card-title\">.*?>(.*?)</a>'
+    patronvideos = r'class=\"card-image\">.*?\s+<a\shref=\"([^\"]+)\">\s+<img\ssrc=\"([^\"]+)\".*?card-title\">.*?>(.*?)</a>'
     matches = re.compile(patronvideos, re.S | re.MULTILINE).findall(data)
 
     for scrapedurl, scrapedthumbnail, scrapedtitle in matches:
@@ -229,7 +230,7 @@ def listserie(item):
                  show=scrapedtitle,
                  title="[COLOR azure]" + scrapedtitle + "[/COLOR]",
                  url=scrapedurl,
-                 thumbnail=scrapedthumbnail,
+                 thumbnail=scrapedthumbnail + thumbUA,
                  extra=item.extra,
                  plot=scrapedtitle), tipo='tv'))
 
@@ -262,7 +263,7 @@ def season_serietv(item):
     data = httptools.downloadpage(item.url, headers=headers).data
     data = scrapertools.decodeHtmlentities(data)
 
-    patron = r'title=Espandi>\s(.*?)</div>(.*?)</div></div>'
+    patron = r'title=\"Espandi\">\s(.*?)</div>(.*?)</div>\s</div>'
     matches = re.compile(patron, re.MULTILINE | re.S).findall(data)
 
     for season_title, html in matches:
@@ -402,7 +403,7 @@ def findvid_serie(item):
             vtype = scrapertools.remove_htmltags(blktxt.strip()[:-1]) + " - "
         else:
             vtype = ''
-        patron = r'<a href=([^\s]+)\starget=_blank.*?>(.*?)<'
+        patron = r'<a href=\"([^\"]+)\"\starget=\"_blank\".*?>(.*?)<'
         # Estrae i contenuti
         matches = re.compile(patron, re.DOTALL).finditer(html)
         for match in matches:
@@ -473,8 +474,6 @@ def play(item):
     if '/goto/' in item.url:
         item.url = item.url.split('/goto/')[-1].decode('base64')
 
-    item.url = item.url.replace('http://cineblog01.uno', 'http://k4pp4.pw')
-
     logger.debug("##############################################################")
     if "go.php" in item.url:
         data = httptools.downloadpage(item.url, headers=headers).data
@@ -524,7 +523,6 @@ def play(item):
         logger.error("vcrypt data doesn't contain expected URL")
 
     return itemlist
-
 
 def HomePage(item):
     import xbmc

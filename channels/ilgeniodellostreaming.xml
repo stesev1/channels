@@ -3,7 +3,7 @@
 	<id>ilgeniodellostreaming</id>
 	<name>IlGenioDelloStreaming</name>
 
-	<active>true</active>
+	<active>false</active>
 	<adult>false</adult>
 	<language>it</language>
 
@@ -12,8 +12,8 @@
 	<bannermenu>https://raw.githubusercontent.com/stesev1/channels/master/images/ilgeniodellostreaming.png</bannermenu>
 
 	<update_url>https://raw.githubusercontent.com/stesev1/channels/master/channels/</update_url>
-	<version>14</version>
-	<date>17/03/2019</date>
+	<version>15</version>
+	<date>03/04/2019</date>
 	<changes>New Channel</changes>
 
 	<categories>
